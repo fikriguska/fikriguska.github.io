@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Hello on rain0fhex</title>
+    <title>hello on rain0fhex</title>
     <link>/tags/hello/</link>
-    <description>Recent content in Hello on rain0fhex</description>
+    <description>Recent content in hello on rain0fhex</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 11 May 2019 16:09:40 +0700</lastBuildDate>
+    <lastBuildDate>Mon, 13 May 2019 05:42:08 +0700</lastBuildDate>
     
 	<atom:link href="/tags/hello/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Hello World!</title>
+      <title>Hello World</title>
       <link>/posts/hello-world/</link>
-      <pubDate>Sat, 11 May 2019 16:09:40 +0700</pubDate>
+      <pubDate>Mon, 13 May 2019 05:42:08 +0700</pubDate>
       
       <guid>/posts/hello-world/</guid>
-      <description>Website ini merupakan sebuah catatan.</description>
+      <description>#include &amp;lt;stdio.h&amp;gt; int main(){ printf(&amp;quot;hello world!&amp;quot;); return 0; }  </description>
     </item>
     
   </channel>
