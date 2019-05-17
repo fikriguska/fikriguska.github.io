@@ -5,8 +5,254 @@
         <description>Recent content in Posts on rain0fhex</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
-        <lastBuildDate>Mon, 13 May 2019 05:42:08 +0700</lastBuildDate>
+        <lastBuildDate>Fri, 17 May 2019 23:04:35 +0700</lastBuildDate>
         <atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
+        
+        <item>
+            <title>Bandit 1-5</title>
+            <link>/posts/bandit-1-5/</link>
+            <pubDate>Fri, 17 May 2019 23:04:35 +0700</pubDate>
+            
+            <guid>/posts/bandit-1-5/</guid>
+            <description>#Bandit Level 0 Level Goal  The goal of this level is for you to log into the game using SSH. The host to which you need to connect is bandit.labs.overthewire.org, on port 2220. The username is bandit0 and the password is bandit0. Once logged in, go to the Level 1 page to find out how to beat Level 1.
+ Commands you may need to solve this level  ssh</description>
+            <content type="html"><![CDATA[
+
+<h2 id="bandit-level-0">#Bandit Level 0</h2>
+
+<h2 id="level-goal"><em>Level Goal</em></h2>
+
+<blockquote>
+<p>The goal of this level is for you to log into the game using SSH. The host to which you need to connect is bandit.labs.overthewire.org, on port 2220. The username is bandit0 and the password is bandit0. Once logged in, go to the Level 1 page to find out how to beat Level 1.</p>
+</blockquote>
+
+<h2 id="commands-you-may-need-to-solve-this-level"><em>Commands you may need to solve this level</em></h2>
+
+<blockquote>
+<p>ssh</p>
+</blockquote>
+
+<h2 id="helpful-reading-material"><em>Helpful Reading Material</em></h2>
+
+<blockquote>
+<p><a href="http://en.wikipedia.org/wiki/Secure_Shell">Secure Shell (SSH) on Wikipedia</a></p>
+
+<p><a href="http://www.wikihow.com/Use-SSH">How to use SSH on wikiHow</a></p>
+</blockquote>
+
+<p>Untuk <em>login</em> ssh kedalam <a href="bandit.labs.overthewire.org">bandit.labs.overthewire.org</a> menggunakan <em>username</em> <strong>bandit0</strong> dengan password <strong>bandit0</strong> pada <strong>port</strong> 2220, gunakan:</p>
+
+<pre><code>$ ssh -p 2220 bandit5@bandit.labs.overthewire.org
+</code></pre>
+
+<p>Setelah itu masukkan <em>password</em> nya
+<br />
+</p>
+
+<h2 id="bandit-level-0-1">#Bandit Level 0 → 1</h2>
+
+<h2 id="level-goal-1"><em>Level Goal</em></h2>
+
+<blockquote>
+<p>The password for the next level is stored in a file called readme located in the home directory. Use this password to log into bandit1 using SSH. Whenever you find a password for a level, use SSH (on port 2220) to log into that level and continue the game.</p>
+</blockquote>
+
+<h2 id="commands-you-may-need-to-solve-this-level-1"><em>Commands you may need to solve this level</em></h2>
+
+<blockquote>
+<p>ls, cd, cat, file, du, find</p>
+</blockquote>
+
+<pre><code>$ ls
+readme
+</code></pre>
+
+<p>Terdapat sebuah <em>file</em> bernama <em>readme</em>, tinggal buka saja <em>file</em> nya menggunakan <em>cat</em> atau <em>less</em>.</p>
+
+<pre><code>$ cat readme
+boJ9jbbUNNfktd78OOpsqOltutMc3MY1
+</code></pre>
+
+<p>Isi dari <em>file readme</em> merupakan <em>password</em> untuk ssh <em>level</em> berikutnya.
+<br />
+</p>
+
+<h2 id="bandit-level-1-2">#Bandit Level 1 → 2</h2>
+
+<h2 id="level-goal-2"><em>Level Goal</em></h2>
+
+<blockquote>
+<p>The password for the next level is stored in a file called <strong>-</strong> located in the home directory</p>
+</blockquote>
+
+<h2 id="commands-you-may-need-to-solve-this-level-2"><em>Commands you may need to solve this level</em></h2>
+
+<blockquote>
+<p>ls, cd, cat, file, du, find</p>
+</blockquote>
+
+<h2 id="helpful-reading-material-1"><em>Helpful Reading Material</em></h2>
+
+<blockquote>
+<p><a href="https://www.google.com/search?q=dashed+filename">Google Search for “dashed filename”</a>
+<a href="http://tldp.org/LDP/abs/html/special-chars.html">Advanced Bash-scripting Guide - Chapter 3 - Special Characters</a></p>
+</blockquote>
+
+<pre><code>$ ls
+-
+</code></pre>
+
+<p>Terdapat sebuah <em>file</em> bernama <strong>-</strong> yang apabila dibuka menggunakan <em>cat</em> atau <em>less</em> seperti biasa langsung meminta <em>input</em>. Untuk membukanya dapat menggunakan:</p>
+
+<pre><code>$ cat ./-
+CV1DtqXWVFXTvM2F0k09SHz0YwRINYA9
+</code></pre>
+
+<p><br />
+</p>
+
+<h2 id="bandit-level-2-3">#Bandit Level 2 → 3</h2>
+
+<h2 id="level-goal-3"><em>Level Goal</em></h2>
+
+<blockquote>
+<p>The password for the next level is stored in a file called <strong>spaces in this filename</strong> located in the home directory</p>
+</blockquote>
+
+<h2 id="commands-you-may-need-to-solve-this-level-3"><em>Commands you may need to solve this level</em></h2>
+
+<blockquote>
+<p>ls, cd, cat, file, du, find</p>
+</blockquote>
+
+<h2 id="helpful-reading-material-2"><em>Helpful Reading Material</em></h2>
+
+<blockquote>
+<p><a href="https://www.google.com/search?q=spaces+in+filename">Google Search for “spaces in filename”</a>
+    $ls
+    spaces in this filename
+Untuk membuka <em>file</em> yang namanya menggunakan spasi dapat dilakukan dengan cara menambah karakter &lsquo;\&rsquo; sebelum spasi pada nama <em>file</em> ketika memanggil <em>cat</em> atau <em>less</em>.</p>
+</blockquote>
+
+<pre><code>$ cat spaces\ in\ this\ filename
+UmHadQclWmgdLOKQ3YNgjWxGoRMb5luK
+</code></pre>
+
+<p><br />
+</p>
+
+<h2 id="bandit-level-3-4">#Bandit Level 3 → 4</h2>
+
+<h2 id="level-goal-4"><em>Level Goal</em></h2>
+
+<blockquote>
+<p>The password for the next level is stored in a hidden file in the <strong>inhere</strong> directory.</p>
+</blockquote>
+
+<h2 id="commands-you-may-need-to-solve-this-level-4"><em>Commands you may need to solve this level</em></h2>
+
+<blockquote>
+<p>ls, cd, cat, file, du, find</p>
+</blockquote>
+
+<pre><code>$ ls
+inhere
+$ cd inhere
+$ ls
+$
+</code></pre>
+
+<p>Ketika <em>ls</em>, tidak terlihat adanya <em>file</em>. Untuk melihat semua <em>file</em> termasuk <em>hidden file</em> dapat menggunakan <strong>-a</strong> pada <em>ls</em>.</p>
+
+<pre><code>$ ls -a
+$ . .. .hidden
+</code></pre>
+
+<p>Dan terdapat sebuah <em>file</em> bernama <em>.hidden</em>, tinggal buka saja.</p>
+
+<pre><code>$ cat .hidden
+pIwrPrtPN36QITSp3EQaw936yaFoFgAB
+</code></pre>
+
+<p><br />
+</p>
+
+<h2 id="bandit-level-4-5">#Bandit Level 4 → 5</h2>
+
+<h2 id="level-goal-5"><em>Level Goal</em></h2>
+
+<blockquote>
+<p>The password for the next level is stored in the only human-readable file in the <strong>inhere</strong> directory. Tip: if your terminal is messed up, try the “reset” command.</p>
+</blockquote>
+
+<h2 id="commands-you-may-need-to-solve-this-level-5"><em>Commands you may need to solve this level</em></h2>
+
+<blockquote>
+<p>ls, cd, cat, file, du, find</p>
+</blockquote>
+
+<pre><code>$ ls
+inhere
+$ ls inhere
+-file00  -file02  -file04  -file06  -file08
+-file01  -file03  -file05  -file07  -file09
+</code></pre>
+
+<p>Terdapat banyak <em>file</em> di dalam folder <strong>inhere</strong>. Untuk membuka semuanya gunakan perintah:</p>
+
+<pre><code>$ cat inhere/*
+</code></pre>
+
+<p>Ketika dibuka, banyak isi <em>file</em> yang non <em>human readable</em>. Namun, didalamnya terlihat sebagian deretan huruf yang <em>human readable</em>, itulah <em>passwordnya</em>.</p>
+
+<pre><code>koReBOKuIDDepwhWk7jZC0RTdopnAYKh
+</code></pre>
+
+<p><br />
+</p>
+
+<h2 id="bandit-level-5-6">#Bandit Level 5 → 6</h2>
+
+<h2 id="level-goal-6"><em>Level Goal</em></h2>
+
+<blockquote>
+<p>The password for the next level is stored in a file somewhere under the inhere directory and has all of the following properties:</p>
+
+<ul>
+<li><p>human-readable</p></li>
+
+<li><p>1033 bytes in size</p></li>
+
+<li><p>not executable</p></li>
+</ul>
+</blockquote>
+
+<h2 id="commands-you-may-need-to-solve-this-level-6"><em>Commands you may need to solve this level</em></h2>
+
+<blockquote>
+<p>ls, cd, cat, file, du, find</p>
+</blockquote>
+
+<pre><code>$ ls
+$ inhere
+$ ls inhere
+maybehere00  maybehere02  maybehere04  maybehere06  maybehere08  maybehere10  maybehere12  maybehere14  maybehere16  maybehere18
+maybehere01  maybehere03  maybehere05  maybehere07  maybehere09  maybehere11  maybehere13  maybehere15  maybehere17  maybehere19
+</code></pre>
+
+<p>Terdapat banyak <em>folder</em> dan banyak <em>file</em> yang terdapat di dalam <em>folder</em> <strong>inhere</strong>. Untuk mencari <em>file</em> dengan ciri-ciri seperti pada <strong>Level Goals</strong> dapat menggunakan:</p>
+
+<pre><code>$ find -size 1033c
+./inhere/maybehere07/.file2
+</code></pre>
+
+<p>Terdapat satu <em>file</em> yang memiliki besar 1033 <em>bytes</em>, maka dapat dipastikan itulah <em>file</em> yang dicari.</p>
+
+<pre><code>$ cat ./inhere/maybehere07/.file2
+DXjZPULLxYr17uwoI01bNLQbtFemEgo7
+</code></pre>
+]]></content>
+        </item>
         
         <item>
             <title>Hello World</title>
