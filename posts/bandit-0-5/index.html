@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author"
+    content="Bintang Fikriguska ">
+<meta name="description"
+    content="#Bandit Level 0 Level Goal  The goal of this level is for you to log into the game using SSH. The host to which you need to connect is bandit.labs.overthewire.org, on port 2220. The username is bandit0 and the password is bandit0. Once logged in, go to the Level 1 page to find out how to beat Level 1.
+ Commands you may need to solve this level  ssh" />
+<meta name="keywords" content="" />
+<meta name="robots" content="noodp" />
+<link rel="canonical" href="/posts/bandit-0-5/" />
+
+
+<title>
+    
+    Bandit 0-5 :: rain0fhex 
+    
+</title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.1/css/flag-icon.min.css" rel="stylesheet"
+    type="text/css">
+
+
+
+<link rel="stylesheet" href="/main.min.91687bbfc139d7ff1a244bb6d7324425f9c4f424eaaad242b478e3b3cf56396a.css">
+
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#252627">
+<link rel="shortcut icon" href="/favicon.ico">
+<meta name="theme-color" content="#252627">
+<meta itemprop="name" content="Bandit 0-5">
+<meta itemprop="description" content="#Bandit Level 0 Level Goal  The goal of this level is for you to log into the game using SSH. The host to which you need to connect is bandit.labs.overthewire.org, on port 2220. The username is bandit0 and the password is bandit0. Once logged in, go to the Level 1 page to find out how to beat Level 1.
+ Commands you may need to solve this level  ssh">
+
+
+<meta itemprop="datePublished" content="2019-05-17T23:04:35&#43;07:00" />
+<meta itemprop="dateModified" content="2019-05-17T23:04:35&#43;07:00" />
+<meta itemprop="wordCount" content="689">
+
+
+
+<meta itemprop="keywords" content="CTF,Writeup," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Bandit 0-5"/>
+<meta name="twitter:description" content="#Bandit Level 0 Level Goal  The goal of this level is for you to log into the game using SSH. The host to which you need to connect is bandit.labs.overthewire.org, on port 2220. The username is bandit0 and the password is bandit0. Once logged in, go to the Level 1 page to find out how to beat Level 1.
+ Commands you may need to solve this level  ssh"/>
+
+
+
+
+<meta property="article:published_time" content="2019-05-17 23:04:35 &#43;0700 WIB" />
+
+
+
+
+
+
+
+    </head>
+
+    <body class="dark-theme">
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__mark">></span>
+            <span class="logo__text">rain0fhex</span>
+            <span class="logo__cursor"></span>
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="/about">About</a></li><li><a href="/posts">Posts</a></li><li><a href="/showcase">Showcase</a></li>
+    </ul>
+</nav>
+
+                <span class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </span>
+            
+
+            <span class="theme-toggle"><svg class="theme-toggler" width="24" height="24" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M22 41C32.4934 41 41 32.4934 41 22C41 11.5066 32.4934 3 22
+  3C11.5066 3 3 11.5066 3 22C3 32.4934 11.5066 41 22 41ZM7 22C7
+  13.7157 13.7157 7 22 7V37C13.7157 37 7 30.2843 7 22Z"/>
+</svg>
+</span>
+        </span>
+    </span>
+</header>
+
+
+            <div class="content">
+                
+    <main class="post">
+
+        <div class="post-info">
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>4 minutes
+
+            
+
+            </p>
+        </div>
+
+        <article>
+            <h1 class="post-title"><a href="/posts/bandit-0-5/">Bandit 0-5</a></h1>
+
+            
+
+            <div class="post-content">
+                
+
+<h2 id="bandit-level-0">#Bandit Level 0</h2>
+
+<h2 id="level-goal"><em>Level Goal</em></h2>
+
+<blockquote>
+<p>The goal of this level is for you to log into the game using SSH. The host to which you need to connect is bandit.labs.overthewire.org, on port 2220. The username is bandit0 and the password is bandit0. Once logged in, go to the Level 1 page to find out how to beat Level 1.</p>
+</blockquote>
+
+<h2 id="commands-you-may-need-to-solve-this-level"><em>Commands you may need to solve this level</em></h2>
+
+<blockquote>
+<p>ssh</p>
+</blockquote>
+
+<h2 id="helpful-reading-material"><em>Helpful Reading Material</em></h2>
+
+<blockquote>
+<p><a href="http://en.wikipedia.org/wiki/Secure_Shell">Secure Shell (SSH) on Wikipedia</a></p>
+
+<p><a href="http://www.wikihow.com/Use-SSH">How to use SSH on wikiHow</a></p>
+</blockquote>
+
+<p>Untuk <em>login</em> ssh kedalam <a href="bandit.labs.overthewire.org">bandit.labs.overthewire.org</a> menggunakan <em>username</em> <strong>bandit0</strong> dengan password <strong>bandit0</strong> pada <strong>port</strong> 2220, gunakan:</p>
+
+<pre><code>$ ssh -p 2220 bandit5@bandit.labs.overthewire.org
+</code></pre>
+
+<p>Setelah itu masukkan <em>password</em> nya
+<br />
+</p>
+
+<h2 id="bandit-level-0-1">#Bandit Level 0 → 1</h2>
+
+<h2 id="level-goal-1"><em>Level Goal</em></h2>
+
+<blockquote>
+<p>The password for the next level is stored in a file called readme located in the home directory. Use this password to log into bandit1 using SSH. Whenever you find a password for a level, use SSH (on port 2220) to log into that level and continue the game.</p>
+</blockquote>
+
+<h2 id="commands-you-may-need-to-solve-this-level-1"><em>Commands you may need to solve this level</em></h2>
+
+<blockquote>
+<p>ls, cd, cat, file, du, find</p>
+</blockquote>
+
+<pre><code>$ ls
+readme
+</code></pre>
+
+<p>Terdapat sebuah <em>file</em> bernama <em>readme</em>, tinggal buka saja <em>file</em> nya menggunakan <em>cat</em> atau <em>less</em>.</p>
+
+<pre><code>$ cat readme
+boJ9jbbUNNfktd78OOpsqOltutMc3MY1
+</code></pre>
+
+<p>Isi dari <em>file readme</em> merupakan <em>password</em> untuk ssh <em>level</em> berikutnya.
+<br />
+</p>
+
+<h2 id="bandit-level-1-2">#Bandit Level 1 → 2</h2>
+
+<h2 id="level-goal-2"><em>Level Goal</em></h2>
+
+<blockquote>
+<p>The password for the next level is stored in a file called <strong>-</strong> located in the home directory</p>
+</blockquote>
+
+<h2 id="commands-you-may-need-to-solve-this-level-2"><em>Commands you may need to solve this level</em></h2>
+
+<blockquote>
+<p>ls, cd, cat, file, du, find</p>
+</blockquote>
+
+<h2 id="helpful-reading-material-1"><em>Helpful Reading Material</em></h2>
+
+<blockquote>
+<p><a href="https://www.google.com/search?q=dashed+filename">Google Search for “dashed filename”</a>
+<a href="http://tldp.org/LDP/abs/html/special-chars.html">Advanced Bash-scripting Guide - Chapter 3 - Special Characters</a></p>
+</blockquote>
+
+<pre><code>$ ls
+-
+</code></pre>
+
+<p>Terdapat sebuah <em>file</em> bernama <strong>-</strong> yang apabila dibuka menggunakan <em>cat</em> atau <em>less</em> seperti biasa langsung meminta <em>input</em>. Untuk membukanya dapat menggunakan:</p>
+
+<pre><code>$ cat ./-
+CV1DtqXWVFXTvM2F0k09SHz0YwRINYA9
+</code></pre>
+
+<p><br />
+</p>
+
+<h2 id="bandit-level-2-3">#Bandit Level 2 → 3</h2>
+
+<h2 id="level-goal-3"><em>Level Goal</em></h2>
+
+<blockquote>
+<p>The password for the next level is stored in a file called <strong>spaces in this filename</strong> located in the home directory</p>
+</blockquote>
+
+<h2 id="commands-you-may-need-to-solve-this-level-3"><em>Commands you may need to solve this level</em></h2>
+
+<blockquote>
+<p>ls, cd, cat, file, du, find</p>
+</blockquote>
+
+<h2 id="helpful-reading-material-2"><em>Helpful Reading Material</em></h2>
+
+<blockquote>
+<p><a href="https://www.google.com/search?q=spaces+in+filename">Google Search for “spaces in filename”</a>
+    $ls
+    spaces in this filename
+Untuk membuka <em>file</em> yang namanya menggunakan spasi dapat dilakukan dengan cara menambah karakter &lsquo;\&rsquo; sebelum spasi pada nama <em>file</em> ketika memanggil <em>cat</em> atau <em>less</em>.</p>
+</blockquote>
+
+<pre><code>$ cat spaces\ in\ this\ filename
+UmHadQclWmgdLOKQ3YNgjWxGoRMb5luK
+</code></pre>
+
+<p><br />
+</p>
+
+<h2 id="bandit-level-3-4">#Bandit Level 3 → 4</h2>
+
+<h2 id="level-goal-4"><em>Level Goal</em></h2>
+
+<blockquote>
+<p>The password for the next level is stored in a hidden file in the <strong>inhere</strong> directory.</p>
+</blockquote>
+
+<h2 id="commands-you-may-need-to-solve-this-level-4"><em>Commands you may need to solve this level</em></h2>
+
+<blockquote>
+<p>ls, cd, cat, file, du, find</p>
+</blockquote>
+
+<pre><code>$ ls
+inhere
+$ cd inhere
+$ ls
+$
+</code></pre>
+
+<p>Ketika <em>ls</em>, tidak terlihat adanya <em>file</em>. Untuk melihat semua <em>file</em> termasuk <em>hidden file</em> dapat menggunakan <strong>-a</strong> pada <em>ls</em>.</p>
+
+<pre><code>$ ls -a
+$ . .. .hidden
+</code></pre>
+
+<p>Dan terdapat sebuah <em>file</em> bernama <em>.hidden</em>, tinggal buka saja.</p>
+
+<pre><code>$ cat .hidden
+pIwrPrtPN36QITSp3EQaw936yaFoFgAB
+</code></pre>
+
+<p><br />
+</p>
+
+<h2 id="bandit-level-4-5">#Bandit Level 4 → 5</h2>
+
+<h2 id="level-goal-5"><em>Level Goal</em></h2>
+
+<blockquote>
+<p>The password for the next level is stored in the only human-readable file in the <strong>inhere</strong> directory. Tip: if your terminal is messed up, try the “reset” command.</p>
+</blockquote>
+
+<h2 id="commands-you-may-need-to-solve-this-level-5"><em>Commands you may need to solve this level</em></h2>
+
+<blockquote>
+<p>ls, cd, cat, file, du, find</p>
+</blockquote>
+
+<pre><code>$ ls
+inhere
+$ ls inhere
+-file00  -file02  -file04  -file06  -file08
+-file01  -file03  -file05  -file07  -file09
+</code></pre>
+
+<p>Terdapat banyak <em>file</em> di dalam folder <strong>inhere</strong>. Untuk membuka semuanya gunakan perintah:</p>
+
+<pre><code>$ cat inhere/*
+</code></pre>
+
+<p>Ketika dibuka, banyak isi <em>file</em> yang non <em>human readable</em>. Namun, didalamnya terlihat sebagian deretan huruf yang <em>human readable</em>, itulah <em>passwordnya</em>.</p>
+
+<pre><code>koReBOKuIDDepwhWk7jZC0RTdopnAYKh
+</code></pre>
+
+<p><br />
+</p>
+
+<h2 id="bandit-level-5-6">#Bandit Level 5 → 6</h2>
+
+<h2 id="level-goal-6"><em>Level Goal</em></h2>
+
+<blockquote>
+<p>The password for the next level is stored in a file somewhere under the inhere directory and has all of the following properties:</p>
+
+<ul>
+<li><p>human-readable</p></li>
+
+<li><p>1033 bytes in size</p></li>
+
+<li><p>not executable</p></li>
+</ul>
+</blockquote>
+
+<h2 id="commands-you-may-need-to-solve-this-level-6"><em>Commands you may need to solve this level</em></h2>
+
+<blockquote>
+<p>ls, cd, cat, file, du, find</p>
+</blockquote>
+
+<pre><code>$ ls
+$ inhere
+$ ls inhere
+maybehere00  maybehere02  maybehere04  maybehere06  maybehere08  maybehere10  maybehere12  maybehere14  maybehere16  maybehere18
+maybehere01  maybehere03  maybehere05  maybehere07  maybehere09  maybehere11  maybehere13  maybehere15  maybehere17  maybehere19
+</code></pre>
+
+<p>Terdapat banyak <em>folder</em> dan banyak <em>file</em> yang terdapat di dalam <em>folder</em> <strong>inhere</strong>. Untuk mencari <em>file</em> dengan ciri-ciri seperti pada <strong>Level Goals</strong> dapat menggunakan:</p>
+
+<pre><code>$ find -size 1033c
+./inhere/maybehere07/.file2
+</code></pre>
+
+<p>Terdapat satu <em>file</em> yang memiliki besar 1033 <em>bytes</em>, maka dapat dipastikan itulah <em>file</em> yang dicari.</p>
+
+<pre><code>$ cat ./inhere/maybehere07/.file2
+DXjZPULLxYr17uwoI01bNLQbtFemEgo7
+</code></pre>
+
+            </div>
+        </article>
+
+        <hr />
+
+        <div class="post-info">
+                <p>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="/tags/ctf">CTF</a></span><span class="tag"><a href="/tags/writeup">Writeup</a></span>
+                </p>
+
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>689 Words</p>
+
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2019-05-17 23:04 &#43;0700</p>
+        </div>
+
+        <div id="disqus_thread"></div>
+            <script>
+
+            
+
+            
+
+            (function() { 
+            var d = document, s = d.createElement('script');
+            s.src = 'https://fikriguska.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+            })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+                      
+
+        
+            <div class="pagination">
+                <div class="pagination__title">
+                    <span class="pagination__title-h">Read other posts</span>
+                    <hr />
+                </div>
+
+                <div class="pagination__buttons">
+                    
+
+                    
+                        <span class="button next">
+                            <a href="/posts/hello-world/">
+                                <span class="button__text">Hello World</span>
+                                <span class="button__icon">→</span>
+                            </a>
+                        </span>
+                    
+                </div>
+            </div>
+        
+
+        
+    </main>
+
+            </div>
+
+            
+                <footer class="footer">
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>&copy; 2019</span>
+            
+                <span><a href="/">Bintang Fikriguska</a></span>
+            
+            <span></span>
+            <span> <a href="/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a></span>
+        </div>
+    </div>
+    <div class="footer__inner">
+        <div class="footer__content">
+
+        </div>
+    </div>
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>Powered by <a href="http://gohugo.io">Hugo</a></span>
+            <span>Made with &#10084; by <a href="https://github.com/rhazdon">rhazdon</a></span>
+        </div>
+    </div>
+</footer>
+
+            
+        </div>
+
+        
+
+
+
+
+<script type="text/javascript" src="/bundle.min.cf7871ed49474a80ed457154d24e61f7881adbe0f9384951a74ac46b688a39a4dbfa68bc6d37baeb058186de354ead3487d4ee7f083ea4cba860c48600b694f3.js" integrity="sha512-z3hx7UlHSoDtRXFU0k5h94ga2&#43;D5OElRp0rEa2iKOaTb&#43;mi8bTe66wWBht41Tq00h9Tufwg&#43;pMuoYMSGALaU8w=="></script>
+
+
+
+    </body>
+</html>
