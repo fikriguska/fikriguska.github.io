@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>responsive on 💻📘🤸‍♂️💡</title>
-    <link>http://fikriguska.github.io/tags/responsive/</link>
+    <link>http://fikriguska.github.io/tags/responsive.html</link>
     <description>Recent content in responsive on 💻📘🤸‍♂️💡</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
@@ -12,10 +12,10 @@
     
     <item>
       <title>Project 3</title>
-      <link>http://fikriguska.github.io/project/project3/</link>
+      <link>http://fikriguska.github.io/project/project3.html</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://fikriguska.github.io/project/project3/</guid>
+      <guid>http://fikriguska.github.io/project/project3.html</guid>
       <description></description>
     </item>
     
