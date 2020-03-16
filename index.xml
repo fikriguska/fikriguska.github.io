@@ -2,56 +2,56 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>💻📘🤸‍♂️💡</title>
-    <link>http://fikriguska.github.io/</link>
+    <link>https://fikriguska.github.io/</link>
     <description>Recent content on 💻📘🤸‍♂️💡</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     
-	<atom:link href="http://fikriguska.github.io/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://fikriguska.github.io/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Project 1</title>
-      <link>http://fikriguska.github.io/project/project1/</link>
+      <link>https://fikriguska.github.io/project/project1/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://fikriguska.github.io/project/project1/</guid>
+      <guid>https://fikriguska.github.io/project/project1/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Project 2</title>
-      <link>http://fikriguska.github.io/project/project2/</link>
+      <link>https://fikriguska.github.io/project/project2/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://fikriguska.github.io/project/project2/</guid>
+      <guid>https://fikriguska.github.io/project/project2/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Project 3</title>
-      <link>http://fikriguska.github.io/project/project3/</link>
+      <link>https://fikriguska.github.io/project/project3/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://fikriguska.github.io/project/project3/</guid>
+      <guid>https://fikriguska.github.io/project/project3/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Project 4</title>
-      <link>http://fikriguska.github.io/project/project4/</link>
+      <link>https://fikriguska.github.io/project/project4/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://fikriguska.github.io/project/project4/</guid>
+      <guid>https://fikriguska.github.io/project/project4/</guid>
       <description></description>
     </item>
     
     <item>
       <title>About</title>
-      <link>http://fikriguska.github.io/about/</link>
+      <link>https://fikriguska.github.io/about/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://fikriguska.github.io/about/</guid>
+      <guid>https://fikriguska.github.io/about/</guid>
       <description>Bintang Fikriguska
 Computer Science Undergraduate @ IPB University DM me on instagram @fikriguska</description>
     </item>
