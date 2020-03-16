@@ -1,56 +1,81 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>/posts/bandit-0-5/</loc>
-    <lastmod>2019-05-17T23:04:35+07:00</lastmod>
+    <loc>http://example.com/project/project1/</loc>
   </url>
   
   <url>
-    <loc>/tags/ctf/</loc>
-    <lastmod>2019-05-17T23:04:35+07:00</lastmod>
-    <priority>0</priority>
+    <loc>http://example.com/project/project2/</loc>
   </url>
   
   <url>
-    <loc>/posts/</loc>
-    <lastmod>2019-05-17T23:04:35+07:00</lastmod>
-    <priority>0</priority>
+    <loc>http://example.com/project/project3/</loc>
   </url>
   
   <url>
-    <loc>/tags/</loc>
-    <lastmod>2019-05-17T23:04:35+07:00</lastmod>
-    <priority>0</priority>
+    <loc>http://example.com/project/project4/</loc>
   </url>
   
   <url>
-    <loc>/tags/writeup/</loc>
-    <lastmod>2019-05-17T23:04:35+07:00</lastmod>
-    <priority>0</priority>
+    <loc>http://example.com/about/</loc>
   </url>
   
   <url>
-    <loc>/</loc>
-    <lastmod>2019-05-17T23:04:35+07:00</lastmod>
-    <priority>0</priority>
+    <loc>http://example.com/tags/bootstrap/</loc>
   </url>
   
   <url>
-    <loc>/posts/hello-world/</loc>
-    <lastmod>2019-05-13T05:42:08+07:00</lastmod>
+    <loc>http://example.com/categories/</loc>
   </url>
   
   <url>
-    <loc>/tags/hello/</loc>
-    <lastmod>2019-05-13T05:42:08+07:00</lastmod>
-    <priority>0</priority>
+    <loc>http://example.com/tags/css/</loc>
   </url>
   
   <url>
-    <loc>/categories/</loc>
-    <priority>0</priority>
+    <loc>http://example.com/tags/go/</loc>
+  </url>
+  
+  <url>
+    <loc>http://example.com/tags/golang/</loc>
+  </url>
+  
+  <url>
+    <loc>http://example.com/tags/highlight-js/</loc>
+  </url>
+  
+  <url>
+    <loc>http://example.com/tags/html/</loc>
+  </url>
+  
+  <url>
+    <loc>http://example.com/tags/hugo/</loc>
+  </url>
+  
+  <url>
+    <loc>http://example.com/tags/js/</loc>
+  </url>
+  
+  <url>
+    <loc>http://example.com/project/</loc>
+  </url>
+  
+  <url>
+    <loc>http://example.com/tags/responsive/</loc>
+  </url>
+  
+  <url>
+    <loc>http://example.com/tags/syntax-highlighting/</loc>
+  </url>
+  
+  <url>
+    <loc>http://example.com/tags/</loc>
+  </url>
+  
+  <url>
+    <loc>http://example.com/</loc>
   </url>
   
 </urlset>
