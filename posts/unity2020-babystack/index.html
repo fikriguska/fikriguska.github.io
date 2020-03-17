@@ -214,7 +214,7 @@ LABEL_13:
     }
   }
 }
-</code></pre></div><p>Kita tidak akan bisa mengontrol saved RIP fungsi <code>main</code>. Namun kita bisa mengoverwrite saved RIP fungsi lain, bagaimana caranya? yaitu dengan menggunakan index kurang dari 0. Jika fungsi <code>main</code> akan memanggil fungsi yang lain, stack frame fungsi main akan berada dibawah fungsi yang dipanggil (walaupun sebenarnya alamat stack frame fungsi <code>main</code> lebih tinggi dari fungsi yang dipanggil). Karena itulah kita menggunakan index kurang dari 0 untuk mengoverwrite saved RIP.
+</code></pre></div><p>Kita tidak akan bisa mengontrol saved RIP fungsi <code>main</code>. Namun kita bisa mengoverwrite saved RIP fungsi lain, bagaimana caranya? yaitu dengan menggunakan index kurang dari 0. Jika fungsi <code>main</code> memanggil fungsi yang lain, stack frame fungsi main akan berada dibawah fungsi yang dipanggil (walaupun sebenarnya alamat stack frame fungsi <code>main</code> lebih tinggi dari fungsi yang dipanggil). Karena itulah kita menggunakan index kurang dari 0 untuk mengoverwrite saved RIP.
 Agar mempermudah, berikut beberapa fungsi yang dibuat:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-py" data-lang="py"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">print_</span>(index):
 	p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;&gt; &#39;</span>, <span style="color:#e6db74">&#39;2&#39;</span>)
