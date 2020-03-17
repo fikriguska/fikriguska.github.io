@@ -6,7 +6,7 @@
     <description>Recent content on 💻📘🤸‍♂️💡</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 16 Mar 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 17 Mar 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://fikriguska.github.io/index.xml" rel="self" type="application/rss+xml" />
     
@@ -45,6 +45,18 @@
       
       <guid>https://fikriguska.github.io/project/project4/</guid>
       <description></description>
+    </item>
+    
+    <item>
+      <title>UNITY 2020 - Babystack</title>
+      <link>https://fikriguska.github.io/posts/unity2020-babystack/</link>
+      <pubDate>Tue, 17 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://fikriguska.github.io/posts/unity2020-babystack/</guid>
+      <description>hint:
+overwriting return address by overflowing the boundary Diberikan file ELF dengan proteksi sebagai berikut:
+@m00n ➜ babystack git:(master) ✗ checksec main [*] &amp;#39;/home/bintang/CTF/unity2020/pwn/babystack/main&amp;#39; Arch: amd64-64-little RELRO: Full RELRO Stack: Canary found NX: NX enabled PIE: PIE enabled ELF tersebut menggunakan libc 2.23 dan memiliki vulnerability Out of Bond (OOB), Berikut fungsi yang memiliki vulnerability tersebut:
+__int64 __fastcall add_book(__int64 a1) { signed int v2; // [rsp+1Ch] [rbp-4h]  printf(&amp;#34;Enter index : &amp;#34;); v2 = read_int(&amp;#34;Enter index : &amp;#34;); if ( v2 &amp;gt; 7 ) printf(&amp;#34;not for OOB\b&amp;#34;); printf(&amp;#34;Enter the name of Books : &amp;#34;); return read_wrapper(30LL * v2 + a1, 29LL); } Program tersebut dapat mengoverwrite array dengan index kurang dari 0 atau lebih dari 7 sehingga kita bisa mengoverwrite sesuatu.</description>
     </item>
     
     <item>
