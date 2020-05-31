@@ -124,7 +124,7 @@
     </div>
 
     <div align="start" class="content"><p>hint:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">overwriting return address by overflowing the boundary
+<div class="highlight" style=" text-align: left"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">overwriting return address by overflowing the boundary
 </code></pre></div><p>Diberikan file ELF dengan proteksi sebagai berikut:</p>
 <div class="highlight" style=" text-align: left"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">@m00n ➜ babystack git:(master) ✗ checksec main
 [*] &#39;/home/bintang/CTF/unity2020/pwn/babystack/main&#39;
@@ -226,7 +226,7 @@ Agar mempermudah, berikut beberapa fungsi yang dibuat:</p>
 	p<span style="color:#f92672">.</span>sendafter(<span style="color:#e6db74">&#39;: &#39;</span>, name)
 </code></pre></div><h2 id="leak">#leak</h2>
 <p>Cara yang saya gunakan adalah dengan memasukkan padding pada index ke 8 sebanyak 16 untuk leak PIE dan 24 untuk leak libc. Padding tersebut tidak boleh terdapat <code>'\n'</code>, karena karakter <code>'\n'</code> akan diubah menjadi NULL.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">__int64</span> <span style="color:#66d9ef">__fastcall</span> <span style="color:#a6e22e">read_wrapper</span>(<span style="color:#66d9ef">void</span> <span style="color:#f92672">*</span>a1, <span style="color:#66d9ef">int</span> a2)
+<div class="highlight" style=" text-align: left"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">__int64</span> <span style="color:#66d9ef">__fastcall</span> <span style="color:#a6e22e">read_wrapper</span>(<span style="color:#66d9ef">void</span> <span style="color:#f92672">*</span>a1, <span style="color:#66d9ef">int</span> a2)
 {
   <span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">int</span> v3; <span style="color:#75715e">// [rsp-Ch] [rbp-Ch]
 </span><span style="color:#75715e"></span>
