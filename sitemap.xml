@@ -1,118 +1,16 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-  xmlns:xhtml="http://www.w3.org/1999/xhtml">
-  
-  <url>
-    <loc>https://fikriguska.github.io/project/project1/</loc>
-  </url>
-  
-  <url>
-    <loc>https://fikriguska.github.io/project/project2/</loc>
-  </url>
-  
-  <url>
-    <loc>https://fikriguska.github.io/project/project3/</loc>
-  </url>
-  
-  <url>
-    <loc>https://fikriguska.github.io/project/project4/</loc>
-  </url>
-  
-  <url>
-    <loc>https://fikriguska.github.io/posts/</loc>
-    <lastmod>2020-03-17T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://fikriguska.github.io/tags/pwn/</loc>
-    <lastmod>2020-03-17T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://fikriguska.github.io/tags/</loc>
-    <lastmod>2020-03-17T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://fikriguska.github.io/posts/unity2020-babystack/</loc>
-    <lastmod>2020-03-17T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://fikriguska.github.io/tags/writeup/</loc>
-    <lastmod>2020-03-17T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://fikriguska.github.io/</loc>
-    <lastmod>2020-03-17T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://fikriguska.github.io/tags/awal/</loc>
-    <lastmod>2020-03-16T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://fikriguska.github.io/tags/init/</loc>
-    <lastmod>2020-03-16T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://fikriguska.github.io/posts/tulisan-pertama/</loc>
-    <lastmod>2020-03-16T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://fikriguska.github.io/about/</loc>
-  </url>
-  
-  <url>
-    <loc>https://fikriguska.github.io/tags/bootstrap/</loc>
-  </url>
-  
-  <url>
-    <loc>https://fikriguska.github.io/categories/</loc>
-  </url>
-  
-  <url>
-    <loc>https://fikriguska.github.io/tags/css/</loc>
-  </url>
-  
-  <url>
-    <loc>https://fikriguska.github.io/tags/go/</loc>
-  </url>
-  
-  <url>
-    <loc>https://fikriguska.github.io/tags/golang/</loc>
-  </url>
-  
-  <url>
-    <loc>https://fikriguska.github.io/tags/highlight-js/</loc>
-  </url>
-  
-  <url>
-    <loc>https://fikriguska.github.io/tags/html/</loc>
-  </url>
-  
-  <url>
-    <loc>https://fikriguska.github.io/tags/hugo/</loc>
-  </url>
-  
-  <url>
-    <loc>https://fikriguska.github.io/tags/js/</loc>
-  </url>
-  
-  <url>
-    <loc>https://fikriguska.github.io/project/</loc>
-  </url>
-  
-  <url>
-    <loc>https://fikriguska.github.io/tags/responsive/</loc>
-  </url>
-  
-  <url>
-    <loc>https://fikriguska.github.io/tags/syntax-highlighting/</loc>
-  </url>
-  
-</urlset>
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+	
+	<sitemap>
+	   	<loc>https://fikriguska.github.io/en/sitemap.xml</loc>
+		
+	   	<lastmod>2020-08-12T00:40:58+07:00</lastmod>
+		
+	</sitemap>
+	
+	<sitemap>
+	   	<loc>https://fikriguska.github.io/fr/sitemap.xml</loc>
+		
+	</sitemap>
+	
+</sitemapindex>

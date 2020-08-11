@@ -1,15 +1,43 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Tags on 💻📘🤸‍♂️💡</title>
+    <title>Tags on Camelliose</title>
     <link>https://fikriguska.github.io/tags/</link>
-    <description>Recent content in Tags on 💻📘🤸‍♂️💡</description>
+    <description>Recent content in Tags on Camelliose</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 17 Mar 2020 00:00:00 +0000</lastBuildDate>
+    <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
+    <lastBuildDate>Wed, 12 Aug 2020 00:40:58 +0700</lastBuildDate>
     
 	<atom:link href="https://fikriguska.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>binary exploitation</title>
+      <link>https://fikriguska.github.io/tags/binary-exploitation/</link>
+      <pubDate>Wed, 12 Aug 2020 00:40:58 +0700</pubDate>
+      
+      <guid>https://fikriguska.github.io/tags/binary-exploitation/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ctf</title>
+      <link>https://fikriguska.github.io/tags/ctf/</link>
+      <pubDate>Wed, 12 Aug 2020 00:40:58 +0700</pubDate>
+      
+      <guid>https://fikriguska.github.io/tags/ctf/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>hacktoday</title>
+      <link>https://fikriguska.github.io/tags/hacktoday/</link>
+      <pubDate>Wed, 12 Aug 2020 00:40:58 +0700</pubDate>
+      
+      <guid>https://fikriguska.github.io/tags/hacktoday/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>pwn</title>
@@ -44,96 +72,6 @@
       <pubDate>Mon, 16 Mar 2020 00:00:00 +0000</pubDate>
       
       <guid>https://fikriguska.github.io/tags/init/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>bootstrap</title>
-      <link>https://fikriguska.github.io/tags/bootstrap/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://fikriguska.github.io/tags/bootstrap/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>css</title>
-      <link>https://fikriguska.github.io/tags/css/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://fikriguska.github.io/tags/css/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>go</title>
-      <link>https://fikriguska.github.io/tags/go/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://fikriguska.github.io/tags/go/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>golang</title>
-      <link>https://fikriguska.github.io/tags/golang/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://fikriguska.github.io/tags/golang/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>highlight-js</title>
-      <link>https://fikriguska.github.io/tags/highlight-js/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://fikriguska.github.io/tags/highlight-js/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>html</title>
-      <link>https://fikriguska.github.io/tags/html/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://fikriguska.github.io/tags/html/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>hugo</title>
-      <link>https://fikriguska.github.io/tags/hugo/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://fikriguska.github.io/tags/hugo/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>js</title>
-      <link>https://fikriguska.github.io/tags/js/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://fikriguska.github.io/tags/js/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>responsive</title>
-      <link>https://fikriguska.github.io/tags/responsive/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://fikriguska.github.io/tags/responsive/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>syntax-highlighting</title>
-      <link>https://fikriguska.github.io/tags/syntax-highlighting/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://fikriguska.github.io/tags/syntax-highlighting/</guid>
       <description></description>
     </item>
     

