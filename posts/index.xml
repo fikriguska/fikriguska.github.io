@@ -1,20 +1,51 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>Posts on Camelliose</title>
-        <link>https://fikriguska.github.io/posts/</link>
+        <link>https://fikriguska.xyz/posts/</link>
         <description>Recent content in Posts on Camelliose</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
         <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
-        <lastBuildDate>Wed, 12 Aug 2020 00:40:58 +0700</lastBuildDate>
-        <atom:link href="https://fikriguska.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+        <lastBuildDate>Thu, 31 Dec 2020 12:07:52 +0700</lastBuildDate>
+        <atom:link href="https://fikriguska.xyz/posts/index.xml" rel="self" type="application/rss+xml" />
+        
+        <item>
+            <title>Selamat Tinggal 2020!</title>
+            <link>https://fikriguska.xyz/posts/2020/12/selamat-tinggal-2020/</link>
+            <pubDate>Thu, 31 Dec 2020 12:07:52 +0700</pubDate>
+            
+            <guid>https://fikriguska.xyz/posts/2020/12/selamat-tinggal-2020/</guid>
+            <description>Gak terasa 2020 sebentar lagi berakhir, banyak cerita yang saya alami ditahun ini. Ada beberapa hal yang akan saya tulis mengenai tahun 2020 pada post ini, tapi gak semua sih, karena akan terlalu panjang kalau diceritain semua, hehe.
+Kuliah online Ya, karena pandemi virus covid-19, kampus-kampus ngelaksanain kegiatannya secara online untuk mengurangi penyebaran virus. Saya salah satu orang yang merasa senang diadakannya kuliah online ini (bukan senang karena pandemi ya!), karena dengan begitu saya bisa leluasa ngelakuin aktivitas-aktivitas lain yang saya sukai dan juga bisa berkumpul di rumah bersama keluarga.</description>
+            <content type="html"><![CDATA[<p>Gak terasa 2020 sebentar lagi berakhir, banyak cerita yang saya alami ditahun ini. Ada beberapa hal yang akan saya tulis mengenai tahun 2020 pada post ini, tapi gak semua sih, karena akan terlalu panjang kalau diceritain semua, hehe.</p>
+<h1 id="kuliah-online">Kuliah online</h1>
+<p><img src="/img/novel-corona-virus.jpg" alt=""></p>
+<p>Ya, karena pandemi virus covid-19, kampus-kampus ngelaksanain kegiatannya secara online untuk mengurangi penyebaran virus. Saya salah satu orang yang merasa senang diadakannya kuliah online ini (bukan senang karena pandemi ya!), karena dengan begitu saya bisa leluasa ngelakuin aktivitas-aktivitas lain yang saya sukai dan juga bisa berkumpul di rumah bersama keluarga. Selain itu, keinginan saya untuk berpuasa ramadhan di rumah juga tercapai, karena tahun lalu (2019) saya menunaikannya ketika tinggal di asrama dan kalau tahun ini gak kuliah online, saya gak akan bisa menunaikannya di rumah, tetapi di kos :'). Namun begitu, saya tetap berharap supaya pandemi virus covid-19 ini cepat berlalu.</p>
+<h1 id="binary-exploitation">Binary Exploitation</h1>
+<p><img src="/img/script-pwn.png" alt=""></p>
+<p><a href="https://trailofbits.github.io/ctf/exploits/binary1.html"><em>Binary exploitation</em></a> itu adalah proses untuk melakukan eksploitasi pada sebuah program, biasanya dilakuin dengan cara memanfaatkan celah keamanan untuk bisa men-corrupt memori untuk mengubah alur dari suatu program (<em>memory corruption</em>). <em>Binary Exploitation</em> ini sering dijadiin kategori lomba <a href="https://yohan.es/ctf/">Capture The Flag</a>, karena saya kebagian untuk menghandle kategori ini di tim untuk lomba, maka mau tidak mau saya harus mempelajarinya. Saya baru benar-benar belajar bidang ini di awal-awal semester 3, walaupun saya sebenarnya ga terlalu rajin belajar, dan hanya rajin belajar waktu mau buat soal untuk hacktoday 2020 :v (hacktoday bakal dijelasin dibawah) tetapi sebenernya saya sangat tertarik pada bidang ini. Pada tahun 2020 akhir ini, sudah lumayan banyak yang saya pelajari, dan nantinya akan lebih saya dalami lagi.</p>
+<h1 id="hacktoday-2020">Hacktoday 2020</h1>
+<p><img src="/img/hacktoday-2020-scoreboard.png" alt=""></p>
+<p>Hacktoday  adalah kompetisi Capture The Flag dibawah acara <a href="https://ittoday.id">ITToday</a> yang diadain oleh departemen ilmu komputer IPB setiap tahunnya. Hacktoday terbuka untuk seluruh pelajar SMA/SMK dan mahasiswa di Indonesia. Karena tahun ini terdapat pandemi, acara ini diadain full secara online. Saya menjadi salah satu pembuat soal sekaligus menjadi pengurus infrastucture website platform hacktoday (bersama <a href="https://medium.com/@vidner">@vidner</a>), padahal tahun lalu (Hacktoday 2019) saya ikut sebagai peserta lomba hehehehe. Pada Hacktoday 2020 ini saya membuat 3 soal penyisihan dan 1 soal final di kategori yang sama, yaitu pwn (but it&rsquo;s actually binary exploitation). Semoga selanjutnya bisa membuat soal yang lebih baik lagi ^_^.</p>
+<h1 id="heading">#💖</h1>
+<p><img src="/img/love.jpg" alt="love"></p>
+<p>I&rsquo;m in love with her, and yeah she makes my life more colorful. Tapi, saat ini sebenarnya kami sedang tidak baik-baik saja hehe. But I hope that in 2021 our relationship goes well :)</p>
+<h1 id="kocheng">Kocheng</h1>
+<p><img src="/img/kocheng.jpg" alt=""></p>
+<p>Entah kenapa pada tahun ini saya lebih menyukai kucing dari tahun-tahun sebelumnya wkwk melihara kucing bisa membuat mood saya naik lewat tingkah lakunya yang menurut saya lucu dan menggemaskan. Tapi kalau kucing pelirahaan saya mati, sedih banget rasanya :(. Foto diatas adalah kucing saya, Nye (abu-abu), Koren (oranye), dan Black (hitam). Dari foto itu hanya tersisa 2 yang masih hidup, yaitu nye dan koren, Black sudah mati sekitar 1.5 bulan yang lalu karena sakit :(. Sebenarnya masih ada kucing-kucing yang lain, mungkin akan diceritakan di post selanjutnya hehe.</p>
+<p>.</p>
+<p>.</p>
+<p>Mungkin cuman segitu yang bisa saya ceritakan .-., semoga tahun 2021 menjadi tahun yang lebih baik dari sebelumnya, penuh berkah, dan penuh dengan petualangan-petualangan baru!</p>
+<p>Selamat Tahun Baru~</p>
+]]></content>
+        </item>
         
         <item>
             <title>Hacktoday 2020 (Quals) - buffer overflow</title>
-            <link>https://fikriguska.github.io/posts/2020/08/hacktoday-2020-quals-buffer-overflow/</link>
+            <link>https://fikriguska.xyz/posts/2020/08/hacktoday-2020-quals-buffer-overflow/</link>
             <pubDate>Wed, 12 Aug 2020 00:40:58 +0700</pubDate>
             
-            <guid>https://fikriguska.github.io/posts/2020/08/hacktoday-2020-quals-buffer-overflow/</guid>
+            <guid>https://fikriguska.xyz/posts/2020/08/hacktoday-2020-quals-buffer-overflow/</guid>
             <description>Overview Diberikan binary dengan proteksi sebagai berikut:
 Binary tersebut tersebut menampilkan tulisan &amp;ldquo;OK, I&amp;rsquo;ll give you buffer overflow&amp;rdquo; lalu meminta input maksimal 1000 byte dan terdapat beberapa pengecekan setiap 8 byte. Berikut hasil dekompilasi fungsi main:
 int __cdecl main(int argc, const char **argv, const char **envp) { signed __int64 v4; // [rsp+0h] [rbp-50h]  int v5; // [rsp+8h] [rbp-48h]  int v6; // [rsp+Ch] [rbp-44h]  char buf[64]; // [rsp+10h] [rbp-40h]  __int64 savedregs; // [rsp+50h] [rbp+0h]  memset(buf, 0, sizeof(buf)); v5 = 0; init(&amp;amp;savedregs, argv, buf); strcpy(str, &amp;#34;OK, I&amp;#39;ll give you buffer overflow&amp;#34;); puts(str); v6 = read(0, buf, 0x3E8uLL); while ( v6 / 8 !</description>
@@ -225,10 +256,10 @@ context<span style="color:#f92672">.</span>terminal <span style="color:#f92672">
         
         <item>
             <title>Hacktoday 2020 (Quals) - no free</title>
-            <link>https://fikriguska.github.io/posts/2020/08/hacktoday-2020-quals-no-free/</link>
+            <link>https://fikriguska.xyz/posts/2020/08/hacktoday-2020-quals-no-free/</link>
             <pubDate>Tue, 11 Aug 2020 22:16:58 +0700</pubDate>
             
-            <guid>https://fikriguska.github.io/posts/2020/08/hacktoday-2020-quals-no-free/</guid>
+            <guid>https://fikriguska.xyz/posts/2020/08/hacktoday-2020-quals-no-free/</guid>
             <description>overview Diberikan file libc 2.23 dan binary dengan proteksi sebagai berikut.
 Pada saat memulai program, akan diminta username. Binary tersebut bisa menyimpan suatu note yang terdiri dari nama dan content, note tersebut bisa dilihat, diedit, tetapi tidak bisa dihapus. Username juga bisa diedit, dan yang terakhir kita bisa mengirim feedback. Nama, content, username, dan feedback akan disimpan dalam heap.
 Vulnerability Vulnerability terletak pada fungsi edit, berikut baris yang vuln:
@@ -393,10 +424,10 @@ libc <span style="color:#f92672">=</span> ELF(<span style="color:#e6db74">&#39;.
         
         <item>
             <title>Hacktoday 2020 (Quals) - sum</title>
-            <link>https://fikriguska.github.io/posts/2020/08/hacktoday-2020-quals-sum/</link>
+            <link>https://fikriguska.xyz/posts/2020/08/hacktoday-2020-quals-sum/</link>
             <pubDate>Tue, 11 Aug 2020 21:43:36 +0700</pubDate>
             
-            <guid>https://fikriguska.github.io/posts/2020/08/hacktoday-2020-quals-sum/</guid>
+            <guid>https://fikriguska.xyz/posts/2020/08/hacktoday-2020-quals-sum/</guid>
             <description>Overview Diberikan sebuah file libc 2.31 dan binary dengan proteksi sebagai berikut:
 Berikut hasil dekompilasi fungsi main:
 int __cdecl main(int argc, const char **argv, const char **envp) { char v4; // [rsp+1Fh] [rbp-61h]  int v5; // [rsp+20h] [rbp-60h]  int i; // [rsp+24h] [rbp-5Ch]  __int64 v7; // [rsp+28h] [rbp-58h]  int s[18]; // [rsp+30h] [rbp-50h]  unsigned __int64 v9; // [rsp+78h] [rbp-8h]  v9 = __readfsqword(0x28u); v7 = 0LL; init(*(_QWORD *)&amp;amp;argc, argv, envp); banner(); do { v7 = 0LL; memset(s, 0, 0x40uLL); printf(&amp;#34;n: &amp;#34;, 0LL); __isoc99_scanf(&amp;#34;%d&amp;#34;, &amp;amp;v5); for ( i = 0; i &amp;lt; v5; ++i ) { printf(&amp;#34;%d.</description>
@@ -597,10 +628,10 @@ libc <span style="color:#f92672">=</span> ELF(<span style="color:#e6db74">&#39;.
         
         <item>
             <title>UNITY 2020 (Quals) - Babystack</title>
-            <link>https://fikriguska.github.io/posts/2020/03/unity-2020-quals-babystack/</link>
+            <link>https://fikriguska.xyz/posts/2020/03/unity-2020-quals-babystack/</link>
             <pubDate>Tue, 17 Mar 2020 00:00:00 +0000</pubDate>
             
-            <guid>https://fikriguska.github.io/posts/2020/03/unity-2020-quals-babystack/</guid>
+            <guid>https://fikriguska.xyz/posts/2020/03/unity-2020-quals-babystack/</guid>
             <description>hint:
 overwriting return address by overflowing the boundary Diberikan file ELF dengan proteksi sebagai berikut:
 @m00n ➜ babystack git:(master) ✗ checksec main [*] &amp;#39;/home/bintang/CTF/unity2020/pwn/babystack/main&amp;#39; Arch: amd64-64-little RELRO: Full RELRO Stack: Canary found NX: NX enabled PIE: PIE enabled ELF tersebut menggunakan libc 2.23 dan memiliki vulnerability Out of Bond (OOB), Berikut fungsi yang memiliki vulnerability tersebut:
@@ -833,10 +864,10 @@ $
         
         <item>
             <title>Tulisan Pertama</title>
-            <link>https://fikriguska.github.io/posts/2020/03/tulisan-pertama/</link>
+            <link>https://fikriguska.xyz/posts/2020/03/tulisan-pertama/</link>
             <pubDate>Mon, 16 Mar 2020 00:00:00 +0000</pubDate>
             
-            <guid>https://fikriguska.github.io/posts/2020/03/tulisan-pertama/</guid>
+            <guid>https://fikriguska.xyz/posts/2020/03/tulisan-pertama/</guid>
             <description>#Halo. Ini adalah tulisan pertama dari blog saya. Nantinya blog ini dipake untuk nulisin apa yang ada dipikiran saya, isinya bakal macem-macem ga cuman satu topik aja 😅, udah sih mungkin gitu aja wkwk</description>
             <content type="html"><![CDATA[<h2 id="halo">#Halo.</h2>
 <p>Ini adalah tulisan pertama dari blog saya. Nantinya blog ini dipake untuk nulisin apa yang ada dipikiran saya, isinya bakal macem-macem ga cuman satu topik aja 😅, udah sih mungkin gitu aja wkwk</p>

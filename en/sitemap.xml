@@ -3,129 +3,139 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://fikriguska.github.io/tags/binary-exploitation/</loc>
-    <lastmod>2020-08-12T00:40:58+07:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://fikriguska.github.io/</loc>
-    <lastmod>2020-08-12T00:40:58+07:00</lastmod>
+    <loc>https://fikriguska.xyz/</loc>
+    <lastmod>2020-12-31T12:07:52+07:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="fr"
-                href="https://fikriguska.github.io/fr/"
+                href="https://fikriguska.xyz/fr/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://fikriguska.github.io/"
+                href="https://fikriguska.xyz/"
                 />
   </url>
   
   <url>
-    <loc>https://fikriguska.github.io/tags/ctf/</loc>
-    <lastmod>2020-08-12T00:40:58+07:00</lastmod>
+    <loc>https://fikriguska.xyz/tags/life/</loc>
+    <lastmod>2020-12-31T12:07:52+07:00</lastmod>
   </url>
   
   <url>
-    <loc>https://fikriguska.github.io/tags/hacktoday/</loc>
-    <lastmod>2020-08-12T00:40:58+07:00</lastmod>
+    <loc>https://fikriguska.xyz/posts/</loc>
+    <lastmod>2020-12-31T12:07:52+07:00</lastmod>
   </url>
   
   <url>
-    <loc>https://fikriguska.github.io/posts/2020/08/hacktoday-2020-quals-buffer-overflow/</loc>
-    <lastmod>2020-08-12T00:40:58+07:00</lastmod>
+    <loc>https://fikriguska.xyz/posts/2020/12/selamat-tinggal-2020/</loc>
+    <lastmod>2020-12-31T12:07:52+07:00</lastmod>
   </url>
   
   <url>
-    <loc>https://fikriguska.github.io/posts/</loc>
-    <lastmod>2020-08-12T00:40:58+07:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://fikriguska.github.io/tags/</loc>
-    <lastmod>2020-08-12T00:40:58+07:00</lastmod>
+    <loc>https://fikriguska.xyz/tags/</loc>
+    <lastmod>2020-12-31T12:07:52+07:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="fr"
-                href="https://fikriguska.github.io/fr/tags/"
+                href="https://fikriguska.xyz/fr/tags/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://fikriguska.github.io/tags/"
+                href="https://fikriguska.xyz/tags/"
                 />
   </url>
   
   <url>
-    <loc>https://fikriguska.github.io/posts/2020/08/hacktoday-2020-quals-no-free/</loc>
+    <loc>https://fikriguska.xyz/tags/binary-exploitation/</loc>
+    <lastmod>2020-08-12T00:40:58+07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://fikriguska.xyz/tags/ctf/</loc>
+    <lastmod>2020-08-12T00:40:58+07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://fikriguska.xyz/tags/hacktoday/</loc>
+    <lastmod>2020-08-12T00:40:58+07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://fikriguska.xyz/posts/2020/08/hacktoday-2020-quals-buffer-overflow/</loc>
+    <lastmod>2020-08-12T00:40:58+07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://fikriguska.xyz/posts/2020/08/hacktoday-2020-quals-no-free/</loc>
     <lastmod>2020-08-11T22:16:58+07:00</lastmod>
   </url>
   
   <url>
-    <loc>https://fikriguska.github.io/posts/2020/08/hacktoday-2020-quals-sum/</loc>
+    <loc>https://fikriguska.xyz/posts/2020/08/hacktoday-2020-quals-sum/</loc>
     <lastmod>2020-08-11T21:43:36+07:00</lastmod>
   </url>
   
   <url>
-    <loc>https://fikriguska.github.io/tags/pwn/</loc>
+    <loc>https://fikriguska.xyz/tags/pwn/</loc>
     <lastmod>2020-03-17T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://fikriguska.github.io/posts/2020/03/unity-2020-quals-babystack/</loc>
+    <loc>https://fikriguska.xyz/posts/2020/03/unity-2020-quals-babystack/</loc>
     <lastmod>2020-03-17T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://fikriguska.github.io/tags/writeup/</loc>
+    <loc>https://fikriguska.xyz/tags/writeup/</loc>
     <lastmod>2020-03-17T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://fikriguska.github.io/tags/awal/</loc>
+    <loc>https://fikriguska.xyz/tags/awal/</loc>
     <lastmod>2020-03-16T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://fikriguska.github.io/tags/init/</loc>
+    <loc>https://fikriguska.xyz/tags/init/</loc>
     <lastmod>2020-03-16T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://fikriguska.github.io/posts/2020/03/tulisan-pertama/</loc>
+    <loc>https://fikriguska.xyz/posts/2020/03/tulisan-pertama/</loc>
     <lastmod>2020-03-16T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://fikriguska.github.io/about/</loc>
+    <loc>https://fikriguska.xyz/about/</loc>
   </url>
   
   <url>
-    <loc>https://fikriguska.github.io/categories/</loc>
+    <loc>https://fikriguska.xyz/categories/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="fr"
-                href="https://fikriguska.github.io/fr/categories/"
+                href="https://fikriguska.xyz/fr/categories/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://fikriguska.github.io/categories/"
+                href="https://fikriguska.xyz/categories/"
                 />
   </url>
   
   <url>
-    <loc>https://fikriguska.github.io/series/</loc>
+    <loc>https://fikriguska.xyz/series/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="fr"
-                href="https://fikriguska.github.io/fr/series/"
+                href="https://fikriguska.xyz/fr/series/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://fikriguska.github.io/series/"
+                href="https://fikriguska.xyz/series/"
                 />
   </url>
   
