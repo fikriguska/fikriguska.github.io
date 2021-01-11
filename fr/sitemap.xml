@@ -3,58 +3,58 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://fikriguska.xyz/fr/</loc>
+    <loc>https://fikriguska.my.id/fr/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://fikriguska.xyz/"
+                href="https://fikriguska.my.id/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="fr"
-                href="https://fikriguska.xyz/fr/"
+                href="https://fikriguska.my.id/fr/"
                 />
   </url>
   
   <url>
-    <loc>https://fikriguska.xyz/fr/categories/</loc>
+    <loc>https://fikriguska.my.id/fr/categories/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://fikriguska.xyz/categories/"
+                href="https://fikriguska.my.id/categories/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="fr"
-                href="https://fikriguska.xyz/fr/categories/"
+                href="https://fikriguska.my.id/fr/categories/"
                 />
   </url>
   
   <url>
-    <loc>https://fikriguska.xyz/fr/series/</loc>
+    <loc>https://fikriguska.my.id/fr/series/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://fikriguska.xyz/series/"
+                href="https://fikriguska.my.id/series/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="fr"
-                href="https://fikriguska.xyz/fr/series/"
+                href="https://fikriguska.my.id/fr/series/"
                 />
   </url>
   
   <url>
-    <loc>https://fikriguska.xyz/fr/tags/</loc>
+    <loc>https://fikriguska.my.id/fr/tags/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://fikriguska.xyz/tags/"
+                href="https://fikriguska.my.id/tags/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="fr"
-                href="https://fikriguska.xyz/fr/tags/"
+                href="https://fikriguska.my.id/fr/tags/"
                 />
   </url>
   

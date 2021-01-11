@@ -2,85 +2,85 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on Camelliose</title>
-    <link>https://fikriguska.xyz/tags/</link>
+    <link>https://fikriguska.my.id/tags/</link>
     <description>Recent content in Tags on Camelliose</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&lt;a href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;CC BY-NC 4.0&lt;/a&gt;</copyright>
     <lastBuildDate>Thu, 31 Dec 2020 12:19:20 +0700</lastBuildDate>
     
-	<atom:link href="https://fikriguska.xyz/tags/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://fikriguska.my.id/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>life</title>
-      <link>https://fikriguska.xyz/tags/life/</link>
+      <link>https://fikriguska.my.id/tags/life/</link>
       <pubDate>Thu, 31 Dec 2020 12:19:20 +0700</pubDate>
       
-      <guid>https://fikriguska.xyz/tags/life/</guid>
+      <guid>https://fikriguska.my.id/tags/life/</guid>
       <description></description>
     </item>
     
     <item>
       <title>binary exploitation</title>
-      <link>https://fikriguska.xyz/tags/binary-exploitation/</link>
+      <link>https://fikriguska.my.id/tags/binary-exploitation/</link>
       <pubDate>Wed, 12 Aug 2020 00:40:58 +0700</pubDate>
       
-      <guid>https://fikriguska.xyz/tags/binary-exploitation/</guid>
+      <guid>https://fikriguska.my.id/tags/binary-exploitation/</guid>
       <description></description>
     </item>
     
     <item>
       <title>ctf</title>
-      <link>https://fikriguska.xyz/tags/ctf/</link>
+      <link>https://fikriguska.my.id/tags/ctf/</link>
       <pubDate>Wed, 12 Aug 2020 00:40:58 +0700</pubDate>
       
-      <guid>https://fikriguska.xyz/tags/ctf/</guid>
+      <guid>https://fikriguska.my.id/tags/ctf/</guid>
       <description></description>
     </item>
     
     <item>
       <title>hacktoday</title>
-      <link>https://fikriguska.xyz/tags/hacktoday/</link>
+      <link>https://fikriguska.my.id/tags/hacktoday/</link>
       <pubDate>Wed, 12 Aug 2020 00:40:58 +0700</pubDate>
       
-      <guid>https://fikriguska.xyz/tags/hacktoday/</guid>
+      <guid>https://fikriguska.my.id/tags/hacktoday/</guid>
       <description></description>
     </item>
     
     <item>
       <title>pwn</title>
-      <link>https://fikriguska.xyz/tags/pwn/</link>
+      <link>https://fikriguska.my.id/tags/pwn/</link>
       <pubDate>Tue, 17 Mar 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://fikriguska.xyz/tags/pwn/</guid>
+      <guid>https://fikriguska.my.id/tags/pwn/</guid>
       <description></description>
     </item>
     
     <item>
       <title>writeup</title>
-      <link>https://fikriguska.xyz/tags/writeup/</link>
+      <link>https://fikriguska.my.id/tags/writeup/</link>
       <pubDate>Tue, 17 Mar 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://fikriguska.xyz/tags/writeup/</guid>
+      <guid>https://fikriguska.my.id/tags/writeup/</guid>
       <description></description>
     </item>
     
     <item>
       <title>awal</title>
-      <link>https://fikriguska.xyz/tags/awal/</link>
+      <link>https://fikriguska.my.id/tags/awal/</link>
       <pubDate>Mon, 16 Mar 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://fikriguska.xyz/tags/awal/</guid>
+      <guid>https://fikriguska.my.id/tags/awal/</guid>
       <description></description>
     </item>
     
     <item>
       <title>init</title>
-      <link>https://fikriguska.xyz/tags/init/</link>
+      <link>https://fikriguska.my.id/tags/init/</link>
       <pubDate>Mon, 16 Mar 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://fikriguska.xyz/tags/init/</guid>
+      <guid>https://fikriguska.my.id/tags/init/</guid>
       <description></description>
     </item>
     
